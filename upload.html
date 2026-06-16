@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SEK · Subir wireframe</title>
+  <link rel="stylesheet" href="shared/styles.css">
+</head>
+<body>
+<div id="page-wrapper">
+
+  <header class="index-head">
+    <div class="container">
+      <h1>Subir wireframe</h1>
+      <p>Arrastra un archivo, elige la carpeta y pulsa subir. Se publica solo.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container upload-wrap">
+
+      <div class="upload-field">
+        <label for="folder">Carpeta de destino</label>
+        <select id="folder">
+          <option value="">Raíz</option>
+          <option value="pages/">pages/</option>
+          <option value="pages/sek-education-group/">pages/sek-education-group/</option>
+          <option value="pages/sek-schools/">pages/sek-schools/</option>
+          <option value="modules/">modules/</option>
+          <option value="shared/">shared/</option>
+        </select>
+      </div>
+
+      <div class="upload-field">
+        <label for="pwd">Contraseña</label>
+        <input type="password" id="pwd" autocomplete="current-password" placeholder="Contraseña de subida">
+      </div>
+
+      <div class="upload-field">
+        <label>Archivo</label>
+        <div class="dropzone" id="dropzone">
+          <p>Arrastra el archivo aquí<br>o <strong>haz clic para elegirlo</strong></p>
+          <input type="file" id="file" hidden>
+        </div>
+        <ul class="upload-list" id="filelist"></ul>
+      </div>
+
+      <button class="btn-upload" id="btn" disabled>Subir y publicar</button>
+      <div class="upload-status" id="status"></div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const dz = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file');
+  const fileList = document.getElementById('filelist');
+  const btn = document.getElementById('btn');
+  const statusEl = document.getElementById('status');
+  let chosen = null;
+
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg;
+    statusEl.className = 'upload-status' + (kind ? ' ' + kind : '');
+  }
+  function pick(file) {
+    chosen = file || null;
+    fileList.innerHTML = chosen ? '<li>' + chosen.name + ' (' + Math.ceil(chosen.size / 1024) + ' KB)</li>' : '';
+    btn.disabled = !chosen;
+    setStatus('');
+  }
+
+  dz.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => pick(fileInput.files[0]));
+  ['dragenter', 'dragover'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.add('is-over'); }));
+  ['dragleave', 'drop'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.remove('is-over'); }));
+  dz.addEventListener('drop', ev => pick(ev.dataTransfer.files[0]));
+
+  function toBase64(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(',')[1]); // strip data: prefix
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+  }
+
+  btn.addEventListener('click', async () => {
+    if (!chosen) return;
+    btn.disabled = true;
+    setStatus('Subiendo…');
+    try {
+      const contentBase64 = await toBase64(chosen);
+      const path = (document.getElementById('folder').value || '') + chosen.name;
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          path,
+          contentBase64,
+          password: document.getElementById('pwd').value
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
+      setStatus('✓ Subido: ' + path + '. Se está publicando (~1 min).', 'ok');
+      pick(null);
+    } catch (err) {
+      setStatus('✗ ' + err.message, 'err');
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
