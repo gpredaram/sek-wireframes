@@ -44,8 +44,8 @@
         <div class="u-dest">Destino: <code id="dest">/ (raíz)</code></div>
 
         <div class="u-drop" id="drop">
-          <p>Arrastra el archivo aquí<br>o <strong>haz clic para elegirlo</strong></p>
-          <input type="file" id="file" hidden accept=".html,.css,.js,.svg,.png,.jpg,.jpeg,.webp,.gif,.ico,.woff,.woff2,.json,.txt,.md">
+          <p>Arrastra uno o varios archivos aquí<br>o <strong>haz clic para elegirlos</strong></p>
+          <input type="file" id="file" hidden multiple accept=".html,.css,.js,.svg,.png,.jpg,.jpeg,.webp,.gif,.ico,.woff,.woff2,.json,.txt,.md">
         </div>
         <ul class="u-files" id="files"></ul>
 
@@ -157,18 +157,39 @@
     el.textContent = msg;
   }
 
-  // ---- file pick + upload ----
-  function pick(file) {
-    chosen = file || null;
-    $('files').innerHTML = chosen ? '<li>' + chosen.name + ' · ' + Math.ceil(chosen.size / 1024) + ' KB</li>' : '';
-    $('send').disabled = !chosen;
-    setStatus('');
+  // ---- multi-file queue + batch upload ----
+  let queued = [];
+
+  function renderQueue() {
+    const ul = $('files');
+    ul.innerHTML = '';
+    queued.forEach((f, i) => {
+      const li = document.createElement('li');
+      const label = document.createElement('span');
+      label.textContent = f.name + ' · ' + Math.ceil(f.size / 1024) + ' KB';
+      const rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'u-rm'; rm.textContent = '✕'; rm.title = 'Quitar';
+      rm.addEventListener('click', () => { queued.splice(i, 1); renderQueue(); });
+      li.appendChild(label); li.appendChild(rm);
+      ul.appendChild(li);
+    });
+    $('send').disabled = queued.length === 0;
+    $('send').textContent = queued.length > 1 ? ('Subir y publicar (' + queued.length + ')') : 'Subir y publicar';
   }
+
+  function addFiles(list) {
+    Array.from(list || []).forEach((f) => {
+      if (!queued.some((q) => q.name === f.name && q.size === f.size)) queued.push(f);
+    });
+    setStatus('');
+    renderQueue();
+  }
+
   $('drop').addEventListener('click', () => $('file').click());
-  $('file').addEventListener('change', () => pick($('file').files[0]));
+  $('file').addEventListener('change', () => { addFiles($('file').files); $('file').value = ''; });
   ['dragenter', 'dragover'].forEach((e) => $('drop').addEventListener(e, (ev) => { ev.preventDefault(); $('drop').classList.add('is-over'); }));
   ['dragleave', 'drop'].forEach((e) => $('drop').addEventListener(e, (ev) => { ev.preventDefault(); $('drop').classList.remove('is-over'); }));
-  $('drop').addEventListener('drop', (ev) => pick(ev.dataTransfer.files[0]));
+  $('drop').addEventListener('drop', (ev) => addFiles(ev.dataTransfer.files));
 
   function toBase64(file) {
     return new Promise((resolve, reject) => {
@@ -180,16 +201,23 @@
   }
 
   $('send').addEventListener('click', async () => {
-    if (!chosen) return;
-    $('send').disabled = true; setStatus('Subiendo…');
+    if (!queued.length) return;
+    $('send').disabled = true;
+    setStatus('Subiendo ' + queued.length + ' archivo(s)…');
     try {
-      const contentBase64 = await toBase64(chosen);
-      const path = destination + chosen.name;
-      const res = await fetch('/api/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ path, contentBase64, password }) });
+      const files = [];
+      for (const f of queued) {
+        files.push({ path: destination + f.name, contentBase64: await toBase64(f) });
+      }
+      const res = await fetch('/api/upload-batch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, files })
+      });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
-      setStatus('✓ Subido: ' + path + ' · publicándose (~1 min).', 'ok');
-      pick(null);
+      setStatus('✓ ' + data.count + ' archivo(s) subido(s) a /' + destination + ' · publicándose (~1 min).', 'ok');
+      queued = []; renderQueue();
     } catch (err) {
       setStatus('✗ ' + err.message, 'err');
       $('send').disabled = false;

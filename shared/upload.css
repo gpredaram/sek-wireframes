@@ -112,9 +112,16 @@ body {
 .u-drop strong { color: var(--u-ink); }
 .u-files { margin: 12px 0 0; list-style: none; }
 .u-files li {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px;
-  background: #f2f4f7; padding: 8px 10px; border-radius: 7px;
+  background: #f2f4f7; padding: 8px 10px; border-radius: 7px; margin-bottom: 6px;
 }
+.u-files li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.u-rm {
+  flex: none; border: none; background: transparent; color: var(--u-muted);
+  cursor: pointer; font-size: 13px; line-height: 1; padding: 4px 6px; border-radius: 6px;
+}
+.u-rm:hover { background: #fdeced; color: var(--u-err); }
 
 .u-btn {
   width: 100%; margin-top: 16px; padding: 12px 16px; font-size: 15px; font-weight: 700;
