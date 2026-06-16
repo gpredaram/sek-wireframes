@@ -1,56 +1,56 @@
 # SEK · Wireframes
 
-Wireframes estáticos (HTML + CSS + JS vanilla) de los sites de SEK. Sin build, sin
-framework: se sirven tal cual. En producción se despliegan en Vercel.
+Static wireframes (HTML + CSS + vanilla JS) for the SEK sites. No build, no
+framework: served as-is. Deployed to Vercel in production.
 
-🔗 **Producción:** https://sek-wireframes-gpredarams-projects.vercel.app
+🔗 **Production:** https://sek-wireframes-gpredarams-projects.vercel.app
 
-## Estructura
+## Structure
 
 ```
 .
-├── index.html                 # índice/TOC: enlaza páginas y módulos
+├── index.html                 # index / TOC: links to pages and modules
 ├── pages/
 │   ├── bienvenida.html
-│   ├── sek-education-group/    # SEK Education Group (menú simple 2 niveles)
+│   ├── sek-education-group/    # SEK Education Group (simple 2-level menu)
 │   │   └── la-institucion.html
-│   └── sek-schools/            # SEK International Schools (doble menú superpuesto)
+│   └── sek-schools/            # SEK International Schools (overlaid double menu)
 │       └── future-learning-model.html
-├── modules/                   # HTMLs independientes por módulo (nombres agnósticos)
-│   └── sek-<tipo>-NNN.html
+├── modules/                   # standalone per-module HTMLs (agnostic names)
+│   └── sek-<type>-NNN.html
 ├── shared/
-│   ├── styles.css             # FUENTE DE VERDAD VISUAL — no duplicar estilos
-│   └── wireframe.js           # JS compartido — no duplicar funciones
-├── vercel.json                # estático, cleanUrls, cabeceras de caché
-└── CLAUDE.md                  # reglas del proyecto (lee esto antes de generar HTML)
+│   ├── styles.css             # VISUAL SOURCE OF TRUTH — never duplicate styles
+│   └── wireframe.js           # shared JS — never duplicate functions
+├── vercel.json                # static, cleanUrls, cache headers
+└── CLAUDE.md                  # project rules (read before generating any HTML)
 ```
 
-## Reglas clave
+## Key rules
 
-- **Nunca estilos inline** — todo en `shared/styles.css`.
-- **Nunca funciones JS duplicadas** — todo en `shared/wireframe.js`.
+- **No inline styles** — everything in `shared/styles.css`.
+- **No duplicated JS functions** — everything in `shared/wireframe.js`.
 - **Mobile-first**, 3 breakpoints: `<768px` · `768–1199px` · `≥1200px`.
-- Escala de grises, sin anotaciones visibles, placeholders grises (nunca emojis).
-- Importa siempre los assets compartidos según la profundidad:
-  - desde `pages/<site>/`: `../../shared/`
-  - desde `modules/`: `../shared/`
-- Detalle completo y specs de Notion → [`CLAUDE.md`](./CLAUDE.md).
+- Grayscale, no visible annotations, gray placeholders (never emojis).
+- Always import the shared assets by depth:
+  - from `pages/<site>/`: `../../shared/`
+  - from `modules/`: `../shared/`
+- Full detail and Notion specs → [`CLAUDE.md`](./CLAUDE.md).
 
-## Ver en local
+## Run locally
 
-Sin build. Abre `index.html` en el navegador, o sirve la carpeta con un estático:
+No build. Open `index.html` in the browser, or serve the folder statically:
 
 ```bash
-python3 -m http.server 8000   # luego http://localhost:8000
+python3 -m http.server 8000   # then http://localhost:8000
 ```
 
-## Despliegue
+## Deployment
 
-El repo está conectado a Vercel: **cada `push` a `main` redespliega automáticamente**.
+The repo is connected to Vercel: **every `push` to `main` redeploys automatically.**
 
 ```bash
 git add -A && git commit -m "..."
-git push origin main          # Vercel despliega solo
+git push origin main          # Vercel deploys on its own
 ```
 
-La URL de producción no cambia entre despliegues.
+The production URL does not change between deployments.
