@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
   // Auth: shared password (if configured)
   if (PASSWORD && password !== PASSWORD) {
-    return res.status(401).json({ error: 'Contraseña incorrecta' });
+    return res.status(401).json({ error: 'No autorizado' });
   }
   if (!path || !contentBase64) {
     return res.status(400).json({ error: 'Faltan datos (path / archivo)' });
@@ -35,6 +35,27 @@ module.exports = async (req, res) => {
   if (clean.includes('..') || clean === '') {
     return res.status(400).json({ error: 'Ruta no válida' });
   }
+
+  // Folder allowlist: root file, or under pages/ | modules/ | shared/
+  const ALLOWED_DIRS = ['pages/', 'modules/', 'shared/'];
+  const inRoot = !clean.includes('/');
+  if (!inRoot && !ALLOWED_DIRS.some((d) => clean.startsWith(d))) {
+    return res.status(400).json({ error: 'Carpeta no permitida' });
+  }
+
+  // File-type allowlist
+  const ALLOWED_EXT = ['html', 'css', 'js', 'svg', 'png', 'jpg', 'jpeg', 'webp', 'gif', 'ico', 'woff', 'woff2', 'json', 'txt', 'md'];
+  const ext = (clean.split('.').pop() || '').toLowerCase();
+  if (!ALLOWED_EXT.includes(ext)) {
+    return res.status(400).json({ error: `Tipo de archivo no permitido (.${ext})` });
+  }
+
+  // Size limit (~4 MB, under Vercel's request body cap). base64 ≈ 4/3 of bytes.
+  const approxBytes = Math.floor(String(contentBase64).length * 0.75);
+  if (approxBytes > 4 * 1024 * 1024) {
+    return res.status(413).json({ error: 'Archivo demasiado grande (máx. 4 MB)' });
+  }
+
   const apiPath = clean.split('/').map(encodeURIComponent).join('/');
   const url = `https://api.github.com/repos/${REPO}/contents/${apiPath}`;
   const headers = {
