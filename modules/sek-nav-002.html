@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEK-NAV-002 · Footer</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* ── Chrome ─────────────────────────────────────────────── */
+    .mod-chrome { position: sticky; top: 0; z-index: 500; background: #fff; border-bottom: 2px solid #111; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+    .mod-code { font-family: monospace; font-size: 13px; font-weight: 700; color: #111; }
+    .mod-name { font-size: 13px; color: #555; }
+    .mod-ver  { font-family: monospace; font-size: 11px; color: #aaa; margin-left: auto; }
+    .state-block { margin-bottom: 4px; }
+    .state-label { padding: 8px 20px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #777; }
+    .demo-narrow { max-width: 390px; margin: 0 auto; outline: 2px dashed #ccc; outline-offset: -1px; }
+
+    /* ── Sim-mobile: revierte los cambios del breakpoint 768px ─ */
+    .sim-mobile .footer-inner  { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .sim-mobile .footer-legal  { flex-direction: column !important; gap: 6px !important; }
+    .sim-mobile .container     { padding: 0 20px !important; }
+  </style>
+</head>
+<body>
+
+<div class="mod-chrome">
+  <span class="mod-code">SEK-NAV-002</span>
+  <span class="mod-name">Footer</span>
+  <span class="mod-ver">v1.0</span>
+</div>
+
+<!-- ── Desktop / Tablet / Mobile — responsive ↔ ─────────── -->
+<div class="state-block">
+  <div class="state-label">Responsive ↔ · 3 col ≥1200px · 2 col 768-1199px · 1 col &lt;768px</div>
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo"></div>
+        </div>
+        <div class="footer-col">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">MYSEK</a></li>
+            <li><a href="#">Webmail</a></li>
+            <li><a href="#">Email alumnos</a></li>
+            <li><a href="#">Gestión de servicios</a></li>
+            <li><a href="#">Teams</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <div class="footer-social">
+            <div class="social-icon">In</div>
+            <div class="social-icon">Tw</div>
+            <div class="social-icon">Li</div>
+            <div class="social-icon">Pi</div>
+            <div class="social-icon">Yt</div>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Política de cookies</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 SEK Education Group. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ── Mobile: 1 columna apilada ─────────────────────────── -->
+<div class="state-block">
+  <div class="state-label">Mobile · 1 col · &lt; 768px</div>
+  <div class="demo-narrow sim-mobile">
+    <footer style="background:var(--gray-800);color:var(--gray-300);padding:48px 0 32px;">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-col">
+            <div class="footer-logo"></div>
+          </div>
+          <div class="footer-col">
+            <h4>Recursos</h4>
+            <ul>
+              <li><a href="#">MYSEK</a></li>
+              <li><a href="#">Webmail</a></li>
+              <li><a href="#">Email alumnos</a></li>
+              <li><a href="#">Gestión de servicios</a></li>
+              <li><a href="#">Teams</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Síguenos</h4>
+            <div class="footer-social">
+              <div class="social-icon">In</div>
+              <div class="social-icon">Tw</div>
+              <div class="social-icon">Li</div>
+              <div class="social-icon">Pi</div>
+              <div class="social-icon">Yt</div>
+            </div>
+            <div class="footer-legal">
+              <a href="#">Aviso legal</a>
+              <a href="#">Política de cookies</a>
+              <a href="#">Política de privacidad</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2026 SEK Education Group. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="../shared/wireframe.js"></script>
+</body>
+</html>

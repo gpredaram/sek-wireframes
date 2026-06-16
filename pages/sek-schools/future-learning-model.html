@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Learning Model — SEK Wireframe</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    /* Anchor bar: doble nav (36px + 52px = 88px) en tablet+ */
+    @media (min-width: 768px) {
+      #anchor-bar { top: 88px; }
+    }
+
+    /* ── SEK-CON-010 · C1 — Bullets con intro ──────────────── */
+    .flm-bullets {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .flm-bullet {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .flm-bullet-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray-500);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    .flm-bullet-text {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+
+    @media (min-width: 768px) {
+      .flm-bullets { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+      .flm-bullet   { flex: 1 1 calc(33% - 16px); min-width: 200px; flex-direction: column; gap: 8px; }
+      .flm-bullet-icon { width: 24px; height: 2px; border-radius: 1px; margin-top: 4px; }
+    }
+
+    /* ── SEK-CON-010 · C2 — Texto + imagen ──────────────────── */
+    .flm-profesores {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .flm-profesores-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius);
+    }
+    .flm-compromiso {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .flm-compromiso h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 12px;
+    }
+    .flm-cta-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 11px 22px;
+      background: var(--gray-800);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      letter-spacing: .02em;
+    }
+    .flm-cta-btn:hover { background: var(--gray-700); }
+
+    @media (min-width: 1200px) {
+      .flm-profesores { grid-template-columns: 1fr 380px; gap: 48px; }
+    }
+
+    /* ── SEK-CON-010 · C3 — Infografía ──────────────────────── */
+    .flm-infografia {
+      width: 100%;
+      aspect-ratio: 16/7;
+      border-radius: var(--radius);
+      margin-top: 16px;
+    }
+
+    /* ── SEK-CON-011 · E1/E2 — Bloques texto perfil ─────────── */
+    .flm-perfil-bloque { margin-bottom: 40px; }
+    .flm-perfil-bloque h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin: 24px 0 10px;
+    }
+
+    /* ── SEK-CON-011 · E4 — Acordeón exclusivo actividades ──── */
+    .flm-acord-wrap {
+      margin-top: 24px;
+      border-top: 1px solid var(--gray-200);
+      border-left: 1px solid var(--gray-200);
+      border-right: 1px solid var(--gray-200);
+    }
+    .flm-acord-item { border-bottom: 1px solid var(--gray-200); }
+    .flm-acord-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 16px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--white);
+    }
+    .flm-acord-header:hover { background: var(--gray-100); }
+    .flm-acord-header.open  { background: var(--gray-100); }
+    .flm-acord-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-800);
+      line-height: 1.3;
+    }
+    .flm-acord-chevron {
+      font-size: 11px;
+      color: var(--gray-500);
+      transition: transform .2s;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+    .flm-acord-chevron.open { transform: rotate(180deg); }
+    .flm-acord-body {
+      display: none;
+      padding: 0 16px 16px 16px;
+      background: var(--gray-100);
+    }
+    .flm-acord-body.open { display: block; }
+    .flm-acord-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 12px;
+    }
+    .flm-acord-tag {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--gray-700);
+      line-height: 1.4;
+    }
+
+    /* ── Separador de sección ────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 2px solid var(--gray-200);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE WRAPPER -->
+<div id="page-wrapper">
+
+  <!-- ══════════════════════════════════════════════════════════
+       SITE NAVIGATION — Sistema global (doble menú superpuesto)
+       Desktop: Capa 1 (red SEK) + Capa 2 (SEK Ciudalcampo)
+       Mobile:  Topbar logo + hamburger → drawer
+  ══════════════════════════════════════════════════════════ -->
+  <nav id="site-nav">
+
+    <!-- Capa 1: Menú común red SEK -->
+    <div class="nav-layer nav-layer--red">
+      <div class="container">
+        <div class="nav-inner">
+          <div class="nav-logo-sm"></div>
+          <ul class="nav-items">
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios-sek')">Colegios SEK <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-modelo')">Modelo Educativo <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-programas')">Programas IB <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-por-que-sek')">¿Por qué SEK? <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-red')">Admisiones <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-actualidad')">Actualidad <span class="nav-chevron">▾</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capa 2: Menú específico SEK Ciudalcampo -->
+    <div class="nav-layer nav-layer--college">
+      <div class="container">
+        <div class="nav-inner">
+          <div class="nav-logo-college"></div>
+          <ul class="nav-items">
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegio')">El Colegio <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-etapas')">Etapas <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-instalaciones')">Instalaciones <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-servicios')">Servicios <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-vida')">Vida Escolar <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-idiomas')">Idiomas e Internacional <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-col')">Admisiones <span class="nav-chevron">▾</span></li>
+            <li class="nav-item nav-item--cta" onclick="toggleDropdown(this,'dd-solicitar-inf')">Solicitar INF <span class="nav-chevron">▾</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dropdown panels -->
+    <div class="nav-dropdown" id="dd-colegios-sek">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Colegios en Madrid</a></li>
+          <li><a href="#">Colegios en Cataluña</a></li>
+          <li><a href="#">Todos los colegios</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-modelo">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#"><span class="nav-dd-link-title">Future Learning Model</span><span class="nav-dd-link-desc">Nuestro modelo pedagógico</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Robótica</span><span class="nav-dd-link-desc">Aprendizaje STEAM</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Bachillerato Internacional</span><span class="nav-dd-link-desc">Programas IB</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Espacios de aprendizaje</span><span class="nav-dd-link-desc">Entornos innovadores</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Idiomas</span><span class="nav-dd-link-desc">Formación multilingüe</span></a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-programas">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Primary Years (PYP)</a></li>
+          <li><a href="#">Middle Years (MYP)</a></li>
+          <li><a href="#">Diploma IB</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-por-que-sek">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Resultados académicos</a></li>
+          <li><a href="#">Comunidad educativa</a></li>
+          <li><a href="#">Instalaciones</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-admisiones-red">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Proceso de admisión</a></li>
+          <li><a href="#">Documentación</a></li>
+          <li><a href="#">Contactar</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-actualidad">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Noticias</a></li>
+          <li><a href="#">Eventos</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-solicitar-inf">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Necesito información</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Programar visita</a></li>
+          <li><a href="#">Tour virtual</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-colegio">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#"><span class="nav-dd-link-title">Bienvenida</span><span class="nav-dd-link-desc">Comienza el curso escolar</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Equipo docente</span><span class="nav-dd-link-desc">Conoce a nuestros docentes</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Resultados</span><span class="nav-dd-link-desc">Datos académicos</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Dónde estamos</span><span class="nav-dd-link-desc">Contacto con el centro</span></a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-etapas">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#"><span class="nav-dd-link-title">Early Childhood</span><span class="nav-dd-link-desc">Edades de 4 meses a 6 años</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Primaria</span><span class="nav-dd-link-desc">Edades de 6 a 12 años</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Secundaria</span><span class="nav-dd-link-desc">Edades de 12 a 16 años</span></a></li>
+          <li><a href="#"><span class="nav-dd-link-title">Bachillerato</span><span class="nav-dd-link-desc">Edades de 16 a 18 años</span></a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-instalaciones">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Espacios de aprendizaje</a></li>
+          <li><a href="#">Espacios deportivos</a></li>
+          <li><a href="#">Tour virtual</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-servicios">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Nutrición</a></li>
+          <li><a href="#">Servicio Médico</a></li>
+          <li><a href="#">Transporte</a></li>
+          <li><a href="#">Actividades Extraescolares</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-vida">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Semana Blanca</a></li>
+          <li><a href="#">Duke of Edinburgh's</a></li>
+          <li><a href="#">SEKMUN</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-idiomas">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Idiomas y Certificación Oficial</a></li>
+          <li><a href="#">Estancias internacionales</a></li>
+          <li><a href="#">Intercambios culturales</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="dd-admisiones-col">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col"><ul>
+          <li><a href="#">Admisiones generales</a></li>
+          <li><a href="#">Admisiones internacionales</a></li>
+          <li><a href="#">Becas y ayudas</a></li>
+        </ul></div>
+      </div>
+    </div>
+
+    <!-- Mobile: topbar logo + hamburger -->
+    <div class="nav-topbar-mobile">
+      <div class="nav-logo-mobile"></div>
+      <button class="nav-hamburger" onclick="openDrawer()" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════
+       1. HERO — SEK-CAB-001 · Hero simple
+  ══════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg img-placeholder">foto</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="breadcrumb">
+        SEK Ciudalcampo <span>›</span> Modelo Educativo <span>›</span> Future Learning Model
+      </div>
+      <div class="hero-text">
+        <h1>Future Learning Model</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       2. BARRA DE ANCLAS — SEK-CON-008 · PAT-009
+       Ancla 1 activa por defecto (DEC-005)
+  ══════════════════════════════════════════════════════════ -->
+  <div id="anchor-bar">
+    <div class="anchor-inner">
+      <a href="#modelo-educativo" class="anchor-link active">Modelo SEK de Aprendizaje Futuro</a>
+      <a href="#perfil-sek"       class="anchor-link">Perfil SEK</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       3. MODELO EDUCATIVO — SEK-CON-010
+       C1 Claves · C2 Profesores · C3 Infografía
+  ══════════════════════════════════════════════════════════ -->
+  <section id="modelo-educativo" class="section">
+    <div class="container">
+
+      <!-- C1 · Claves del modelo -->
+      <div class="section-head">
+        <h2>Modelo SEK de Aprendizaje Futuro y el Aula Inteligente</h2>
+      </div>
+      <div class="text-block-body">
+        <p>Con un diseño educativo propio, el Aula Inteligente —comunidad de aprendizaje cuyo objetivo principal es el desarrollo de la inteligencia y de los valores de cada uno de sus alumnos—, los Colegios Internacionales SEK trabajan un exclusivo modelo de aprendizaje: SEK Future Learning Model.</p>
+      </div>
+      <ul class="flm-bullets">
+        <li class="flm-bullet">
+          <div class="flm-bullet-icon"></div>
+          <span class="flm-bullet-text">Impulsa un aprendizaje flexible, personalizado y colaborativo, con metodologías y herramientas adaptadas a entornos físicos y virtuales.</span>
+        </li>
+        <li class="flm-bullet">
+          <div class="flm-bullet-icon"></div>
+          <span class="flm-bullet-text">Fomenta el pensamiento crítico, la resolución de problemas reales y el espíritu emprendedor. Atiende a las necesidades actuales y futuras de los alumnos.</span>
+        </li>
+        <li class="flm-bullet">
+          <div class="flm-bullet-icon"></div>
+          <span class="flm-bullet-text">Los alumnos participan activamente en su propio proceso de aprendizaje.</span>
+        </li>
+      </ul>
+
+      <!-- C2 · Profesores de excelencia + Compromiso con familias -->
+      <div style="margin-top: 56px">
+        <div class="flm-profesores">
+          <div>
+            <div class="section-head">
+              <h2>Profesores de Excelencia y Comunidad de Aprendizaje</h2>
+            </div>
+            <div class="text-block-body">
+              <p>Los profesores, a la vanguardia educativa y en constante desarrollo profesional, son facilitadores del aprendizaje, y adquirieron la condición de aprendices permanentes. La formación continua del profesorado es uno de los rasgos distintivos de la Institución Educativa SEK, asociado a su afán de investigación e innovación educativa. Los Colegios SEK cuentan con equipos de profesores de excelencia que destacan no solo por su nivel de formación y su vocación de mejora, sino también por su compromiso con el modelo educativo SEK y con la calidad.</p>
+            </div>
+            <a href="#" class="text-block-cta">Conoce el Aula de Familias →</a>
+
+            <div class="flm-compromiso">
+              <h3>Compromiso con las Familias</h3>
+              <div class="text-block-body">
+                <p>En nuestra Comunidad de Aprendizaje, la familia y el entorno del alumno son factores fundamentales. Continuamente se trabaja en temas relacionados con la educación de niños y adolescentes de interés para las familias, y se trasladan al Aula de Familias. Esta actividad, formativa y abierta, tiene como objetivo la reflexión en común y la fijación de criterios sobre los múltiples aspectos de la educación.</p>
+              </div>
+              <a href="#" class="flm-cta-btn">Acceder al Aula de Familias</a>
+            </div>
+          </div>
+          <div class="flm-profesores-img img-placeholder">imagen</div>
+        </div>
+      </div>
+
+      <!-- C3 · Infografía modelo educativo -->
+      <div style="margin-top: 48px">
+        <div class="flm-infografia img-placeholder">infografía · Modelo SEK Future Learning</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══════════════════════════════════════════════════════════
+       4. PERFIL SEK — SEK-CON-011
+       E1 Perfil SEK · E2 Evaluación · E3 Infografía · E4 Actividades
+  ══════════════════════════════════════════════════════════ -->
+  <section id="perfil-sek" class="section">
+    <div class="container">
+
+      <!-- E1 · Perfil SEK y Desarrollo Competencial -->
+      <div class="flm-perfil-bloque">
+        <div class="section-head">
+          <h2>El Perfil SEK y el Desarrollo Competencial</h2>
+        </div>
+        <div class="text-block-body">
+          <p>El Modelo Educativo SEK, SEK Future Learning Model, orienta a los alumnos al aprendizaje continuo a lo largo de toda su vida e integra el Perfil SEK. Las quince competencias de aprendizaje de este Perfil conforman la identidad de nuestra Comunidad Educativa y son la clave para el éxito individual y colectivo.</p>
+        </div>
+        <h3 style="font-size:17px;font-weight:700;color:var(--gray-800);margin:24px 0 10px">Impacto del Perfil SEK</h3>
+        <div class="text-block-body">
+          <p>El Perfil SEK representa cómo nos relacionamos con nosotros mismos, con los demás y con el planeta. Pone el acento en un desarrollo competencial integral, en el perfeccionamiento de nuestro alumnado y quienes les acompañan en su aprendizaje.</p>
+        </div>
+      </div>
+
+      <!-- E2 · Evaluación y Reconocimiento -->
+      <div class="flm-perfil-bloque">
+        <div class="section-head">
+          <h2>Evaluación Personalizada y Reconocimiento Académico</h2>
+        </div>
+        <div class="text-block-body">
+          <p>Gracias a un porfolio académico individual y personalizado, el alumno reflexiona sobre su aprendizaje, identifica sus logros, desarrolla autoevaluación, evalúa a sus pares y, con la orientación de los profesores, determina sus próximos pasos para el aprendizaje.</p>
+        </div>
+        <h3 style="font-size:17px;font-weight:700;color:var(--gray-800);margin:24px 0 10px">Reconocimiento Final</h3>
+        <div class="text-block-body">
+          <p>Al final de su vida académica en el colegio, el alumno recibe el Diploma SEK para celebrar las experiencias de aprendizaje en las que han participado, más allá de los requisitos académicos, dentro del colegio, en la comunidad y en el mundo.</p>
+        </div>
+      </div>
+
+      <!-- E3 · Infografía Perfil SEK -->
+      <div style="margin-bottom: 48px">
+        <div class="flm-infografia img-placeholder">infografía · Perfil SEK — 15 competencias</div>
+      </div>
+
+      <!-- E4 · Actividades que fomentan el Perfil SEK -->
+      <div class="section-head">
+        <h2>Actividades que fomentan el Perfil SEK</h2>
+      </div>
+
+      <!-- Acordeón exclusivo: solo una categoría abierta a la vez (DEC-003) -->
+      <div class="flm-acord-wrap">
+
+        <div class="flm-acord-item">
+          <div class="flm-acord-header" onclick="toggleFlmAcord(this)">
+            <span class="flm-acord-title">Ciudadanía Global e Innovación Social</span>
+            <span class="flm-acord-chevron">▼</span>
+          </div>
+          <div class="flm-acord-body">
+            <div class="flm-acord-tags">
+              <span class="flm-acord-tag">Conferencias internacionales</span>
+              <span class="flm-acord-tag">Intercambios</span>
+              <span class="flm-acord-tag">Proyectos Erasmus+</span>
+              <span class="flm-acord-tag">Estancias en Dublín y Alpes</span>
+              <span class="flm-acord-tag">SEKMUN y otros MUN</span>
+              <span class="flm-acord-tag">Retos del siglo XXI y ODS</span>
+              <span class="flm-acord-tag">UNICEF y otras ONG</span>
+              <span class="flm-acord-tag">Proyectos comunitarios y CAS</span>
+              <span class="flm-acord-tag">ECOSEK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flm-acord-item">
+          <div class="flm-acord-header" onclick="toggleFlmAcord(this)">
+            <span class="flm-acord-title">Comunicación y Ciudadanía Digital</span>
+            <span class="flm-acord-chevron">▼</span>
+          </div>
+          <div class="flm-acord-body">
+            <div class="flm-acord-tags">
+              <span class="flm-acord-tag">MAKER spaces</span>
+              <span class="flm-acord-tag">Robótica y programación STEAM</span>
+              <span class="flm-acord-tag">First Lego League</span>
+              <span class="flm-acord-tag">Oratoria y Ligas de Debate</span>
+              <span class="flm-acord-tag">Parlamento Europeo</span>
+              <span class="flm-acord-tag">Actividades periodísticas, radio y redes sociales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flm-acord-item">
+          <div class="flm-acord-header" onclick="toggleFlmAcord(this)">
+            <span class="flm-acord-title">Salud y Bienestar</span>
+            <span class="flm-acord-chevron">▼</span>
+          </div>
+          <div class="flm-acord-body">
+            <div class="flm-acord-tags">
+              <span class="flm-acord-tag">Duke of Edinburgh</span>
+              <span class="flm-acord-tag">Proyectos personales PAI</span>
+              <span class="flm-acord-tag">SEK Sports Academy y ligas deportivas</span>
+              <span class="flm-acord-tag">Mindfulness BeWell Center UCJC</span>
+              <span class="flm-acord-tag">Semanas Blancas y viajes culturales y deportivos</span>
+              <span class="flm-acord-tag">Outdoor learning Forest School</span>
+              <span class="flm-acord-tag">La Goleta SummerSEK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flm-acord-item">
+          <div class="flm-acord-header" onclick="toggleFlmAcord(this)">
+            <span class="flm-acord-title">Emprendimiento e Innovación</span>
+            <span class="flm-acord-chevron">▼</span>
+          </div>
+          <div class="flm-acord-body">
+            <div class="flm-acord-tags">
+              <span class="flm-acord-tag">Hackathon</span>
+              <span class="flm-acord-tag">IMPACT Lab Junior</span>
+              <span class="flm-acord-tag">Actividades de enriquecimiento curricular</span>
+              <span class="flm-acord-tag">Passion Pursuits</span>
+              <span class="flm-acord-tag">Junior Advisory Board</span>
+              <span class="flm-acord-tag">Student Council</span>
+              <span class="flm-acord-tag">House System</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flm-acord-item">
+          <div class="flm-acord-header" onclick="toggleFlmAcord(this)">
+            <span class="flm-acord-title">Creatividad y Exploración Artística</span>
+            <span class="flm-acord-chevron">▼</span>
+          </div>
+          <div class="flm-acord-body">
+            <div class="flm-acord-tags">
+              <span class="flm-acord-tag">Música</span>
+              <span class="flm-acord-tag">Artes Plásticas y Diseño</span>
+              <span class="flm-acord-tag">Teatro</span>
+              <span class="flm-acord-tag">Danza</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /flm-acord-wrap -->
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       5. FOOTER — SEK-NAV-002
+  ══════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo"></div>
+        </div>
+        <div class="footer-col">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">MYSEK</a></li>
+            <li><a href="#">Webmail</a></li>
+            <li><a href="#">Email alumnos</a></li>
+            <li><a href="#">Gestión de servicios</a></li>
+            <li><a href="#">Teams</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <div class="footer-social">
+            <div class="social-icon">In</div>
+            <div class="social-icon">Tw</div>
+            <div class="social-icon">Li</div>
+            <div class="social-icon">Pi</div>
+            <div class="social-icon">Yt</div>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Política de cookies</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 SEK Education Group. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<!-- VIDEO MODAL -->
+<div id="video-modal" class="modal-overlay" style="display:none" onclick="closeVideoModal()">
+  <div class="modal-inner" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeVideoModal()">&#10005;</button>
+    <div class="modal-play-icon">&#9654;</div>
+    <span class="modal-play-label">Vídeo</span>
+  </div>
+</div>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <div class="drawer-logo"></div>
+    <button class="drawer-close" onclick="closeDrawer()">&#10005;</button>
+  </div>
+
+  <div class="nav-drawer-main">
+
+    <!-- Left column -->
+    <div class="nav-drawer-left">
+      <div class="drawer-section-sep">SEK Ciudalcampo</div>
+      <button class="drawer-item-btn active" onclick="selectDrawerItem(this,'dp-colegio')">El Colegio</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-etapas')">Etapas</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-instalaciones')">Instalaciones</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-servicios')">Servicios</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-vida')">Vida Escolar</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-idiomas')">Idiomas e Internacional</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-admisiones-col')">Admisiones</button>
+      <div class="drawer-section-sep">SEK</div>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-colegios-sek')">Colegios SEK</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-modelo')">Modelo Educativo</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-programas')">Programas IB</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-por-que')">¿Por qué SEK?</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-admisiones-red')">Admisiones</button>
+      <button class="drawer-item-btn" onclick="selectDrawerItem(this,'dp-actualidad')">Actualidad</button>
+    </div>
+
+    <!-- Right column -->
+    <div class="nav-drawer-right">
+
+      <div class="drawer-panel active" id="dp-colegio">
+        <div class="drawer-panel-title">El Colegio</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Bienvenida</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Equipo docente</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Resultados</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Dónde estamos</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-etapas">
+        <div class="drawer-panel-title">Etapas</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Early Childhood</a><span class="drawer-panel-link-desc">4 meses – 6 años</span></li>
+          <li><a class="drawer-panel-link-title" href="#">Primaria</a><span class="drawer-panel-link-desc">6 – 12 años</span></li>
+          <li><a class="drawer-panel-link-title" href="#">Secundaria</a><span class="drawer-panel-link-desc">12 – 16 años</span></li>
+          <li><a class="drawer-panel-link-title" href="#">Bachillerato</a><span class="drawer-panel-link-desc">16 – 18 años</span></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-instalaciones">
+        <div class="drawer-panel-title">Instalaciones</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Espacios de aprendizaje</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Espacios deportivos</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Tour virtual</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-servicios">
+        <div class="drawer-panel-title">Servicios</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Nutrición</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Servicio Médico</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Transporte</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Actividades Extraescolares</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-vida">
+        <div class="drawer-panel-title">Vida Escolar</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Semana Blanca</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Duke of Edinburgh's</a></li>
+          <li><a class="drawer-panel-link-title" href="#">SEKMUN</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-idiomas">
+        <div class="drawer-panel-title">Idiomas e Internacional</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Idiomas y Certificación Oficial</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Estancias internacionales</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Intercambios culturales</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-admisiones-col">
+        <div class="drawer-panel-title">Admisiones</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Admisiones generales</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Admisiones internacionales</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Becas y ayudas</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-colegios-sek">
+        <div class="drawer-panel-title">Colegios SEK</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Colegios en Madrid</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Colegios en Cataluña</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Todos los colegios</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-modelo">
+        <div class="drawer-panel-title">Modelo Educativo</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Future Learning Model</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Robótica</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Bachillerato Internacional</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Espacios de aprendizaje</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Idiomas</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-programas">
+        <div class="drawer-panel-title">Bachillerato IB</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Primary Years (PYP)</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Middle Years (MYP)</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Diploma IB</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-por-que">
+        <div class="drawer-panel-title">¿Por qué SEK?</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Resultados académicos</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Comunidad educativa</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Instalaciones</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-admisiones-red">
+        <div class="drawer-panel-title">Admisiones</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Proceso de admisión</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Documentación</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Contactar</a></li>
+        </ul>
+      </div>
+
+      <div class="drawer-panel" id="dp-actualidad">
+        <div class="drawer-panel-title">Actualidad</div>
+        <ul class="drawer-panel-links">
+          <li><a class="drawer-panel-link-title" href="#">Noticias</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Eventos</a></li>
+          <li><a class="drawer-panel-link-title" href="#">Blog</a></li>
+        </ul>
+      </div>
+
+    </div><!-- /nav-drawer-right -->
+  </div><!-- /nav-drawer-main -->
+
+  <div class="drawer-cta-area">
+    <div class="drawer-cta-submenu" id="drawer-cta-submenu">
+      <a href="#" class="drawer-cta-subitem">Necesito información</a>
+      <a href="#" class="drawer-cta-subitem">Contacto</a>
+      <a href="#" class="drawer-cta-subitem">Programar visita</a>
+      <a href="#" class="drawer-cta-subitem">Tour virtual</a>
+    </div>
+    <button class="drawer-cta-btn" onclick="toggleDrawerCTA()">
+      Solicitar información <span class="drawer-cta-chevron" id="drawer-cta-chevron">▾</span>
+    </button>
+  </div>
+</div>
+
+<script src="../../shared/wireframe.js"></script>
+<script>
+  /* Acordeón exclusivo E4 — solo una categoría abierta a la vez (DEC-003) */
+  function toggleFlmAcord(header) {
+    var allHeaders = document.querySelectorAll('.flm-acord-header');
+    var isOpen = header.classList.contains('open');
+    allHeaders.forEach(function(h) {
+      h.classList.remove('open');
+      h.querySelector('.flm-acord-chevron').classList.remove('open');
+      h.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      header.classList.add('open');
+      header.querySelector('.flm-acord-chevron').classList.add('open');
+      header.nextElementSibling.classList.add('open');
+    }
+  }
+
+  /* Actualiza ancla activa al hacer scroll */
+  document.addEventListener('DOMContentLoaded', function() {
+    var sections = [
+      document.getElementById('modelo-educativo'),
+      document.getElementById('perfil-sek')
+    ];
+    var links = document.querySelectorAll('#anchor-bar .anchor-link');
+
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY + 150;
+      var active = 0;
+      sections.forEach(function(sec, i) {
+        if (sec && sec.offsetTop <= scrollY) active = i;
+      });
+      links.forEach(function(l, i) {
+        l.classList.toggle('active', i === active);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

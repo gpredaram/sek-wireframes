@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Institución — SEK Education Group</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    /* Anchor bar: justo debajo del seg-nav (52px) */
+    #anchor-bar { top: 52px; }
+
+    /* Stats: mobile-first columna → row en tablet+ */
+    .colegios-stats {
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+    }
+    .colegio-stat {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+    }
+    .colegio-stat-num   { font-size: 22px; font-weight: 700; color: var(--gray-800); line-height: 1.2; }
+    .colegio-stat-label { font-size: 13px; color: var(--gray-500); }
+
+    @media (min-width: 768px) {
+      .colegios-stats { flex-direction: row; gap: 32px; margin-bottom: 40px; padding-bottom: 32px; }
+    }
+
+    /* Carousel nativo: scroll container (siempre outer) */
+    .seg-car-outer {
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .seg-car-outer::-webkit-scrollbar { display: none; }
+
+    .seg-car-track {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 16px;
+    }
+    .seg-car-track .colegio-card {
+      flex-shrink: 0;
+      width: 260px;
+      scroll-snap-align: start;
+    }
+
+    /* Track "¿Por qué elegir SEK?" */
+    #por-que-outer .carousel-track {
+      flex-wrap: nowrap;
+      transition: none;
+    }
+    #por-que-outer .card-nav {
+      flex-shrink: 0;
+      width: 210px;
+      scroll-snap-align: start;
+    }
+
+    /* Flechas */
+    .seg-car-arrows {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+      width: 100%;
+    }
+    .seg-car-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--gray-400);
+      background: var(--white);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .seg-car-arrow:hover { background: var(--gray-200); }
+    .seg-car-arrow:disabled { opacity: 0.3; pointer-events: none; cursor: default; }
+  </style>
+</head>
+<body>
+
+<!-- PAGE WRAPPER -->
+<div id="page-wrapper">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVEGACIÓN — SEK Education Group (menú único, 2 niveles)
+  ═══════════════════════════════════════════════════════════ -->
+  <nav id="seg-nav">
+
+    <!-- Desktop -->
+    <div class="container">
+      <div class="nav-inner">
+        <div class="seg-nav-logo">SEK Education Group</div>
+        <ul class="nav-items">
+          <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios'); event.stopPropagation();">
+            Colegios <span class="nav-chevron">▾</span>
+          </li>
+          <li class="nav-item" onclick="toggleDropdown(this,'dd-seg-group'); event.stopPropagation();">
+            SEK Education Group <span class="nav-chevron">▾</span>
+          </li>
+          <li class="nav-item">UCJC</li>
+          <li class="nav-item">Fundación FS</li>
+          <li class="nav-item">Alumni</li>
+          <li class="nav-item">Contacto</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dropdown: Colegios -->
+    <div class="nav-dropdown" id="dd-colegios">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col">
+          <h4>En España</h4>
+          <ul>
+            <li><a href="#">SEK El Castillo</a></li>
+            <li><a href="#">SEK Santa Isabel</a></li>
+            <li><a href="#">SEK Ciudalcampo</a></li>
+            <li><a href="#">SEK Cataluña</a></li>
+            <li><a href="#">SEK Atlántico</a></li>
+            <li><a href="#">SEK Alborbán</a></li>
+          </ul>
+        </div>
+        <div class="nav-dd-col">
+          <h4>Fuera de España</h4>
+          <ul>
+            <li><a href="#">SEK Dublín</a></li>
+            <li><a href="#">SEK Les Alpes</a></li>
+            <li><a href="#">SEK Qatar</a></li>
+            <li><a href="#">SEK Riyadh</a></li>
+          </ul>
+          <h4 style="margin-top:14px">Online</h4>
+          <ul>
+            <li><a href="#">SEK Online</a></li>
+          </ul>
+        </div>
+        <div class="nav-dd-divider"></div>
+        <div class="nav-dd-extra">
+          <div class="nav-dd-stat">
+            <span class="nav-dd-stat-num">11</span>
+            <span class="nav-dd-stat-text">colegios en 4 países</span>
+          </div>
+          <div style="margin-top:10px">
+            <a href="#" class="nav-dd-link-title">Ver todos los colegios</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dropdown: SEK Education Group -->
+    <div class="nav-dropdown" id="dd-seg-group">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col" style="min-width:280px">
+          <ul>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">La Institución</span><span class="nav-dd-link-desc">Historia y trayectoria del grupo</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Principios y valores</span><span class="nav-dd-link-desc">Nuestra filosofía educativa</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Advisory Boards</span><span class="nav-dd-link-desc">Consejo asesor internacional</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">SEK Lab</span><span class="nav-dd-link-desc">Innovación y pedagogía</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">B Corp</span><span class="nav-dd-link-desc">Empresa B certificada</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Int Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
+            <li><a href="#"><span class="nav-dd-link-title">Desarrollo Integral del Talento</span><span class="nav-dd-link-desc">Desarrollo personal integral</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-dd-divider"></div>
+        <div class="nav-dd-extra">
+          <div class="nav-dd-stat">
+            <span class="nav-dd-stat-num">130</span>
+            <span class="nav-dd-stat-text">años formando generaciones</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile topbar -->
+    <div class="nav-topbar-mobile">
+      <div class="nav-logo-mobile"></div>
+      <button class="nav-hamburger" onclick="openDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       1. HERO — SEK-CAB-002 variante VID-LOOP
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg img-placeholder">vídeo SEK Education Group (loop, mudo)</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-logo-badge">logo<br>130<br>aniv.</div>
+    <div class="hero-play-center">
+      <button class="play-hero-btn" onclick="openVideoModal()">&#9654;</button>
+    </div>
+    <div class="hero-content">
+      <div class="breadcrumb"><span>SEK ›</span> La Institución</div>
+      <div class="hero-text">
+        <h1>La Institución</h1>
+        <p class="subtitle">Comprometidos con un aprendizaje relevante, global e internacional</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       2. BARRA DE ANCLAJE — SEK-CON-008 · PAT-009
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="anchor-bar">
+    <div class="anchor-inner">
+      <a href="#quienes-somos"  class="anchor-link active">Quiénes somos</a>
+      <a href="#colegios"       class="anchor-link">Colegios</a>
+      <a href="#ucjc"           class="anchor-link">UCJC</a>
+      <a href="#ciento-treinta" class="anchor-link">130 años</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       3. QUIÉNES SOMOS — SEK-CON-001 variante A (sin imagen)
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="quienes-somos" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Quiénes somos</h2>
+        <p>Liderazgo e Innovación pedagógica</p>
+      </div>
+      <div class="text-block-body">
+        <p>SEK Education Group es un grupo educativo internacional privado fundado en 1892, con más de 130 años de experiencia en educación de calidad. Contamos con una red de colegios en España, Irlanda y Francia, y somos fundadores de la Universidad Camilo José Cela.</p>
+        <p>Nuestro modelo educativo, el SEK Future Learning Model, sitúa al alumno en el centro del aprendizaje, fomentando el pensamiento crítico, la creatividad y la colaboración. Con más de 7.000 estudiantes de 80 nacionalidades, somos una comunidad global comprometida con la excelencia.</p>
+      </div>
+      <a href="#" class="text-block-cta">Conoce nuestros principios y valores</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       4. COLEGIOS SEK — SEK-CRD-007
+       Stats · 3 grupos · carrusel nativo + flechas abajo derecha
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="colegios" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Colegios SEK</h2>
+      </div>
+
+      <!-- Stats: stack vertical · icon placeholder + texto en fila -->
+      <div class="colegios-stats">
+        <div class="colegio-stat">
+          <div class="icon-placeholder"></div>
+          <div>
+            <div class="colegio-stat-num">7.000</div>
+            <div class="colegio-stat-label">Estudiantes</div>
+          </div>
+        </div>
+        <div class="colegio-stat">
+          <div class="icon-placeholder"></div>
+          <div>
+            <div class="colegio-stat-num">80</div>
+            <div class="colegio-stat-label">Nacionalidades en los colegios de Madrid</div>
+          </div>
+        </div>
+        <div class="colegio-stat">
+          <div class="icon-placeholder"></div>
+          <div>
+            <div class="colegio-stat-num">4 meses – 18 años</div>
+            <div class="colegio-stat-label">Formación desde los 4 meses</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grupo: En España -->
+      <div class="colegios-grupo">
+        <div class="colegios-grupo-title">En España</div>
+        <div class="seg-car-outer" id="car-espana">
+          <div class="seg-car-track">
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Villalba, Madrid</div>
+                <div class="colegio-card-name">SEK El Castillo</div>
+                <div class="colegio-card-ages">4 meses – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Madrid</div>
+                <div class="colegio-card-name">SEK Santa Isabel</div>
+                <div class="colegio-card-ages">3 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">San Sebastián de los Reyes, Madrid</div>
+                <div class="colegio-card-name">SEK Ciudalcampo</div>
+                <div class="colegio-card-ages">4 meses – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Barcelona</div>
+                <div class="colegio-card-name">SEK Cataluña</div>
+                <div class="colegio-card-ages">3 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Pontevedra</div>
+                <div class="colegio-card-name">SEK Atlántico</div>
+                <div class="colegio-card-ages">3 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Armilla, Granada</div>
+                <div class="colegio-card-name">SEK Alborbán</div>
+                <div class="colegio-card-ages">3 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="seg-car-arrows">
+          <button class="seg-car-arrow" id="prev-espana" onclick="segCarScroll('car-espana',-1)">&#8592;</button>
+          <button class="seg-car-arrow" id="next-espana" onclick="segCarScroll('car-espana',1)">&#8594;</button>
+        </div>
+      </div>
+
+      <!-- Grupo: Fuera de España -->
+      <div class="colegios-grupo">
+        <div class="colegios-grupo-title">Fuera de España</div>
+        <div class="seg-car-outer" id="car-fuera">
+          <div class="seg-car-track">
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Irlanda</div>
+                <div class="colegio-card-name">SEK Dublín</div>
+                <div class="colegio-card-ages">12 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Francia</div>
+                <div class="colegio-card-name">SEK Les Alpes</div>
+                <div class="colegio-card-ages">12 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Qatar</div>
+                <div class="colegio-card-name">SEK Qatar</div>
+                <div class="colegio-card-ages">3 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">Arabia Saudí</div>
+                <div class="colegio-card-name">SEK Riyadh</div>
+                <div class="colegio-card-ages">3 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="seg-car-arrows">
+          <button class="seg-car-arrow" id="prev-fuera" onclick="segCarScroll('car-fuera',-1)">&#8592;</button>
+          <button class="seg-car-arrow" id="next-fuera" onclick="segCarScroll('car-fuera',1)">&#8594;</button>
+        </div>
+      </div>
+
+      <!-- Grupo: Online -->
+      <div class="colegios-grupo">
+        <div class="colegios-grupo-title">Online</div>
+        <div class="seg-car-outer" id="car-online">
+          <div class="seg-car-track">
+
+            <div class="colegio-card">
+              <div class="colegio-card-img">
+                <div class="img-placeholder" style="position:absolute;inset:0">imagen</div>
+              </div>
+              <div class="colegio-card-body">
+                <div class="colegio-card-address">100% online</div>
+                <div class="colegio-card-name">SEK Online</div>
+                <div class="colegio-card-ages">12 – 18 años</div>
+                <a href="#" class="colegio-card-cta">Ver colegio →</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="seg-car-arrows">
+          <button class="seg-car-arrow" id="prev-online" onclick="segCarScroll('car-online',-1)">&#8592;</button>
+          <button class="seg-car-arrow" id="next-online" onclick="segCarScroll('car-online',1)">&#8594;</button>
+        </div>
+      </div>
+
+      <a href="#" class="colegios-cta-global">Ver todos los colegios →</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       5. UCJC — SEK-CON-001 variante B (con logo)
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="ucjc" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Universidad Camilo José Cela (UCJC)</h2>
+        <p>Fundada en el año 2000 como parte de SEK Education Group</p>
+      </div>
+      <div class="text-block-logo">logo UCJC</div>
+      <div class="text-block-body">
+        <p>Una universidad privada, plural, solidaria, independiente y presencial. Su reciente transformación organizativa y renovado modelo académico de inspiración humanística e influencia internacional y bilingüe le ha llevado a asentarse en tres pilares fundamentales: la interdisciplinariedad del saber-hacer, la fuerte vocación docente y la clara orientación aplicada de la investigación.</p>
+      </div>
+      <a href="#" class="text-block-cta">Saber más de UCJC</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       6. 130 AÑOS DE HISTORIA — SEK-CON-009 variante A
+       Texto truncado mobile (PAT-002) · vídeo embed · 2 cards acceso
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="ciento-treinta" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>130 años de historia</h2>
+        <p>La Institución Educativa seglar más antigua de España</p>
+      </div>
+
+      <div class="historia-video">
+        <div class="img-placeholder" style="position:absolute;inset:0">vídeo 130 aniversario (YouTube embed)</div>
+        <button class="historia-video-play" onclick="openVideoModal()">&#9654;</button>
+      </div>
+
+      <div class="historia-text" id="historia-texto">
+        <p>Fundado en 1892 por Felipe Segovia Olmo, SEK nació con la vocación de ofrecer una educación laica, progresista y de calidad en España. A lo largo de su historia, el grupo ha sido pionero en numerosas iniciativas: primer colegio español en sumarse al Bachillerato Internacional en 1977, creador de su propio modelo pedagógico —el SEK Future Learning Model— y fundador de la Universidad Camilo José Cela en el año 2000.</p>
+        <p>Hoy, más de 130 años después de su fundación, SEK Education Group mantiene su espíritu innovador y su compromiso con la excelencia, formando a las nuevas generaciones para afrontar los desafíos de un mundo en constante cambio. Con presencia en España, Irlanda y Francia, y una plataforma de formación online, el grupo continúa creciendo y evolucionando sin perder de vista los valores que han guiado su trayectoria desde el principio.</p>
+      </div>
+      <button class="historia-ver-mas" id="historia-ver-mas-btn" onclick="toggleHistoriaVerMas()">Ver más</button>
+
+      <div class="historia-cards">
+        <a href="#" class="historia-card">
+          <div class="historia-card-graphic img-placeholder">gráfico</div>
+          <div class="historia-card-title">Conoce el cronograma de la institución</div>
+        </a>
+        <a href="#" class="historia-card">
+          <div class="historia-card-graphic img-placeholder">gráfico</div>
+          <div class="historia-card-title">Descubre los recuerdos destacados de SEK</div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       7. ¿POR QUÉ ELEGIR SEK? — SEK-CRD-002 variante IMG
+       Carrusel nativo · flechas debajo a la derecha
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="por-que" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>¿Por qué elegir SEK?</h2>
+      </div>
+      <div class="seg-car-outer" id="por-que-outer">
+        <div class="carousel-track">
+
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Modelo educativo</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Programa IB</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Idiomas</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Instalaciones</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Bachillerato Online</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Etapas</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Opiniones</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+          <div class="card-nav">
+            <div class="card-img img-placeholder">imagen</div>
+            <div class="card-overlay"></div>
+            <span class="card-label">Experiencias internacionales</span>
+            <span class="card-cta">Descubre más ›</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="seg-car-arrows">
+        <button class="seg-car-arrow" id="prev-porque" onclick="segCarScroll('por-que-outer',-1)">&#8592;</button>
+        <button class="seg-car-arrow" id="next-porque" onclick="segCarScroll('por-que-outer',1)">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       8. FOOTER — SEK-NAV-002
+  ═══════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo"></div>
+        </div>
+        <div class="footer-col">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">MYSEK</a></li>
+            <li><a href="#">Webmail</a></li>
+            <li><a href="#">Email alumnos</a></li>
+            <li><a href="#">Gestión de servicios</a></li>
+            <li><a href="#">Teams</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <div class="footer-social">
+            <div class="social-icon">In</div>
+            <div class="social-icon">Tw</div>
+            <div class="social-icon">Li</div>
+            <div class="social-icon">Pi</div>
+            <div class="social-icon">Yt</div>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Política de cookies</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 SEK Education Group. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<!-- VIDEO MODAL -->
+<div id="video-modal" class="modal-overlay" style="display:none" onclick="closeVideoModal()">
+  <div class="modal-inner" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeVideoModal()">&#10005;</button>
+    <div class="modal-play-icon">&#9654;</div>
+    <span class="modal-play-label">Vídeo SEK Education Group</span>
+  </div>
+</div>
+
+<!-- MOBILE DRAWER — SEK Education Group (2 niveles) -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <div class="drawer-logo"></div>
+    <button class="drawer-close" onclick="closeDrawer()">&#10005;</button>
+  </div>
+
+  <div class="seg-drawer-content">
+
+    <!-- Nivel 1 -->
+    <div id="seg-drawer-l1">
+      <button class="seg-drawer-item" onclick="segDrawerShowL2('seg-dl2-colegios')">
+        Colegios Internacionales SEK <span class="seg-drawer-item-arrow">›</span>
+      </button>
+      <button class="seg-drawer-item" onclick="segDrawerShowL2('seg-dl2-group')">
+        SEK Education Group <span class="seg-drawer-item-arrow">›</span>
+      </button>
+      <a href="#" class="seg-drawer-item">
+        Universidad Camilo José Cela <span class="seg-drawer-item-arrow">›</span>
+      </a>
+      <a href="#" class="seg-drawer-item">
+        Fundación Felipe Segovia <span class="seg-drawer-item-arrow">›</span>
+      </a>
+      <a href="#" class="seg-drawer-item">
+        Alumni <span class="seg-drawer-item-arrow">›</span>
+      </a>
+    </div>
+
+    <!-- Nivel 2: Colegios -->
+    <div id="seg-dl2-colegios" class="seg-drawer-l2">
+      <button class="seg-drawer-back" onclick="segDrawerBack()">
+        <span class="seg-drawer-back-arrow">›</span> Colegios
+      </button>
+      <a href="#" class="seg-drawer-subitem">SEK El Castillo</a>
+      <a href="#" class="seg-drawer-subitem">SEK Santa Isabel</a>
+      <a href="#" class="seg-drawer-subitem">SEK Ciudalcampo</a>
+      <a href="#" class="seg-drawer-subitem">SEK Cataluña</a>
+      <a href="#" class="seg-drawer-subitem">SEK Atlántico</a>
+      <a href="#" class="seg-drawer-subitem">SEK Alborbán</a>
+      <a href="#" class="seg-drawer-subitem">SEK Dublín</a>
+      <a href="#" class="seg-drawer-subitem">SEK Les Alpes</a>
+      <a href="#" class="seg-drawer-subitem">SEK Qatar</a>
+      <a href="#" class="seg-drawer-subitem">SEK Riyadh</a>
+      <a href="#" class="seg-drawer-subitem">SEK Online</a>
+      <a href="#" class="seg-drawer-subitem" style="font-weight:600">Ver todos los colegios →</a>
+    </div>
+
+    <!-- Nivel 2: SEK Education Group -->
+    <div id="seg-dl2-group" class="seg-drawer-l2">
+      <button class="seg-drawer-back" onclick="segDrawerBack()">
+        <span class="seg-drawer-back-arrow">›</span> SEK Education Group
+      </button>
+      <a href="#" class="seg-drawer-subitem">La Institución</a>
+      <a href="#" class="seg-drawer-subitem">Historia</a>
+      <a href="#" class="seg-drawer-subitem">Principios y valores</a>
+      <a href="#" class="seg-drawer-subitem">Advisory Boards</a>
+      <a href="#" class="seg-drawer-subitem">SEK LAB</a>
+      <a href="#" class="seg-drawer-subitem">B Corp</a>
+      <a href="#" class="seg-drawer-subitem">International Sports Academy</a>
+      <a href="#" class="seg-drawer-subitem">Desarrollo Integral del Talento</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../shared/wireframe.js"></script>
+<script>
+  /* applyCarousel hookeado al toggle de vista — esta página usa scroll nativo */
+  function applyCarousel() { segRefreshAll(); }
+  function moveCarousel() {}
+
+  /* Devuelve el elemento scrollable: outer en todos los casos (scroll nativo) */
+  function segScrollEl(outer) {
+    return outer;
+  }
+
+  /* Flechas: scrollBy smooth sobre el track en mobile, outer en desktop */
+  function segCarScroll(outerId, dir) {
+    var outer = document.getElementById(outerId);
+    if (!outer) return;
+    var scrollEl = segScrollEl(outer);
+    var item     = outer.querySelector('.colegio-card, .card-nav');
+    if (!item) return;
+    scrollEl.scrollBy({ left: dir * (item.offsetWidth + 16), behavior: 'smooth' });
+  }
+
+  /* Visibilidad + estado de flechas según modo y posición del scroll */
+  function segCarRefresh(outerId, prevId, nextId) {
+    var outer    = document.getElementById(outerId);
+    var prev     = document.getElementById(prevId);
+    var next     = document.getElementById(nextId);
+    if (!outer || !prev || !next) return;
+    var arrowsDiv = prev.parentElement;
+    arrowsDiv.style.display = outer.scrollWidth > outer.clientWidth + 2 ? 'flex' : 'none';
+    if (arrowsDiv.style.display === 'none') return;
+    var scrollEl = segScrollEl(outer);
+    var atStart  = scrollEl.scrollLeft === 0;
+    var atEnd    = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+    prev.disabled            = atStart;
+    prev.style.opacity       = atStart ? '0.3' : '1';
+    prev.style.pointerEvents = atStart ? 'none' : '';
+    next.disabled            = atEnd;
+    next.style.opacity       = atEnd   ? '0.3' : '1';
+    next.style.pointerEvents = atEnd   ? 'none' : '';
+  }
+
+  function segRefreshAll() {
+    segCarRefresh('car-espana',    'prev-espana',  'next-espana');
+    segCarRefresh('car-fuera',     'prev-fuera',   'next-fuera');
+    segCarRefresh('car-online',    'prev-online',  'next-online');
+    segCarRefresh('por-que-outer', 'prev-porque',  'next-porque');
+  }
+
+  /* Escucha scroll en outer (desktop) y track (mobile) */
+  function setupSegCar(outerId, prevId, nextId) {
+    var outer = document.getElementById(outerId);
+    if (!outer) return;
+    function onScroll() { segCarRefresh(outerId, prevId, nextId); }
+    outer.addEventListener('scroll', onScroll);
+    var track = outer.querySelector('.seg-car-track, .carousel-track');
+    if (track) track.addEventListener('scroll', onScroll);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    setupSegCar('car-espana',    'prev-espana',  'next-espana');
+    setupSegCar('car-fuera',     'prev-fuera',   'next-fuera');
+    setupSegCar('car-online',    'prev-online',  'next-online');
+    setupSegCar('por-que-outer', 'prev-porque',  'next-porque');
+    setTimeout(segRefreshAll, 100);
+  });
+
+  window.addEventListener('resize', segRefreshAll);
+
+  /* Drawer 2 niveles */
+  function segDrawerShowL2(panelId) {
+    document.getElementById('seg-drawer-l1').classList.add('hidden');
+    document.querySelectorAll('.seg-drawer-l2').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  function segDrawerBack() {
+    var l1 = document.getElementById('seg-drawer-l1');
+    if (l1) l1.classList.remove('hidden');
+    document.querySelectorAll('.seg-drawer-l2').forEach(function(p) { p.classList.remove('active'); });
+  }
+
+  function closeDrawer() {
+    var drawer = document.getElementById('nav-drawer');
+    if (!drawer) return;
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+    segDrawerBack();
+  }
+</script>
+
+</body>
+</html>

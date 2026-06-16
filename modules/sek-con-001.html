@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEK-CON-001 · Bloque texto</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* ── Chrome ─────────────────────────────────────────────── */
+    .mod-chrome { position: sticky; top: 0; z-index: 500; background: #fff; border-bottom: 2px solid #111; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+    .mod-code { font-family: monospace; font-size: 13px; font-weight: 700; color: #111; }
+    .mod-name { font-size: 13px; color: #555; }
+    .mod-ver  { font-family: monospace; font-size: 11px; color: #aaa; margin-left: auto; }
+    .state-block { background: var(--white); margin-bottom: 4px; }
+    .state-label { padding: 8px 20px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #777; }
+    .demo-narrow { max-width: 390px; margin: 0 auto; outline: 2px dashed #ccc; outline-offset: -1px; }
+
+    /* ── CON-001-B: 2 col con imagen en desktop ──────────────── */
+    .con001-b { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+    @media (min-width: 768px) { .con001-b { grid-template-columns: 1fr 200px; gap: 48px; } }
+    @media (min-width: 1200px) { .con001-b { grid-template-columns: 1fr 240px; } }
+  </style>
+</head>
+<body>
+
+<div class="mod-chrome">
+  <span class="mod-code">SEK-CON-001</span>
+  <span class="mod-name">Bloque texto</span>
+  <span class="mod-ver">v1.0</span>
+</div>
+
+<div id="page-wrapper">
+
+  <!-- ── Variante A: Sin imagen · con subtítulo y CTA ──────── -->
+  <div class="state-block">
+    <div class="state-label">Variante A — Sin imagen · con subtítulo + CTA · responsive ↔</div>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Quiénes somos</h2>
+          <p>Historia y misión del grupo SEK</p>
+        </div>
+        <div class="text-block-subtitle">Más de 130 años formando ciudadanos globales</div>
+        <div class="text-block-body">
+          <p>SEK es un grupo educativo internacional con más de 130 años de historia, presente en Europa, Latinoamérica y Oriente Medio. Nuestra misión es formar ciudadanos globales comprometidos, competentes y creativos, capaces de transformar el mundo desde los valores del humanismo.</p>
+          <p>El grupo SEK nació en 1892 de la mano de Felipe Segovia Olmo con una visión clara: ofrecer una educación de calidad que prepare a los jóvenes para los retos del futuro. Hoy somos un referente internacional en educación activa y metodologías innovadoras.</p>
+        </div>
+        <a href="#" class="text-block-cta">Conoce nuestra historia completa →</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Variante A mínima: Solo H2 + texto, sin subtítulo ni CTA ── -->
+  <div class="state-block">
+    <div class="state-label">Variante A mínima — Solo H2 + texto · sin subtítulo ni CTA</div>
+    <section class="section" style="background:var(--gray-100);">
+      <div class="container">
+        <div class="section-head">
+          <h2>Nuestra historia</h2>
+        </div>
+        <div class="text-block-body">
+          <p>Desde 1892, el grupo SEK ha crecido hasta convertirse en uno de los grupos educativos de referencia en España y en el mundo. A lo largo de más de un siglo, hemos mantenido nuestro compromiso con una educación de calidad, innovadora y humanista que coloca al alumno en el centro.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Variante B: Con logo / imagen · 2 col desktop ─────── -->
+  <div class="state-block">
+    <div class="state-label">Variante B — Con logo / imagen · 2 col ≥768px · responsive ↔</div>
+    <section class="section">
+      <div class="container">
+        <div class="con001-b">
+          <div>
+            <div class="section-head">
+              <h2>Universidad Camilo José Cela</h2>
+            </div>
+            <div class="text-block-subtitle">La universidad del grupo SEK</div>
+            <div class="text-block-body">
+              <p>La Universidad Camilo José Cela es la universidad privada del grupo SEK, fundada en 2003 en Madrid. Ofrece una formación universitaria de excelencia orientada a la empleabilidad y la innovación.</p>
+              <p>Con más de 60 grados, másteres y programas de doctorado, la UCJC forma a los profesionales del futuro en un entorno dinámico e internacional.</p>
+            </div>
+            <a href="#" class="text-block-cta">Conoce la universidad →</a>
+          </div>
+          <div class="text-block-logo img-placeholder">logo</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Variante B · Mobile (logo apilado) ────────────────── -->
+  <div class="state-block">
+    <div class="state-label">Variante B · Mobile — logo apilado · &lt; 768px</div>
+    <div class="demo-narrow">
+      <div style="padding:32px 0;background:#fff;">
+        <div style="padding:0 20px;">
+          <div class="section-head">
+            <h2>Universidad Camilo José Cela</h2>
+          </div>
+          <div class="text-block-logo img-placeholder" style="margin-bottom:20px;">logo</div>
+          <div class="text-block-subtitle">La universidad del grupo SEK</div>
+          <div class="text-block-body">
+            <p>La Universidad Camilo José Cela es la universidad privada del grupo SEK, fundada en 2003 en Madrid. Ofrece formación universitaria de excelencia orientada a la empleabilidad y la innovación.</p>
+          </div>
+          <a href="#" class="text-block-cta">Conoce la universidad →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+
+<script src="../shared/wireframe.js"></script>
+</body>
+</html>

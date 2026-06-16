@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEK-CON-008 · Barra de anclaje</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* ── Chrome ─────────────────────────────────────────────── */
+    .mod-chrome { position: sticky; top: 0; z-index: 900; background: #fff; border-bottom: 2px solid #111; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+    .mod-code { font-family: monospace; font-size: 13px; font-weight: 700; color: #111; }
+    .mod-name { font-size: 13px; color: #555; }
+    .mod-ver  { font-family: monospace; font-size: 11px; color: #aaa; margin-left: auto; }
+    .state-block { background: var(--white); margin-bottom: 4px; }
+    .state-label { padding: 8px 20px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #777; }
+    .demo-narrow { max-width: 390px; margin: 0 auto; outline: 2px dashed #ccc; outline-offset: -1px; }
+
+    /* ── Anchor bar: en el showcase se pega bajo el chrome ──── */
+    #anchor-bar { top: 41px !important; }
+
+    /* ── Snap: barra standalone para estados estáticos ───────── */
+    .anchor-snap {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .anchor-snap::-webkit-scrollbar { display: none; }
+
+    /* ── Estado: oculta — muestra el hueco que deja ──────────── */
+    .anchor-hidden-wrap {
+      overflow: hidden;
+      height: 38px; /* hueco que ocupa la barra */
+      background: var(--gray-100);
+      border-bottom: 1px dashed var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .anchor-hidden-note {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--gray-400);
+      letter-spacing: .06em;
+    }
+
+    /* ── Fake content sections para scroll del demo interactivo */
+    .fake-section {
+      padding: 60px 20px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .fake-section h3 { font-size: 18px; font-weight: 700; color: var(--gray-300); margin-bottom: 12px; }
+    .fake-section p  { font-size: 14px; color: var(--gray-200); line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<div class="mod-chrome">
+  <span class="mod-code">SEK-CON-008</span>
+  <span class="mod-name">Barra de anclaje</span>
+  <span class="mod-ver">v1.0</span>
+</div>
+
+<div id="page-wrapper">
+
+  <!-- ── Demo interactivo: scroll para ver PAT-009 ─────────── -->
+  <div class="state-block">
+    <div class="state-label">Demo interactivo · PAT-009 · scroll abajo para ocultar, arriba para mostrar</div>
+
+    <!-- Barra de anclaje real (sticky, gestionada por wireframe.js) -->
+    <div id="anchor-bar">
+      <div class="anchor-inner">
+        <a href="#sec-a" class="anchor-link active">Sección A</a>
+        <a href="#sec-b" class="anchor-link">Sección B</a>
+        <a href="#sec-c" class="anchor-link">Sección C</a>
+        <a href="#sec-d" class="anchor-link">Sección D</a>
+      </div>
+    </div>
+
+    <!-- Contenido de página para habilitar el scroll -->
+    <div id="sec-a" class="fake-section">
+      <h3>Sección A</h3>
+      <p>Contenido de placeholder para demostrar el comportamiento sticky de la barra de anclaje (PAT-009). Haz scroll hacia abajo para ver cómo la barra se oculta. Haz scroll hacia arriba para que reaparezca.</p>
+    </div>
+    <div id="sec-b" class="fake-section">
+      <h3>Sección B</h3>
+      <p>Segundo bloque de contenido. La barra de anclaje permanece oculta al hacer scroll hacia abajo y reaparece en cuanto el scroll va hacia arriba.</p>
+    </div>
+    <div id="sec-c" class="fake-section">
+      <h3>Sección C</h3>
+      <p>Tercer bloque de contenido. El umbral de detección es de 100px desde el top de la página.</p>
+    </div>
+    <div id="sec-d" class="fake-section">
+      <h3>Sección D</h3>
+      <p>Cuarto bloque de contenido. Ahora haz scroll hacia arriba para ver cómo la barra reaparece con transición suave.</p>
+    </div>
+  </div>
+
+  <!-- ── Estado: Visible · link 1 activo (default) ─────────── -->
+  <div class="state-block">
+    <div class="state-label">Estado: Visible · link activo = primera sección (default)</div>
+    <div class="anchor-snap">
+      <div class="anchor-inner">
+        <a href="#" class="anchor-link active">Sección A</a>
+        <a href="#" class="anchor-link">Sección B</a>
+        <a href="#" class="anchor-link">Sección C</a>
+        <a href="#" class="anchor-link">Sección D</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Estado: Visible · link 2 activo ───────────────────── -->
+  <div class="state-block">
+    <div class="state-label">Estado: Visible · link activo = segunda sección (al hacer scroll)</div>
+    <div class="anchor-snap">
+      <div class="anchor-inner">
+        <a href="#" class="anchor-link">Sección A</a>
+        <a href="#" class="anchor-link active">Sección B</a>
+        <a href="#" class="anchor-link">Sección C</a>
+        <a href="#" class="anchor-link">Sección D</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Estado: Oculta · transform translateY(-100%) ──────── -->
+  <div class="state-block">
+    <div class="state-label">Estado: Oculta · transform: translateY(-100%) · al hacer scroll abajo</div>
+    <div class="anchor-hidden-wrap">
+      <span class="anchor-hidden-note">barra oculta — translateY(-100%) · aparece al hacer scroll arriba</span>
+    </div>
+  </div>
+
+  <!-- ── Mobile: scroll horizontal táctil ──────────────────── -->
+  <div class="state-block">
+    <div class="state-label">Mobile · scroll horizontal táctil · overflow-x: auto · &lt; 768px</div>
+    <div class="demo-narrow">
+      <div class="anchor-snap">
+        <div class="anchor-inner" style="padding:0 20px;">
+          <a href="#" class="anchor-link active">Sección A</a>
+          <a href="#" class="anchor-link">Sección B muy larga</a>
+          <a href="#" class="anchor-link">Sección C</a>
+          <a href="#" class="anchor-link">Sección D</a>
+          <a href="#" class="anchor-link">Sección E</a>
+          <a href="#" class="anchor-link">Sección F</a>
+        </div>
+      </div>
+      <div style="padding:8px 20px;font-family:monospace;font-size:10px;color:var(--gray-400);">← desliza para ver más →</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+
+<script src="../shared/wireframe.js"></script>
+<script>
+  /* Actualiza el link activo al hacer scroll en el demo interactivo */
+  (function() {
+    var sections = ['sec-a','sec-b','sec-c','sec-d'].map(function(id) { return document.getElementById(id); });
+    var links    = document.querySelectorAll('#anchor-bar .anchor-link');
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY + 100;
+      var active  = 0;
+      sections.forEach(function(sec, i) { if (sec && sec.offsetTop <= scrollY) active = i; });
+      links.forEach(function(l, i) { l.classList.toggle('active', i === active); });
+    });
+  })();
+</script>
+</body>
+</html>
