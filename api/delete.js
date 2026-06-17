@@ -12,9 +12,10 @@ module.exports = async (req, res) => {
 
   const clean = String(path || '').replace(/^\/+/, '');
   if (!clean || clean.includes('..') || clean.endsWith('/')) return res.status(400).json({ error: 'Ruta no válida' });
-  // Only content files may be deleted from the page (protect infra/shared)
-  if (!clean.startsWith('pages/') && !clean.startsWith('modules/')) {
-    return res.status(400).json({ error: 'Solo se pueden eliminar archivos de pages/ o modules/' });
+  // Any file may be deleted EXCEPT the uploader's own infrastructure.
+  const PROTECTED = ['index.html', 'upload.html', 'shared/upload.css', 'vercel.json', 'robots.txt', '.gitignore'];
+  if (PROTECTED.includes(clean) || clean.startsWith('api/') || clean.startsWith('.git')) {
+    return res.status(400).json({ error: 'Archivo protegido (infraestructura del subidor): no se puede eliminar' });
   }
 
   try {

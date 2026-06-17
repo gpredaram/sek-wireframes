@@ -85,7 +85,9 @@
   const host = location.origin;
 
   function setStatus(msg, kind) { $('status').textContent = msg; $('status').className = 'u-status' + (kind ? ' ' + kind : ''); }
-  const canDelete = (p) => p.startsWith('pages/') || p.startsWith('modules/');
+  // Any file is deletable except the uploader's own infrastructure.
+  const PROTECTED = new Set(['index.html', 'upload.html', 'shared/upload.css', 'vercel.json', 'robots.txt', '.gitignore']);
+  const canDelete = (p) => !PROTECTED.has(p) && !p.startsWith('api/') && !p.startsWith('.git');
 
   // ---- folder tree ----
   function buildTree(items) {
