@@ -39,85 +39,66 @@ function esc(s) {
 }
 
 // Build the public index.html (TOC) from the current list of file paths.
-// Build the public index.html from the current file paths, reflecting the real
-// folder/file tree. `highlight` = paths uploaded in this commit (shown on top).
+// Build the public index.html — a polished card view of pages/ and modules/.
+// `highlight` = paths uploaded in this commit (shown in "Últimas subidas").
 function renderIndex(paths, highlight = []) {
   const hi = new Set(highlight);
-  const HIDE = (p) =>
-    p === 'index.html' || p === 'upload.html' || p === 'robots.txt' || p === 'vercel.json' ||
-    p === '.gitignore' || p === 'README.md' || p === 'CLAUDE.md' || p.startsWith('api/') || p.startsWith('.git');
+  const isContent = (p) => p.endsWith('.html') && (p.startsWith('pages/') || p.startsWith('modules/'));
+  const pages = paths.filter((p) => p.startsWith('pages/') && p.endsWith('.html')).sort();
+  const modules = paths.filter((p) => p.startsWith('modules/') && p.endsWith('.html')).sort();
 
-  const files = paths.filter((p) => !HIDE(p)).sort();
-
-  const link = (p, name) => {
-    const isHtml = p.endsWith('.html');
+  const card = (p) => {
+    const name = p.split('/').pop().replace(/\.html$/, '');
+    const rel = p.replace(/^(pages|modules)\//, '');
+    const dir = rel.includes('/') ? rel.slice(0, rel.lastIndexOf('/') + 1) : '';
     const href = '/' + p.replace(/\.html$/, '');
-    const tag = hi.has(p) ? ' <span class="idx-new">nuevo</span>' : '';
-    return isHtml
-      ? `<a href="${esc(href)}">${esc(name)}</a>${tag}`
-      : `<span class="idx-fname">${esc(name)}</span>${tag}`;
+    const tag = hi.has(p) ? '<span class="ix-new">nuevo</span>' : '';
+    return `        <a class="ix-card" href="${esc(href)}">
+          <span class="ix-card-name">${esc(name)}${tag}</span>
+          <span class="ix-card-path">${esc(dir || '—')}</span>
+        </a>`;
   };
 
-  // Nested tree
-  const root = { dirs: {}, files: [] };
-  files.forEach((p) => {
-    const parts = p.split('/');
-    let node = root;
-    parts.forEach((part, i) => {
-      if (i === parts.length - 1) node.files.push({ name: part, path: p });
-      else { node.dirs[part] = node.dirs[part] || { dirs: {}, files: [] }; node = node.dirs[part]; }
-    });
-  });
-  function renderNode(node) {
-    let html = '<ul class="idx-tree">';
-    Object.keys(node.dirs).sort().forEach((name) => {
-      html += `<li class="idx-dir"><span class="idx-dname">${esc(name)}/</span>${renderNode(node.dirs[name])}</li>`;
-    });
-    node.files.sort((a, b) => a.name.localeCompare(b.name)).forEach((f) => {
-      html += `<li class="idx-file">${link(f.path, f.name)}</li>`;
-    });
-    return html + '</ul>';
-  }
-
-  const latestPaths = highlight.filter((p) => !HIDE(p)).sort();
-  const latest = latestPaths.length
-    ? `  <section class="section">
-    <div class="container">
-      <div class="section-head"><h2>Últimas subidas</h2><p>${new Date().toLocaleString('es-ES')}</p></div>
-      <ul class="idx-latest">
-${latestPaths.map((p) => `        <li>${link(p, p)}</li>`).join('\n')}
-      </ul>
+  const section = (title, items) =>
+    items.length
+      ? `  <section class="ix-section">
+    <h2 class="ix-h2">${title} <span class="ix-count">${items.length}</span></h2>
+    <div class="ix-grid">
+${items.map(card).join('\n')}
     </div>
-  </section>
+  </section>`
+      : '';
 
-`
-    : '';
+  const latestPaths = highlight.filter(isContent).sort();
+  const latest = latestPaths.length
+    ? `  <section class="ix-section ix-latest">
+    <h2 class="ix-h2">Últimas subidas</h2>
+    <div class="ix-grid">
+${latestPaths.map(card).join('\n')}
+    </div>
+  </section>`
+      : '';
 
   const today = new Date().toISOString().slice(0, 10);
+  const empty = !pages.length && !modules.length;
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SEK · Wireframes — Índice</title>
-  <link rel="stylesheet" href="shared/styles.css">
-  <script src="shared/wireframe.js" defer></script>
+  <title>SEK · Wireframes</title>
+  <link rel="stylesheet" href="shared/index.css">
 </head>
 <body>
-<div id="page-wrapper">
-  <header class="index-head">
-    <div class="container">
-      <h1>SEK · Wireframes</h1>
-      <p>Índice generado automáticamente · ${today}</p>
-    </div>
+<div class="ix-shell">
+  <header class="ix-head">
+    <span class="ix-badge">SEK · Wireframes</span>
+    <h1>Wireframes</h1>
+    <p>${pages.length} páginas · ${modules.length} módulos · actualizado ${today}</p>
   </header>
 
-${latest}  <section class="section">
-    <div class="container">
-      <div class="section-head"><h2>Estructura</h2></div>
-      ${files.length ? renderNode(root) : '<p>Sin archivos todavía.</p>'}
-    </div>
-  </section>
+${[latest, section('Páginas', pages), section('Módulos', modules)].filter(Boolean).join('\n\n')}
+${empty ? '  <p class="ix-empty">Sin páginas ni módulos todavía.</p>' : ''}
 </div>
 </body>
 </html>
