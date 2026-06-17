@@ -1069,3 +1069,24 @@ body {
 .index-card:hover { border-color: var(--gray-500); background: var(--gray-100); }
 .index-card .code { font-size: 12px; color: var(--gray-500); font-family: monospace; }
 .index-card .name { display: block; margin-top: 4px; font-weight: 600; color: var(--gray-800); }
+
+/* ── INDEX: file/folder tree + latest uploads ────────────────── */
+.idx-tree, .idx-tree ul { list-style: none; margin: 0; padding-left: 18px; }
+.idx-tree { padding-left: 0; }
+.idx-dir > .idx-dname { font-weight: 700; color: var(--gray-800); display: inline-block; padding: 3px 0; }
+.idx-file { padding: 3px 0; font-family: monospace; font-size: 13px; }
+.idx-file a { color: var(--gray-700); text-decoration: none; }
+.idx-file a:hover { color: var(--gray-900); text-decoration: underline; }
+.idx-fname { color: var(--gray-500); }
+.idx-new {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--white);
+  background: var(--gray-700); border-radius: 4px; padding: 1px 6px; margin-left: 6px;
+}
+.idx-latest { list-style: none; padding: 0; margin: 0; }
+.idx-latest li {
+  padding: 8px 12px; margin-bottom: 6px; background: var(--gray-100);
+  border-left: 3px solid var(--gray-700); border-radius: 4px;
+  font-family: monospace; font-size: 13px;
+}
+.idx-latest li a { color: var(--gray-800); }

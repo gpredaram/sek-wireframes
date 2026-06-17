@@ -39,35 +39,59 @@ function esc(s) {
 }
 
 // Build the public index.html (TOC) from the current list of file paths.
-function renderIndex(paths) {
-  const htmls = paths.filter(
-    (p) => p.endsWith('.html') && p !== 'index.html' && p !== 'upload.html' && !p.startsWith('api/')
-  );
-  const groups = [
-    { title: 'Páginas', items: htmls.filter((p) => p.startsWith('pages/')) },
-    { title: 'Módulos', items: htmls.filter((p) => p.startsWith('modules/')) },
-    { title: 'Otros', items: htmls.filter((p) => !p.startsWith('pages/') && !p.startsWith('modules/')) }
-  ].filter((g) => g.items.length);
+// Build the public index.html from the current file paths, reflecting the real
+// folder/file tree. `highlight` = paths uploaded in this commit (shown on top).
+function renderIndex(paths, highlight = []) {
+  const hi = new Set(highlight);
+  const HIDE = (p) =>
+    p === 'index.html' || p === 'upload.html' || p === 'robots.txt' || p === 'vercel.json' ||
+    p === '.gitignore' || p === 'README.md' || p === 'CLAUDE.md' || p.startsWith('api/') || p.startsWith('.git');
 
-  const card = (p) => {
-    const name = p.split('/').pop().replace(/\.html$/, '');
-    const dir = p.includes('/') ? p.slice(0, p.lastIndexOf('/') + 1) : '/';
+  const files = paths.filter((p) => !HIDE(p)).sort();
+
+  const link = (p, name) => {
+    const isHtml = p.endsWith('.html');
     const href = '/' + p.replace(/\.html$/, '');
-    return `        <a class="index-card" href="${esc(href)}"><span class="code">${esc(dir)}</span><span class="name">${esc(name)}</span></a>`;
+    const tag = hi.has(p) ? ' <span class="idx-new">nuevo</span>' : '';
+    return isHtml
+      ? `<a href="${esc(href)}">${esc(name)}</a>${tag}`
+      : `<span class="idx-fname">${esc(name)}</span>${tag}`;
   };
 
-  const sections = groups
-    .map(
-      (g) => `  <section class="section">
+  // Nested tree
+  const root = { dirs: {}, files: [] };
+  files.forEach((p) => {
+    const parts = p.split('/');
+    let node = root;
+    parts.forEach((part, i) => {
+      if (i === parts.length - 1) node.files.push({ name: part, path: p });
+      else { node.dirs[part] = node.dirs[part] || { dirs: {}, files: [] }; node = node.dirs[part]; }
+    });
+  });
+  function renderNode(node) {
+    let html = '<ul class="idx-tree">';
+    Object.keys(node.dirs).sort().forEach((name) => {
+      html += `<li class="idx-dir"><span class="idx-dname">${esc(name)}/</span>${renderNode(node.dirs[name])}</li>`;
+    });
+    node.files.sort((a, b) => a.name.localeCompare(b.name)).forEach((f) => {
+      html += `<li class="idx-file">${link(f.path, f.name)}</li>`;
+    });
+    return html + '</ul>';
+  }
+
+  const latestPaths = highlight.filter((p) => !HIDE(p)).sort();
+  const latest = latestPaths.length
+    ? `  <section class="section">
     <div class="container">
-      <div class="section-head"><h2>${esc(g.title)}</h2></div>
-      <div class="index-grid">
-${g.items.sort().map(card).join('\n')}
-      </div>
+      <div class="section-head"><h2>Últimas subidas</h2><p>${new Date().toLocaleString('es-ES')}</p></div>
+      <ul class="idx-latest">
+${latestPaths.map((p) => `        <li>${link(p, p)}</li>`).join('\n')}
+      </ul>
     </div>
-  </section>`
-    )
-    .join('\n\n');
+  </section>
+
+`
+    : '';
 
   const today = new Date().toISOString().slice(0, 10);
   return `<!DOCTYPE html>
@@ -88,7 +112,12 @@ ${g.items.sort().map(card).join('\n')}
     </div>
   </header>
 
-${sections || '  <section class="section"><div class="container"><p>Sin páginas todavía.</p></div></section>'}
+${latest}  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Estructura</h2></div>
+      ${files.length ? renderNode(root) : '<p>Sin archivos todavía.</p>'}
+    </div>
+  </section>
 </div>
 </body>
 </html>
@@ -121,7 +150,7 @@ async function commitChanges({ gh, branch, blobs = [], removals = [], message, r
 
   // Regenerate index.html in the same commit
   if (regenIndex) {
-    const html = renderIndex(paths);
+    const html = renderIndex(paths, blobs.map((b) => b.path));
     const idx = await gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: Buffer.from(html, 'utf8').toString('base64'), encoding: 'base64' }) });
     treeItems.push({ path: 'index.html', mode: '100644', type: 'blob', sha: idx.sha });
   }
