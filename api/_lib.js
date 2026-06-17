@@ -39,48 +39,16 @@ function esc(s) {
 }
 
 // Build the public index.html (TOC) from the current list of file paths.
-// Build the public index.html — a polished card view of pages/ and modules/.
-// `highlight` = paths uploaded in this commit (shown in "Últimas subidas").
+// Build the public index.html shell: sidebar + searchable card grid with live
+// previews. Data (the pages/ and modules/ paths) is embedded; shared/index.js
+// renders cards, previews and titles client-side. `highlight` = new uploads.
 function renderIndex(paths, highlight = []) {
-  const hi = new Set(highlight);
-  const isContent = (p) => p.endsWith('.html') && (p.startsWith('pages/') || p.startsWith('modules/'));
-  const pages = paths.filter((p) => p.startsWith('pages/') && p.endsWith('.html')).sort();
-  const modules = paths.filter((p) => p.startsWith('modules/') && p.endsWith('.html')).sort();
-
-  const card = (p) => {
-    const name = p.split('/').pop().replace(/\.html$/, '');
-    const rel = p.replace(/^(pages|modules)\//, '');
-    const dir = rel.includes('/') ? rel.slice(0, rel.lastIndexOf('/') + 1) : '';
-    const href = '/' + p.replace(/\.html$/, '');
-    const tag = hi.has(p) ? '<span class="ix-new">nuevo</span>' : '';
-    return `        <a class="ix-card" href="${esc(href)}">
-          <span class="ix-card-name">${esc(name)}${tag}</span>
-          <span class="ix-card-path">${esc(dir || '—')}</span>
-        </a>`;
-  };
-
-  const section = (title, items) =>
-    items.length
-      ? `  <section class="ix-section">
-    <h2 class="ix-h2">${title} <span class="ix-count">${items.length}</span></h2>
-    <div class="ix-grid">
-${items.map(card).join('\n')}
-    </div>
-  </section>`
-      : '';
-
-  const latestPaths = highlight.filter(isContent).sort();
-  const latest = latestPaths.length
-    ? `  <section class="ix-section ix-latest">
-    <h2 class="ix-h2">Últimas subidas</h2>
-    <div class="ix-grid">
-${latestPaths.map(card).join('\n')}
-    </div>
-  </section>`
-      : '';
-
+  const items = paths.filter((p) => p.endsWith('.html') && (p.startsWith('pages/') || p.startsWith('modules/'))).sort();
+  const pages = items.filter((p) => p.startsWith('pages/')).length;
+  const modules = items.filter((p) => p.startsWith('modules/')).length;
+  const latest = highlight.filter((p) => items.includes(p));
+  const data = JSON.stringify({ items, latest }).replace(/</g, '\\u003c');
   const today = new Date().toISOString().slice(0, 10);
-  const empty = !pages.length && !modules.length;
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -90,16 +58,22 @@ ${latestPaths.map(card).join('\n')}
   <link rel="stylesheet" href="shared/index.css">
 </head>
 <body>
-<div class="ix-shell">
-  <header class="ix-head">
-    <span class="ix-badge">SEK · Wireframes</span>
-    <h1>Wireframes</h1>
-    <p>${pages.length} páginas · ${modules.length} módulos · actualizado ${today}</p>
-  </header>
-
-${[latest, section('Páginas', pages), section('Módulos', modules)].filter(Boolean).join('\n\n')}
-${empty ? '  <p class="ix-empty">Sin páginas ni módulos todavía.</p>' : ''}
+<div class="ix-app">
+  <aside class="ix-sidebar">
+    <div class="ix-brand"><span class="ix-badge">SEK</span><strong>Wireframes</strong></div>
+    <input id="ixSearch" class="ix-search" type="search" placeholder="Buscar…" aria-label="Buscar">
+    <nav id="ixNav" class="ix-nav"></nav>
+  </aside>
+  <main class="ix-main">
+    <header class="ix-main-head">
+      <h1 id="ixTitle">Todo</h1>
+      <p>${pages} páginas · ${modules} módulos · actualizado ${today}</p>
+    </header>
+    <div id="ixGrid" class="ix-grid"></div>
+  </main>
 </div>
+<script>window.IX_DATA = ${data};</script>
+<script src="shared/index.js" defer></script>
 </body>
 </html>
 `;
