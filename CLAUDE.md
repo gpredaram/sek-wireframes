@@ -14,13 +14,13 @@ https://app.notion.com/p/378808081362811fb515c3b9a7d6164c
    - Patrones de interacción → https://app.notion.com/p/37980808136281f7840fe8ffe486ac80
    - Guía visual de wireframes → https://app.notion.com/p/38080808136281628af5faa44b04f5f3
 
-3. Importa SIEMPRE shared/styles.css y shared/wireframe.js — NUNCA escribas estilos visuales inline:
-   - Desde pages/sek-schools/ o pages/sek-education-group/: ../../shared/
-   - Desde modules/: ../shared/
+3. Importa SIEMPRE shared/styles.css y shared/wireframe.js — NUNCA escribas estilos visuales inline.
+   Usa rutas **absolutas** `/shared/...` (funcionan a cualquier profundidad de carpeta,
+   así reorganizar módulos en subcarpetas no rompe los estilos):
 
 ```html
-<link rel="stylesheet" href="../../shared/styles.css">
-<script src="../../shared/wireframe.js" defer></script>
+<link rel="stylesheet" href="/shared/styles.css">
+<script src="/shared/wireframe.js" defer></script>
 ```
 
 ## Estructura de archivos
