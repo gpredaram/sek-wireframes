@@ -136,6 +136,44 @@ body {
 .u-status.ok  { color: var(--u-ok); }
 .u-status.err { color: var(--u-err); }
 
+/* Delete button in the tree */
+.u-del {
+  flex: none; margin-left: auto; border: none; background: transparent;
+  color: var(--u-muted); cursor: pointer; font-size: 12px; line-height: 1;
+  padding: 2px 6px; border-radius: 6px;
+}
+.u-del:hover { background: #fdeced; color: var(--u-err); }
+
+/* Change history */
+.u-history { margin-top: 20px; }
+.u-hist-list { display: flex; flex-direction: column; gap: 10px; }
+.u-commit { border: 1px solid var(--u-line); border-radius: 9px; padding: 12px 14px; }
+.u-commit-top { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--u-muted); margin-bottom: 6px; }
+.u-commit-top span:last-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.u-commit-msg { font-weight: 600; font-size: 13.5px; margin-bottom: 10px; }
+.u-chg { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.u-chg li {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  background: #f6f7f9; border: 1px solid var(--u-line); border-radius: 999px; padding: 3px 10px 3px 4px;
+}
+.u-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  padding: 2px 7px; border-radius: 5px;
+}
+.u-tag.added    { background: #e7f6ec; color: #1a7f4b; }
+.u-tag.modified { background: #e7eefb; color: #2456c7; }
+.u-tag.removed  { background: #fdeced; color: #c0392b; }
+.u-tag.renamed  { background: #fff3e6; color: #e57600; }
+
+.u-pager { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; font-size: 13px; color: var(--u-muted); }
+.u-pager button {
+  padding: 7px 14px; border: 1px solid var(--u-line-2); background: #fff;
+  border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--u-ink);
+}
+.u-pager button:hover:not(:disabled) { border-color: var(--u-accent); }
+.u-pager button:disabled { opacity: .45; cursor: not-allowed; }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>SEK · Subir wireframe</title>
+  <title>SEK · Subir wireframes</title>
   <link rel="stylesheet" href="shared/upload.css">
 </head>
 <body>
@@ -12,8 +12,8 @@
 
   <header class="u-head">
     <span class="u-badge">SEK · Wireframes</span>
-    <h1>Subir un archivo</h1>
-    <p>Escribe la contraseña, elige la carpeta del explorador y arrastra tu archivo. Se publica solo.</p>
+    <h1>Subir archivos</h1>
+    <p>Conéctate con la contraseña, elige una carpeta (o deja la raíz) y arrastra uno o varios archivos. Al pulsar «Subir y publicar» se suben a Git y la web se actualiza en aproximadamente un minuto.</p>
   </header>
 
   <!-- Password gate -->
@@ -31,7 +31,7 @@
     <section class="u-panel">
       <div class="u-panel-head">
         Explorador
-        <span class="u-hint">elige destino</span>
+        <span class="u-hint">elige destino · 🗑 elimina</span>
       </div>
       <div class="u-panel-body">
         <div class="u-tree" id="tree"><div class="u-empty">Cargando…</div></div>
@@ -39,7 +39,7 @@
     </section>
 
     <section class="u-panel">
-      <div class="u-panel-head">Subir archivo</div>
+      <div class="u-panel-head">Subir archivos</div>
       <div class="u-panel-body">
         <div class="u-dest">Destino: <code id="dest">/ (raíz)</code></div>
 
@@ -55,6 +55,23 @@
     </section>
 
   </div>
+
+  <!-- Change history -->
+  <section class="u-panel u-history" id="historyPanel" hidden>
+    <div class="u-panel-head">
+      Historial de cambios
+      <span class="u-hint">últimas subidas</span>
+    </div>
+    <div class="u-panel-body">
+      <div class="u-hist-list" id="histList"><div class="u-empty">Cargando…</div></div>
+      <div class="u-pager">
+        <button id="histPrev" disabled>← Anteriores</button>
+        <span id="histPage">Página 1</span>
+        <button id="histNext" disabled>Siguientes →</button>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <script>
@@ -64,12 +81,13 @@
 
   let password = '';
   let destination = '';            // '' = root
-  let chosen = null;
+  let histPage = 1;
   const host = location.origin;
 
   function setStatus(msg, kind) { $('status').textContent = msg; $('status').className = 'u-status' + (kind ? ' ' + kind : ''); }
+  const canDelete = (p) => p.startsWith('pages/') || p.startsWith('modules/');
 
-  // ---- build nested tree from flat paths ----
+  // ---- folder tree ----
   function buildTree(items) {
     const root = { dirs: {}, files: [] };
     items.forEach(({ path, type }) => {
@@ -86,18 +104,16 @@
 
   function renderNode(node, depth) {
     const wrap = document.createElement('div');
-    const dirNames = Object.keys(node.dirs).sort();
-    dirNames.forEach((name) => {
+    Object.keys(node.dirs).sort().forEach((name) => {
       const d = node.dirs[name];
       const row = document.createElement('div');
       row.className = 'u-row';
       row.style.paddingLeft = (8 + depth * 16) + 'px';
-      row.dataset.path = d.path + '/';
       row.innerHTML = '<span class="u-tw">▾</span>' + ICON_FOLDER + '<span class="u-nm">' + name + '</span>';
       const children = renderNode(d, depth + 1);
       const twisty = row.querySelector('.u-tw');
       row.addEventListener('click', (e) => {
-        if (e.target === twisty) { // toggle
+        if (e.target === twisty) {
           const open = children.style.display !== 'none';
           children.style.display = open ? 'none' : '';
           twisty.textContent = open ? '▸' : '▾';
@@ -114,6 +130,12 @@
       row.style.paddingLeft = (8 + depth * 16 + 14) + 'px';
       const href = host + '/' + f.path.replace(/\.html$/, '');
       row.innerHTML = ICON_FILE + '<span class="u-nm"><a href="' + href + '" target="_blank" rel="noopener">' + f.name + '</a></span>';
+      if (canDelete(f.path)) {
+        const del = document.createElement('button');
+        del.type = 'button'; del.className = 'u-del'; del.textContent = '🗑'; del.title = 'Eliminar ' + f.path;
+        del.addEventListener('click', () => deleteFile(f.path));
+        row.appendChild(del);
+      }
       wrap.appendChild(row);
     });
     return wrap;
@@ -126,25 +148,66 @@
     $('dest').textContent = '/' + path;
   }
 
-  // ---- connect (load tree) ----
+  async function loadTree() {
+    const res = await fetch('/api/tree', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
+    const tree = buildTree(data.tree || []);
+    const container = $('tree'); container.innerHTML = '';
+    const rootRow = document.createElement('div');
+    rootRow.className = 'u-row' + (destination === '' ? ' sel' : '');
+    rootRow.innerHTML = ICON_FOLDER + '<span class="u-nm">/ (raíz)</span>';
+    rootRow.addEventListener('click', () => selectDir(rootRow, ''));
+    container.appendChild(rootRow);
+    container.appendChild(renderNode(tree, 1));
+  }
+
+  // ---- change history ----
+  const STATUS_LABEL = { added: 'creado', modified: 'modificado', removed: 'eliminado', renamed: 'renombrado' };
+  function fmtDate(iso) {
+    try { return new Date(iso).toLocaleString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+    catch (e) { return iso || ''; }
+  }
+  async function loadHistory(page) {
+    histPage = page;
+    $('histList').innerHTML = '<div class="u-empty">Cargando…</div>';
+    try {
+      const res = await fetch('/api/history', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password, page }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
+      const list = $('histList'); list.innerHTML = '';
+      if (!data.commits.length) { list.innerHTML = '<div class="u-empty">Sin cambios.</div>'; }
+      data.commits.forEach((c) => {
+        const box = document.createElement('div');
+        box.className = 'u-commit';
+        const files = c.files.length
+          ? '<ul class="u-chg">' + c.files.map((f) => '<li><span class="u-tag ' + f.status + '">' + (STATUS_LABEL[f.status] || f.status) + '</span>' + f.name + '</li>').join('') + '</ul>'
+          : '<div class="u-empty" style="padding:6px 0">(sin archivos de contenido)</div>';
+        box.innerHTML =
+          '<div class="u-commit-top"><span>' + fmtDate(c.date) + '</span><span>' + c.sha + '</span></div>' +
+          '<div class="u-commit-msg">' + (c.message || '') + '</div>' + files;
+        list.appendChild(box);
+      });
+      $('histPage').textContent = 'Página ' + data.page;
+      $('histPrev').disabled = data.page <= 1;
+      $('histNext').disabled = !data.hasNext;
+    } catch (err) {
+      $('histList').innerHTML = '<div class="u-empty">✗ ' + err.message + '</div>';
+    }
+  }
+  $('histPrev').addEventListener('click', () => { if (histPage > 1) loadHistory(histPage - 1); });
+  $('histNext').addEventListener('click', () => loadHistory(histPage + 1));
+
+  // ---- connect ----
   $('connect').addEventListener('click', async () => {
     password = $('pwd').value;
     if (!password) { setStatusGate('Escribe la contraseña.'); return; }
     $('connect').disabled = true; $('connect').textContent = 'Conectando…';
     try {
-      const res = await fetch('/api/tree', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
-      const tree = buildTree(data.tree || []);
-      const container = $('tree'); container.innerHTML = '';
-      // root selectable row
-      const rootRow = document.createElement('div');
-      rootRow.className = 'u-row sel'; rootRow.dataset.path = '';
-      rootRow.innerHTML = ICON_FOLDER + '<span class="u-nm">/ (raíz)</span>';
-      rootRow.addEventListener('click', () => selectDir(rootRow, ''));
-      container.appendChild(rootRow);
-      container.appendChild(renderNode(tree, 1));
+      await loadTree();
       $('workspace').hidden = false;
+      $('historyPanel').hidden = false;
+      loadHistory(1);
       $('connect').textContent = 'Conectado ✓';
     } catch (err) {
       $('connect').disabled = false; $('connect').textContent = 'Conectar';
@@ -157,12 +220,26 @@
     el.textContent = msg;
   }
 
+  // ---- delete (with confirmation) ----
+  async function deleteFile(path) {
+    if (!confirm('¿Eliminar "' + path + '"?\n\nSe publicará el cambio y desaparecerá de la web. No se puede deshacer fácilmente.')) return;
+    setStatus('Eliminando ' + path + '…');
+    try {
+      const res = await fetch('/api/delete', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password, path }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
+      setStatus('✓ Eliminado: ' + path + ' · publicándose (~1 min).', 'ok');
+      await loadTree();
+      loadHistory(1);
+    } catch (err) {
+      setStatus('✗ ' + err.message, 'err');
+    }
+  }
+
   // ---- multi-file queue + batch upload ----
   let queued = [];
-
   function renderQueue() {
-    const ul = $('files');
-    ul.innerHTML = '';
+    const ul = $('files'); ul.innerHTML = '';
     queued.forEach((f, i) => {
       const li = document.createElement('li');
       const label = document.createElement('span');
@@ -170,21 +247,15 @@
       const rm = document.createElement('button');
       rm.type = 'button'; rm.className = 'u-rm'; rm.textContent = '✕'; rm.title = 'Quitar';
       rm.addEventListener('click', () => { queued.splice(i, 1); renderQueue(); });
-      li.appendChild(label); li.appendChild(rm);
-      ul.appendChild(li);
+      li.appendChild(label); li.appendChild(rm); ul.appendChild(li);
     });
     $('send').disabled = queued.length === 0;
     $('send').textContent = queued.length > 1 ? ('Subir y publicar (' + queued.length + ')') : 'Subir y publicar';
   }
-
   function addFiles(list) {
-    Array.from(list || []).forEach((f) => {
-      if (!queued.some((q) => q.name === f.name && q.size === f.size)) queued.push(f);
-    });
-    setStatus('');
-    renderQueue();
+    Array.from(list || []).forEach((f) => { if (!queued.some((q) => q.name === f.name && q.size === f.size)) queued.push(f); });
+    setStatus(''); renderQueue();
   }
-
   $('drop').addEventListener('click', () => $('file').click());
   $('file').addEventListener('change', () => { addFiles($('file').files); $('file').value = ''; });
   ['dragenter', 'dragover'].forEach((e) => $('drop').addEventListener(e, (ev) => { ev.preventDefault(); $('drop').classList.add('is-over'); }));
@@ -206,18 +277,14 @@
     setStatus('Subiendo ' + queued.length + ' archivo(s)…');
     try {
       const files = [];
-      for (const f of queued) {
-        files.push({ path: destination + f.name, contentBase64: await toBase64(f) });
-      }
-      const res = await fetch('/api/upload-batch', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password, files })
-      });
+      for (const f of queued) files.push({ path: destination + f.name, contentBase64: await toBase64(f) });
+      const res = await fetch('/api/upload-batch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password, files }) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || ('Error ' + res.status));
       setStatus('✓ ' + data.count + ' archivo(s) subido(s) a /' + destination + ' · publicándose (~1 min).', 'ok');
       queued = []; renderQueue();
+      await loadTree();
+      loadHistory(1);
     } catch (err) {
       setStatus('✗ ' + err.message, 'err');
       $('send').disabled = false;
