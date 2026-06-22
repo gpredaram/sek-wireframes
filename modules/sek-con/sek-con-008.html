@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-008 | Barra de anclaje</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Barra de anclaje
+  ══════════════════════════ */
+  .mod-anchor { display: flex; align-items: center; gap: 20px; padding: 14px 20px; border-bottom: 1px solid var(--gray-200); overflow-x: auto; white-space: nowrap; }
+  .mod-anchor::-webkit-scrollbar { display: none; }
+  .mod-anchor a { font-size: 13px; font-weight: 600; color: var(--gray-700); text-decoration: none; flex-shrink: 0; }
+  .mod-anchor a.active { color: var(--gray-800); border-bottom: 2px solid var(--gray-800); padding-bottom: 4px; }
+  .mod-anchor a { cursor: pointer; }
+  .mod-anchor__sep { width: 1px; height: 14px; background: var(--gray-300); flex-shrink: 0; }
+
+  /* Demo de contenido para el scroll real */
+  .demo-content { padding: 60px 20px; }
+  .demo-content .demo-sec { height: 280px; border-bottom: 1px dashed var(--gray-200); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; color: var(--gray-400); }
+
+  /* Barra sticky con hide/show */
+  .mod-anchor.sticky-demo { position: sticky; top: 0; background: var(--white); z-index: 10; transition: transform .25s ease; }
+  .mod-anchor.sticky-demo.hide { transform: translateY(-100%); }
+
+  /* Tablet/Desktop */
+  .vp-tablet .mod-anchor, .vp-desktop .mod-anchor { padding: 16px 32px; gap: 28px; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-008</strong>
+  <span>Barra de anclaje · v1.0 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">Scroll horizontal táctil · ancla activa subrayada</div>
+      <div class="mod-anchor" id="anchorMobile">
+        <a href="#" class="active" onclick="setActive(event,'anchorMobile')">Ancla 1</a>
+        <a href="#" onclick="setActive(event,'anchorMobile')">Ancla 2</a>
+        <a href="#" onclick="setActive(event,'anchorMobile')">Ancla 3</a>
+        <a href="#" onclick="setActive(event,'anchorMobile')">Ancla 4</a>
+        <a href="#" onclick="setActive(event,'anchorMobile')">Ancla 5</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">Todos los anclajes visibles si caben</div>
+      <div class="mod-anchor" id="anchorTablet">
+        <a href="#" class="active" onclick="setActive(event,'anchorTablet')">Ancla 1</a>
+        <a href="#" onclick="setActive(event,'anchorTablet')">Ancla 2</a>
+        <a href="#" onclick="setActive(event,'anchorTablet')">Ancla 3</a>
+        <a href="#" onclick="setActive(event,'anchorTablet')">Ancla 4</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Todos los anclajes visibles · con separadores opcionales</div>
+      <div class="mod-anchor" id="anchorDesktop">
+        <a href="#" class="active" onclick="setActive(event,'anchorDesktop')">Ancla 1</a>
+        <div class="mod-anchor__sep"></div>
+        <a href="#" onclick="setActive(event,'anchorDesktop')">Ancla 2</a>
+        <div class="mod-anchor__sep"></div>
+        <a href="#" onclick="setActive(event,'anchorDesktop')">Ancla 3</a>
+        <div class="mod-anchor__sep"></div>
+        <a href="#" onclick="setActive(event,'anchorDesktop')">Ancla 4</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO INTERACTIVA · sticky hide/show -->
+<div class="vp-section">
+  <div class="vp-label">Demo interactiva <span class="w">· comportamiento sticky hide/show (PAT-009)</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame" style="width:600px; max-height:500px; overflow-y:auto;" id="scrollDemo">
+      <div class="mod-ex-label">Haz scroll dentro de este recuadro: hacia abajo la barra se oculta, hacia arriba reaparece</div>
+      <div class="mod-anchor sticky-demo" id="anchorBar">
+        <a href="#" class="active" onclick="setActive(event,'anchorBar')">Ancla 1</a>
+        <a href="#" onclick="setActive(event,'anchorBar')">Ancla 2</a>
+        <a href="#" onclick="setActive(event,'anchorBar')">Ancla 3</a>
+        <a href="#" onclick="setActive(event,'anchorBar')">Ancla 4</a>
+      </div>
+      <div class="demo-content">
+        <div class="demo-sec">sección 1</div>
+        <div class="demo-sec">sección 2</div>
+        <div class="demo-sec">sección 3</div>
+        <div class="demo-sec">sección 4</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setActive(event, containerId) {
+    event.preventDefault();
+    const container = document.getElementById(containerId);
+    container.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  const scrollDemo = document.getElementById('scrollDemo');
+  const anchorBar = document.getElementById('anchorBar');
+  let lastScroll = 0;
+
+  scrollDemo.addEventListener('scroll', () => {
+    const current = scrollDemo.scrollTop;
+    if (current > lastScroll && current > 40) {
+      anchorBar.classList.add('hide');
+    } else {
+      anchorBar.classList.remove('hide');
+    }
+    lastScroll = current;
+  });
+</script>
+</body>
+</html>
