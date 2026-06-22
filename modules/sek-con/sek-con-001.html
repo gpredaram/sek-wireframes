@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-001 | Bloque texto</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  /* TOOLBAR */
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  /* VIEWPORT WRAPPER */
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Bloque texto
+  ══════════════════════════ */
+  .mod-text { padding: 28px 20px; font-family: var(--font); }
+  .mod-text h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; line-height: 1.2; }
+  .mod-text h3 { font-size: 14px; font-weight: 500; color: var(--gray-500); margin-bottom: 16px; line-height: 1.4; }
+  .mod-text p { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 14px; }
+  .mod-text p:last-of-type { margin-bottom: 0; }
+
+  .mod-text__grid { display: flex; flex-direction: column; gap: 16px; }
+  .mod-img-ph { background: var(--gray-200); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray-400); width: 100%; height: 140px; }
+  .mod-logo-ph { background: var(--gray-200); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; color: var(--gray-400); width: 100px; height: 50px; }
+
+  .mod-cta { font-size: 14px; font-weight: 600; color: var(--gray-800); text-decoration: none; display: inline-block; margin-top: 6px; }
+  .mod-cta::after { content: ' →'; }
+
+  /* Tablet/Desktop */
+  .vp-tablet .mod-text, .vp-desktop .mod-text { padding: 40px 32px; }
+  .vp-tablet .mod-text h2, .vp-desktop .mod-text h2 { font-size: 26px; }
+  .vp-desktop .mod-text h2 { font-size: 30px; }
+  .vp-tablet .mod-text h3, .vp-desktop .mod-text h3 { font-size: 16px; }
+  .vp-tablet .mod-text p, .vp-desktop .mod-text p { font-size: 15px; line-height: 1.7; }
+  .vp-tablet .mod-text__grid--imgright, .vp-desktop .mod-text__grid--imgright { flex-direction: row; gap: 32px; align-items: flex-start; }
+  .vp-tablet .mod-text__grid--imgright .mod-img-ph, .vp-desktop .mod-text__grid--imgright .mod-img-ph { width: 280px; height: 180px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-001</strong>
+  <span>Bloque texto · v1.0 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px · VARIANTE A · solo texto -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">SEK-CON-001-A · Bloque texto simple · sin imagen</div>
+      <div class="mod-text">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <p>Texto del bloque editorial. Puede tener la longitud que necesite el contenido, sin límite de caracteres definido.</p>
+        <a href="#" class="mod-cta">Link CTA opcional</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px · VARIANTE B · con imagen -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">SEK-CON-001-B · Bloque texto con imagen o logo</div>
+      <div class="mod-text">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-text__grid mod-text__grid--imgright">
+          <div>
+            <p>Texto del bloque editorial. Puede tener la longitud que necesite el contenido, sin límite de caracteres definido.</p>
+            <a href="#" class="mod-cta">Link CTA opcional</a>
+          </div>
+          <div class="mod-img-ph">imagen / logo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · VARIANTE B · con imagen -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">SEK-CON-001-B · Bloque texto con imagen o logo</div>
+      <div class="mod-text">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-text__grid mod-text__grid--imgright">
+          <div>
+            <p>Texto del bloque editorial. Puede tener la longitud que necesite el contenido, sin límite de caracteres definido. En desktop el texto ocupa la columna principal y la imagen o logo se sitúa a la derecha.</p>
+            <a href="#" class="mod-cta">Link CTA opcional</a>
+          </div>
+          <div class="mod-img-ph">imagen / logo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · VARIANTE A · solo texto con CTA -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · variante simple</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">SEK-CON-001-A · Bloque texto simple · sin imagen ni logo</div>
+      <div class="mod-text">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <p>Texto del bloque editorial. Puede tener la longitud que necesite el contenido, sin límite de caracteres definido. Este ejemplo muestra la variante sin imagen ni logo asociados, donde el texto ocupa todo el ancho disponible del contenedor.</p>
+        <a href="#" class="mod-cta">Link CTA opcional</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
