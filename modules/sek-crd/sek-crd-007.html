@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CRD-007 | Card colegio con datos</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  .mod-block { padding: 24px 20px; font-family: var(--font); }
+
+  .mod-stats-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .mod-stat-item { display: flex; align-items: center; gap: 12px; }
+  .mod-stat-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--gray-300); flex-shrink: 0; }
+  .mod-stat-text { font-size: 13px; color: var(--gray-700); font-weight: 500; }
+
+  .mod-group-title { font-size: 16px; font-weight: 700; color: var(--gray-800); margin-bottom: 12px; margin-top: 24px; }
+  .mod-group-title:first-of-type { margin-top: 0; }
+
+  .mod-cards-wrap { position: relative; margin-bottom: 8px; }
+  .mod-cards-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+  .mod-cards-track::-webkit-scrollbar { display: none; }
+  .mod-crd { flex-shrink: 0; width: 180px; background: var(--white); border-radius: var(--radius); box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; scroll-snap-align: start; }
+  .mod-crd__img { width: 100%; height: 130px; background: var(--gray-300); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; color: var(--gray-500); }
+  .mod-crd__body { padding: 12px; }
+  .mod-crd__zone { font-size: 10px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; }
+  .mod-crd__name { font-size: 14px; font-weight: 700; color: var(--gray-800); margin: 4px 0 4px; }
+  .mod-crd__age { font-size: 12px; color: var(--gray-600); margin-bottom: 8px; }
+  .mod-crd__cta { font-size: 12px; font-weight: 600; color: var(--gray-800); text-decoration: none; }
+  .mod-crd__cta::after { content: ' →'; }
+
+  .mod-cards-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; margin-bottom: 16px; }
+  .mod-cards-nav button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--gray-300); background: var(--white); cursor: pointer; font-size: 11px; color: var(--gray-700); display: flex; align-items: center; justify-content: center; }
+  .mod-cards-nav button:disabled { opacity: .3; cursor: default; }
+
+  .mod-global-cta { display: block; text-align: center; margin-top: 24px; font-size: 13px; font-weight: 600; color: var(--gray-800); }
+  .mod-global-cta::after { content: ' →'; }
+
+  .vp-tablet .mod-block, .vp-desktop .mod-block { padding: 32px 32px; }
+  .vp-tablet .mod-stats-list, .vp-desktop .mod-stats-list { flex-direction: row; justify-content: space-between; }
+  .vp-desktop .mod-crd__img { height: 160px; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CRD-007</strong>
+  <span>Card colegio con datos · v1.3 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">Stats en lista vertical · carrusel con flechas por grupo</div>
+      <div class="mod-block">
+        <div class="mod-stats-list">
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">7.000 Estudiantes</div></div>
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">80 Nacionalidades en los colegios de Madrid</div></div>
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">Formación desde 4 meses a los 18 años</div></div>
+        </div>
+
+        <div class="mod-group-title">En España</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="m-esp">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">MADRID</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">MADRID</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">1 – 16 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">VALENCIA</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">2 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-m-esp" onclick="scrollCards('m-esp','p-m-esp','n-m-esp',-1)">←</button><button id="n-m-esp" onclick="scrollCards('m-esp','p-m-esp','n-m-esp',1)">→</button></div>
+
+        <div class="mod-group-title">Fuera de España</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="m-out">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">IRLANDA</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">4 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">QATAR</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-m-out" onclick="scrollCards('m-out','p-m-out','n-m-out',-1)">←</button><button id="n-m-out" onclick="scrollCards('m-out','p-m-out','n-m-out',1)">→</button></div>
+
+        <div class="mod-group-title">Online</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="m-onl">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">ONLINE</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">14 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-m-onl" onclick="scrollCards('m-onl','p-m-onl','n-m-onl',-1)">←</button><button id="n-m-onl" onclick="scrollCards('m-onl','p-m-onl','n-m-onl',1)">→</button></div>
+
+        <a href="#" class="mod-global-cta">Ver todos los colegios</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">Stats en fila · carrusel con flechas por grupo · 3 grupos</div>
+      <div class="mod-block">
+        <div class="mod-stats-list">
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">7.000 Estudiantes</div></div>
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">80 Nacionalidades</div></div>
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">Desde 4 meses a 18 años</div></div>
+        </div>
+
+        <div class="mod-group-title">En España</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="t-esp">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">MADRID</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">MADRID</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">1 – 16 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">VALENCIA</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">2 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">ALICANTE</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-t-esp" onclick="scrollCards('t-esp','p-t-esp','n-t-esp',-1)">←</button><button id="n-t-esp" onclick="scrollCards('t-esp','p-t-esp','n-t-esp',1)">→</button></div>
+
+        <div class="mod-group-title">Fuera de España</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="t-out">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">IRLANDA</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">4 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">QATAR</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-t-out" onclick="scrollCards('t-out','p-t-out','n-t-out',-1)">←</button><button id="n-t-out" onclick="scrollCards('t-out','p-t-out','n-t-out',1)">→</button></div>
+
+        <div class="mod-group-title">Online</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="t-onl">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">ONLINE</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">14 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-t-onl" onclick="scrollCards('t-onl','p-t-onl','n-t-onl',-1)">←</button><button id="n-t-onl" onclick="scrollCards('t-onl','p-t-onl','n-t-onl',1)">→</button></div>
+
+        <a href="#" class="mod-global-cta">Ver todos los colegios</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Stats en fila · carrusel con flechas por grupo · 3 grupos</div>
+      <div class="mod-block">
+        <div class="mod-stats-list">
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">7.000 Estudiantes</div></div>
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">80 Nacionalidades en los colegios de Madrid</div></div>
+          <div class="mod-stat-item"><div class="mod-stat-icon"></div><div class="mod-stat-text">Formación desde 4 meses a los 18 años</div></div>
+        </div>
+
+        <div class="mod-group-title">En España</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="d-esp">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">MADRID</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">MADRID</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">1 – 16 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">VALENCIA</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">2 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">ALICANTE</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-d-esp" onclick="scrollCards('d-esp','p-d-esp','n-d-esp',-1)">←</button><button id="n-d-esp" onclick="scrollCards('d-esp','p-d-esp','n-d-esp',1)">→</button></div>
+
+        <div class="mod-group-title">Fuera de España</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="d-out">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">IRLANDA</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">4 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">QATAR</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">3 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-d-out" onclick="scrollCards('d-out','p-d-out','n-d-out',-1)">←</button><button id="n-d-out" onclick="scrollCards('d-out','p-d-out','n-d-out',1)">→</button></div>
+
+        <div class="mod-group-title">Online</div>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="d-onl">
+            <div class="mod-crd"><div class="mod-crd__img">imagen</div><div class="mod-crd__body"><div class="mod-crd__zone">ONLINE</div><div class="mod-crd__name">Nombre del colegio</div><div class="mod-crd__age">14 – 18 años</div><a href="#" class="mod-crd__cta">Ver colegio</a></div></div>
+          </div>
+        </div>
+        <div class="mod-cards-nav"><button id="p-d-onl" onclick="scrollCards('d-onl','p-d-onl','n-d-onl',-1)">←</button><button id="n-d-onl" onclick="scrollCards('d-onl','p-d-onl','n-d-onl',1)">→</button></div>
+
+        <a href="#" class="mod-global-cta">Ver todos los colegios</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function scrollCards(trackId, prevId, nextId, dir) {
+    const track = document.getElementById(trackId);
+    const cardW = track.querySelector('.mod-crd').offsetWidth + 12;
+    track.scrollBy({ left: dir * cardW * 2, behavior: 'smooth' });
+    setTimeout(() => updateArrows(trackId, prevId, nextId), 350);
+  }
+
+  function updateArrows(trackId, prevId, nextId) {
+    const track = document.getElementById(trackId);
+    const prev = document.getElementById(prevId);
+    const next = document.getElementById(nextId);
+    const atStart = track.scrollLeft <= 1;
+    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    const fitsAll = track.scrollWidth <= track.clientWidth + 1;
+    prev.disabled = atStart || fitsAll;
+    next.disabled = atEnd || fitsAll;
+    prev.style.display = fitsAll ? 'none' : 'flex';
+    next.style.display = fitsAll ? 'none' : 'flex';
+  }
+
+  const allTracks = ['m-esp','m-out','m-onl','t-esp','t-out','t-onl','d-esp','d-out','d-onl'];
+  allTracks.forEach((id) => {
+    const prevId = 'p-' + id;
+    const nextId = 'n-' + id;
+    document.getElementById(id).addEventListener('scroll', () => updateArrows(id, prevId, nextId));
+    updateArrows(id, prevId, nextId);
+  });
+</script>
+</body>
+</html>
