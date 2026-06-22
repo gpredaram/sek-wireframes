@@ -1,120 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEK-NAV-002 · Footer</title>
-  <link rel="stylesheet" href="/shared/styles.css">
-  <style>
-    /* ── Chrome ─────────────────────────────────────────────── */
-    .mod-chrome { position: sticky; top: 0; z-index: 500; background: #fff; border-bottom: 2px solid #111; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
-    .mod-code { font-family: monospace; font-size: 13px; font-weight: 700; color: #111; }
-    .mod-name { font-size: 13px; color: #555; }
-    .mod-ver  { font-family: monospace; font-size: 11px; color: #aaa; margin-left: auto; }
-    .state-block { margin-bottom: 4px; }
-    .state-label { padding: 8px 20px; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #777; }
-    .demo-narrow { max-width: 390px; margin: 0 auto; outline: 2px dashed #ccc; outline-offset: -1px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-NAV-002 | Footer</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
 
-    /* ── Sim-mobile: revierte los cambios del breakpoint 768px ─ */
-    .sim-mobile .footer-inner  { grid-template-columns: 1fr !important; gap: 28px !important; }
-    .sim-mobile .footer-legal  { flex-direction: column !important; gap: 6px !important; }
-    .sim-mobile .container     { padding: 0 20px !important; }
-  </style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; overflow: hidden; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-300); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-700); }
+
+  /* ══════════════════════════
+     MÓDULO · Footer
+  ══════════════════════════ */
+  .mod-footer { background: var(--gray-800); padding: 28px 20px; font-family: var(--font); }
+  .mod-footer__logo { width: 100px; height: 30px; background: var(--gray-600); border-radius: 3px; margin-bottom: 24px; }
+
+  .mod-footer__resources { margin-bottom: 24px; }
+  .mod-footer__resources a { display: block; font-size: 13px; color: var(--gray-300); text-decoration: none; padding: 6px 0; }
+
+  .mod-footer__social { display: flex; gap: 10px; margin-bottom: 20px; }
+  .mod-footer__social-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--gray-600); }
+
+  .mod-footer__legal { display: flex; flex-wrap: wrap; gap: 14px; padding-top: 16px; border-top: 1px solid var(--gray-700); }
+  .mod-footer__legal a { font-size: 11px; color: var(--gray-400); text-decoration: none; }
+
+  /* Tablet/Desktop */
+  .vp-tablet .mod-footer, .vp-desktop .mod-footer { padding: 36px 32px; display: grid; grid-template-columns: 200px 1fr 220px; gap: 32px; align-items: start; }
+  .vp-tablet .mod-footer__logo, .vp-desktop .mod-footer__logo { margin-bottom: 0; }
+  .vp-tablet .mod-footer__resources, .vp-desktop .mod-footer__resources { margin-bottom: 0; }
+  .vp-tablet .mod-footer__legal, .vp-desktop .mod-footer__legal { grid-column: 3; border-top: none; padding-top: 0; flex-direction: column; gap: 6px; margin-top: 0; }
+  .vp-tablet .mod-footer__social, .vp-desktop .mod-footer__social { grid-column: 3; margin-bottom: 16px; }
+  .vp-tablet .mod-footer__legal-wrap, .vp-desktop .mod-footer__legal-wrap { grid-column: 3; display: flex; flex-direction: column; }
+</style>
 </head>
 <body>
 
-<div class="mod-chrome">
-  <span class="mod-code">SEK-NAV-002</span>
-  <span class="mod-name">Footer</span>
-  <span class="mod-ver">v1.0</span>
+<div class="wf-toolbar">
+  <strong>SEK-NAV-002</strong>
+  <span>Footer · v2.0 · vistas responsive</span>
 </div>
 
-<!-- ── Desktop / Tablet / Mobile — responsive ↔ ─────────── -->
-<div class="state-block">
-  <div class="state-label">Responsive ↔ · 3 col ≥1200px · 2 col 768-1199px · 1 col &lt;768px</div>
-  <footer id="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-col">
-          <div class="footer-logo"></div>
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">1 columna apilada · logo arriba</div>
+      <div class="mod-footer">
+        <div class="mod-footer__logo"></div>
+        <div class="mod-footer__resources">
+          <a href="#">MYSEK</a>
+          <a href="#">Webmail</a>
+          <a href="#">Email alumnos</a>
+          <a href="#">Gestión de servicios</a>
+          <a href="#">Teams</a>
         </div>
-        <div class="footer-col">
-          <h4>Recursos</h4>
-          <ul>
-            <li><a href="#">MYSEK</a></li>
-            <li><a href="#">Webmail</a></li>
-            <li><a href="#">Email alumnos</a></li>
-            <li><a href="#">Gestión de servicios</a></li>
-            <li><a href="#">Teams</a></li>
-          </ul>
+        <div class="mod-footer__social">
+          <div class="mod-footer__social-icon"></div>
+          <div class="mod-footer__social-icon"></div>
+          <div class="mod-footer__social-icon"></div>
+          <div class="mod-footer__social-icon"></div>
+          <div class="mod-footer__social-icon"></div>
         </div>
-        <div class="footer-col">
-          <h4>Síguenos</h4>
-          <div class="footer-social">
-            <div class="social-icon">In</div>
-            <div class="social-icon">Tw</div>
-            <div class="social-icon">Li</div>
-            <div class="social-icon">Pi</div>
-            <div class="social-icon">Yt</div>
+        <div class="mod-footer__legal">
+          <a href="#">Aviso legal</a>
+          <a href="#">Política de cookies</a>
+          <a href="#">Política de privacidad</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">Grid 3 columnas: logo · recursos · redes+legal</div>
+      <div class="mod-footer">
+        <div class="mod-footer__logo"></div>
+        <div class="mod-footer__resources">
+          <a href="#">MYSEK</a>
+          <a href="#">Webmail</a>
+          <a href="#">Email alumnos</a>
+          <a href="#">Gestión de servicios</a>
+          <a href="#">Teams</a>
+        </div>
+        <div class="mod-footer__legal-wrap">
+          <div class="mod-footer__social">
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
           </div>
-          <div class="footer-legal">
+          <div class="mod-footer__legal">
             <a href="#">Aviso legal</a>
             <a href="#">Política de cookies</a>
             <a href="#">Política de privacidad</a>
           </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        &copy; 2026 SEK Education Group. Todos los derechos reservados.
-      </div>
     </div>
-  </footer>
-</div>
-
-<!-- ── Mobile: 1 columna apilada ─────────────────────────── -->
-<div class="state-block">
-  <div class="state-label">Mobile · 1 col · &lt; 768px</div>
-  <div class="demo-narrow sim-mobile">
-    <footer style="background:var(--gray-800);color:var(--gray-300);padding:48px 0 32px;">
-      <div class="container">
-        <div class="footer-inner">
-          <div class="footer-col">
-            <div class="footer-logo"></div>
-          </div>
-          <div class="footer-col">
-            <h4>Recursos</h4>
-            <ul>
-              <li><a href="#">MYSEK</a></li>
-              <li><a href="#">Webmail</a></li>
-              <li><a href="#">Email alumnos</a></li>
-              <li><a href="#">Gestión de servicios</a></li>
-              <li><a href="#">Teams</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Síguenos</h4>
-            <div class="footer-social">
-              <div class="social-icon">In</div>
-              <div class="social-icon">Tw</div>
-              <div class="social-icon">Li</div>
-              <div class="social-icon">Pi</div>
-              <div class="social-icon">Yt</div>
-            </div>
-            <div class="footer-legal">
-              <a href="#">Aviso legal</a>
-              <a href="#">Política de cookies</a>
-              <a href="#">Política de privacidad</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          &copy; 2026 SEK Education Group. Todos los derechos reservados.
-        </div>
-      </div>
-    </footer>
   </div>
 </div>
 
-<script src="/shared/wireframe.js"></script>
+<!-- DESKTOP 1200px -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Grid 3 columnas: logo · recursos · redes+legal</div>
+      <div class="mod-footer">
+        <div class="mod-footer__logo"></div>
+        <div class="mod-footer__resources">
+          <a href="#">MYSEK</a>
+          <a href="#">Webmail</a>
+          <a href="#">Email alumnos</a>
+          <a href="#">Gestión de servicios</a>
+          <a href="#">Teams</a>
+        </div>
+        <div class="mod-footer__legal-wrap">
+          <div class="mod-footer__social">
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+            <div class="mod-footer__social-icon"></div>
+          </div>
+          <div class="mod-footer__legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Política de cookies</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
