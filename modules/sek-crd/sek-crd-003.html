@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CRD-003 | Feature cards</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Feature cards
+  ══════════════════════════ */
+  .mod-block { padding: 24px 20px; font-family: var(--font); }
+  .mod-block h2 { font-size: 18px; font-weight: 700; color: var(--gray-800); margin-bottom: 4px; }
+  .mod-block h3 { font-size: 13px; font-weight: 500; color: var(--gray-500); margin-bottom: 16px; }
+
+  .mod-icon-ph { width: 44px; height: 44px; border-radius: 50%; background: var(--gray-300); margin-bottom: 14px; }
+  .mod-crd-title { font-size: 14px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; }
+  .mod-crd-text { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* Variante H · carrusel */
+  .mod-cards-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+  .mod-cards-track::-webkit-scrollbar { display: none; }
+  .mod-crd-h { flex-shrink: 0; width: 160px; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 16px; scroll-snap-align: start; }
+  .mod-cards-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+  .mod-cards-nav button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gray-300); background: var(--white); cursor: pointer; font-size: 12px; color: var(--gray-700); display: flex; align-items: center; justify-content: center; }
+  .mod-cards-nav button:disabled { opacity: .3; cursor: default; }
+
+  /* Variante V · apilada */
+  .mod-crd-v-list { display: flex; flex-direction: column; gap: 10px; }
+  .mod-crd-v { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
+  .mod-crd-v .mod-icon-ph { margin-bottom: 0; flex-shrink: 0; width: 40px; height: 40px; }
+
+  /* Tablet/Desktop */
+  .vp-tablet .mod-block, .vp-desktop .mod-block { padding: 32px 32px; }
+  .vp-tablet .mod-block h2, .vp-desktop .mod-block h2 { font-size: 22px; }
+  .vp-tablet .mod-crd-h, .vp-desktop .mod-crd-h { width: 220px; }
+  .vp-tablet .mod-crd-v-list, .vp-desktop .mod-crd-v-list { flex-direction: row; }
+  .vp-tablet .mod-crd-v, .vp-desktop .mod-crd-v { flex-direction: column; flex: 1; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CRD-003</strong>
+  <span>Feature cards · v1.1 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px · VARIANTE H -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">SEK-CRD-003-H · Carrusel horizontal · flechas funcionales</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-cards-track" id="trackMobile">
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 1</div><p class="mod-crd-text">Texto secundario opcional de la card 1.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 2</div><p class="mod-crd-text">Texto secundario opcional de la card 2.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 3</div><p class="mod-crd-text">Texto secundario opcional de la card 3.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 4</div><p class="mod-crd-text">Texto secundario opcional de la card 4.</p></div>
+        </div>
+        <div class="mod-cards-nav">
+          <button id="prevMobile" onclick="scrollCards('trackMobile','prevMobile','nextMobile',-1)">←</button>
+          <button id="nextMobile" onclick="scrollCards('trackMobile','prevMobile','nextMobile',1)">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px · VARIANTE H -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">SEK-CRD-003-H · Carrusel horizontal · flechas funcionales</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-cards-track" id="trackTablet">
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 1</div><p class="mod-crd-text">Texto secundario opcional de la card 1.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 2</div><p class="mod-crd-text">Texto secundario opcional de la card 2.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 3</div><p class="mod-crd-text">Texto secundario opcional de la card 3.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 4</div><p class="mod-crd-text">Texto secundario opcional de la card 4.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 5</div><p class="mod-crd-text">Texto secundario opcional de la card 5.</p></div>
+        </div>
+        <div class="mod-cards-nav">
+          <button id="prevTablet" onclick="scrollCards('trackTablet','prevTablet','nextTablet',-1)">←</button>
+          <button id="nextTablet" onclick="scrollCards('trackTablet','prevTablet','nextTablet',1)">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · VARIANTE V -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">SEK-CRD-003-V · Feature cards vertical · en fila en desktop</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-crd-v-list">
+          <div class="mod-crd-v"><div class="mod-icon-ph"></div><div><div class="mod-crd-title">Texto principal 1</div><p class="mod-crd-text">Texto secundario opcional de la card 1.</p></div></div>
+          <div class="mod-crd-v"><div class="mod-icon-ph"></div><div><div class="mod-crd-title">Texto principal 2</div><p class="mod-crd-text">Texto secundario opcional de la card 2.</p></div></div>
+          <div class="mod-crd-v"><div class="mod-icon-ph"></div><div><div class="mod-crd-title">Texto principal 3</div><p class="mod-crd-text">Texto secundario opcional de la card 3.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · VARIANTE H -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · variante H</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">SEK-CRD-003-H · Carrusel horizontal · flechas ocultas si todas las cards caben</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-cards-track" id="trackDesktop">
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 1</div><p class="mod-crd-text">Texto secundario opcional.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 2</div><p class="mod-crd-text">Texto secundario opcional.</p></div>
+          <div class="mod-crd-h"><div class="mod-icon-ph"></div><div class="mod-crd-title">Texto principal 3</div><p class="mod-crd-text">Texto secundario opcional.</p></div>
+        </div>
+        <div class="mod-cards-nav">
+          <button id="prevDesktop" onclick="scrollCards('trackDesktop','prevDesktop','nextDesktop',-1)">←</button>
+          <button id="nextDesktop" onclick="scrollCards('trackDesktop','prevDesktop','nextDesktop',1)">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function scrollCards(trackId, prevId, nextId, dir) {
+    const track = document.getElementById(trackId);
+    const cardW = track.querySelector('.mod-crd-h').offsetWidth + 12;
+    track.scrollBy({ left: dir * cardW * 2, behavior: 'smooth' });
+    setTimeout(() => updateArrows(trackId, prevId, nextId), 350);
+  }
+
+  function updateArrows(trackId, prevId, nextId) {
+    const track = document.getElementById(trackId);
+    const prev = document.getElementById(prevId);
+    const next = document.getElementById(nextId);
+    const atStart = track.scrollLeft <= 1;
+    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    prev.disabled = atStart;
+    next.disabled = atEnd || track.scrollWidth <= track.clientWidth + 1;
+    prev.style.display = track.scrollWidth <= track.clientWidth + 1 ? 'none' : 'flex';
+    next.style.display = track.scrollWidth <= track.clientWidth + 1 ? 'none' : 'flex';
+  }
+
+  ['trackMobile', 'trackTablet', 'trackDesktop'].forEach((id) => {
+    const suffix = id.replace('track', '');
+    const prevId = 'prev' + suffix;
+    const nextId = 'next' + suffix;
+    document.getElementById(id).addEventListener('scroll', () => updateArrows(id, prevId, nextId));
+    updateArrows(id, prevId, nextId);
+  });
+</script>
+</body>
+</html>
