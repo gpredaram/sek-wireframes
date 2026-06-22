@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-009 | Bloque texto con vídeo y cards de acceso</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Texto con vídeo y cards de acceso
+  ══════════════════════════ */
+  .mod-block { padding: 28px 20px; font-family: var(--font); }
+  .mod-block h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; line-height: 1.2; }
+  .mod-block h3 { font-size: 14px; font-weight: 500; color: var(--gray-500); margin-bottom: 16px; line-height: 1.4; }
+
+  .mod-block__text { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+  .mod-block__text.is-clamped { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden; }
+  .mod-block__more { font-size: 12px; font-weight: 600; color: var(--gray-800); margin-top: 8px; display: inline-block; cursor: pointer; background: none; border: none; padding: 0; font-family: var(--font); }
+  .mod-block__more::after { content: ' ∨'; display: inline-block; transition: transform .2s; }
+  .mod-block__more.is-open::after { transform: rotate(180deg); }
+
+  .mod-block__video { width: 100%; height: 180px; background: var(--gray-300); border-radius: var(--radius); margin-top: 18px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray-600); position: relative; }
+  .mod-block__video::before { content: ''; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.9); position: absolute; }
+  .mod-block__video::after { content: ''; border-left: 12px solid var(--gray-700); border-top: 7px solid transparent; border-bottom: 7px solid transparent; position: absolute; margin-left: 3px; }
+
+  .mod-block__cards { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+  .mod-card { background: var(--gray-100); border-radius: var(--radius); padding: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .mod-card__graphic { width: 44px; height: 44px; border-radius: 6px; background: var(--gray-300); flex-shrink: 0; }
+  .mod-card__title { font-size: 13px; font-weight: 600; color: var(--gray-800); }
+
+  /* Tablet/Desktop */
+  .vp-tablet .mod-block, .vp-desktop .mod-block { padding: 40px 32px; }
+  .vp-tablet .mod-block h2, .vp-desktop .mod-block h2 { font-size: 26px; }
+  .vp-desktop .mod-block h2 { font-size: 30px; }
+  .vp-tablet .mod-block__text, .vp-desktop .mod-block__text { font-size: 15px; line-height: 1.7; }
+  .vp-tablet .mod-block__video, .vp-desktop .mod-block__video { height: 260px; }
+  .vp-desktop .mod-block__video { height: 340px; }
+  .vp-tablet .mod-block__cards, .vp-desktop .mod-block__cards { flex-direction: row; }
+  .vp-tablet .mod-card, .vp-desktop .mod-card { flex: 1; }
+  .vp-desktop .mod-card__graphic { width: 56px; height: 56px; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-009</strong>
+  <span>Bloque texto con vídeo y cards de acceso · v1.1 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px · VARIANTE A · con vídeo -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">SEK-CON-009-A · Con vídeo · texto truncado "Ver más" interactivo</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <p class="mod-block__text is-clamped" id="text-mobile">Texto del bloque editorial, que puede ser bastante extenso. En mobile se trunca automáticamente a 5 líneas y se muestra un enlace para expandir el contenido completo cuando el texto supera el espacio disponible en pantalla, permitiendo al usuario decidir si quiere leer el resto del contenido.</p>
+        <button class="mod-block__more" id="btn-mobile" onclick="toggleText('mobile')">Ver más</button>
+        <div class="mod-block__video">vídeo embed</div>
+        <div class="mod-block__cards">
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 1</div></div>
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 2</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px · VARIANTE A · con vídeo -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">SEK-CON-009-A · Con vídeo · "Ver más/Ver menos" interactivo</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <p class="mod-block__text is-clamped" id="text-tablet">Texto del bloque editorial. Este ejemplo demuestra el comportamiento interactivo del enlace "Ver más", igual que en mobile. El texto continúa con más contenido de relleno para asegurar que ocupa más de cinco líneas dentro del ancho disponible en esta vista y así el recorte sea visible antes de pulsar el botón.</p>
+        <button class="mod-block__more" id="btn-tablet" onclick="toggleText('tablet')">Ver más</button>
+        <div class="mod-block__video">vídeo embed</div>
+        <div class="mod-block__cards">
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 1</div></div>
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 2</div></div>
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 3</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · VARIANTE A · con vídeo -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">SEK-CON-009-A · Con vídeo · "Ver más/Ver menos" interactivo · cards en fila</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <p class="mod-block__text is-clamped" id="text-desktop">Texto del bloque editorial. En desktop el ancho disponible es mayor, por lo que el contenido de relleno debe ser más extenso para garantizar que el párrafo supere las cinco líneas visibles antes de interactuar con el botón "Ver más". El vídeo embebido y las cards de acceso se mantienen siempre debajo del texto, distribuidas en fila horizontal.</p>
+        <button class="mod-block__more" id="btn-desktop" onclick="toggleText('desktop')">Ver más</button>
+        <div class="mod-block__video">vídeo embed</div>
+        <div class="mod-block__cards">
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 1</div></div>
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 2</div></div>
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 3</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · VARIANTE B · sin vídeo -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · sin vídeo</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">SEK-CON-009-B · Sin vídeo · solo texto + cards · "Ver más/Ver menos" interactivo</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <p class="mod-block__text is-clamped" id="text-variant">Texto del bloque editorial sin vídeo asociado. Las cards de acceso aparecen directamente debajo del texto, manteniendo el mismo comportamiento clickable e ilustrado. Se añade contenido de relleno adicional para que el párrafo supere las cinco líneas visibles y el recorte inicial del clamp se aprecie con claridad en esta vista de ejemplo.</p>
+        <button class="mod-block__more" id="btn-variant" onclick="toggleText('variant')">Ver más</button>
+        <div class="mod-block__cards">
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 1</div></div>
+          <div class="mod-card"><div class="mod-card__graphic"></div><div class="mod-card__title">Título de card 2</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleText(id) {
+    const text = document.getElementById('text-' + id);
+    const btn = document.getElementById('btn-' + id);
+    const isOpen = btn.classList.toggle('is-open');
+    text.classList.toggle('is-clamped');
+    btn.textContent = isOpen ? 'Ver menos' : 'Ver más';
+  }
+</script>
+</body>
+</html>
