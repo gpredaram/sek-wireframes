@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CRD-002 | Cards navegación visual</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Cards navegación visual
+  ══════════════════════════ */
+  .mod-block { padding: 24px 20px; font-family: var(--font); }
+  .mod-block h2 { font-size: 18px; font-weight: 700; color: var(--gray-800); margin-bottom: 4px; }
+  .mod-block h3 { font-size: 13px; font-weight: 500; color: var(--gray-500); margin-bottom: 16px; }
+
+  .mod-cards-wrap { position: relative; }
+  .mod-cards-track { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+  .mod-cards-track::-webkit-scrollbar { display: none; }
+  .mod-crd { flex-shrink: 0; width: 140px; border-radius: var(--radius); overflow: hidden; scroll-snap-align: start; position: relative; background: var(--gray-300); height: 180px; }
+  .mod-crd__label { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px; font-size: 12px; font-weight: 600; color: var(--white); background: linear-gradient(to top, rgba(0,0,0,.6), transparent); }
+  .mod-crd__cta { font-size: 10px; color: rgba(255,255,255,.85); display: block; margin-top: 2px; }
+
+  .mod-cards-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+  .mod-cards-nav button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gray-300); background: var(--white); cursor: pointer; font-size: 12px; color: var(--gray-700); display: flex; align-items: center; justify-content: center; }
+  .mod-cards-nav button:disabled { opacity: .3; cursor: default; }
+  .mod-cards-hint { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-align: center; margin-top: 8px; }
+
+  /* Tablet/Desktop */
+  .vp-tablet .mod-block, .vp-desktop .mod-block { padding: 32px 32px; }
+  .vp-tablet .mod-block h2, .vp-desktop .mod-block h2 { font-size: 22px; }
+  .vp-tablet .mod-crd, .vp-desktop .mod-crd { width: 200px; height: 220px; }
+  .vp-tablet .mod-cards-hint, .vp-desktop .mod-cards-hint { display: none; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CRD-002</strong>
+  <span>Cards navegación visual · v2.4 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">Scroll táctil nativo · sin flechas · hint visible</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track">
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 1<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 2<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 3<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 4<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 5<span class="mod-crd__cta">Descubre más ›</span></div></div>
+          </div>
+          <div class="mod-cards-hint">← desliza para ver más →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">Carrusel JS · 3 cards visibles · flechas funcionales</div>
+      <div class="mod-block">
+        <h2>Título de sección</h2>
+        <h3>Subtítulo opcional</h3>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="trackTablet">
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 1<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 2<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 3<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 4<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 5<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etiqueta 6<span class="mod-crd__cta">Descubre más ›</span></div></div>
+          </div>
+          <div class="mod-cards-nav">
+            <button id="prevTablet" onclick="scrollCards('trackTablet','prevTablet','nextTablet',-1)">←</button>
+            <button id="nextTablet" onclick="scrollCards('trackTablet','prevTablet','nextTablet',1)">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Carrusel JS · 4 cards visibles · flechas funcionales (ocultas si todo cabe)</div>
+      <div class="mod-block">
+        <h2>¿Por qué elegir SEK?</h2>
+        <h3>Descubre lo que nos hace diferentes</h3>
+        <div class="mod-cards-wrap">
+          <div class="mod-cards-track" id="trackDesktop">
+            <div class="mod-crd"><div class="mod-crd__label">Modelo educativo<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Programa IB<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Idiomas<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Instalaciones<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Etapas<span class="mod-crd__cta">Descubre más ›</span></div></div>
+            <div class="mod-crd"><div class="mod-crd__label">Opiniones<span class="mod-crd__cta">Descubre más ›</span></div></div>
+          </div>
+          <div class="mod-cards-nav">
+            <button id="prevDesktop" onclick="scrollCards('trackDesktop','prevDesktop','nextDesktop',-1)">←</button>
+            <button id="nextDesktop" onclick="scrollCards('trackDesktop','prevDesktop','nextDesktop',1)">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function scrollCards(trackId, prevId, nextId, dir) {
+    const track = document.getElementById(trackId);
+    const cardW = track.querySelector('.mod-crd').offsetWidth + 10;
+    track.scrollBy({ left: dir * cardW * 2, behavior: 'smooth' });
+    setTimeout(() => updateArrows(trackId, prevId, nextId), 350);
+  }
+
+  function updateArrows(trackId, prevId, nextId) {
+    const track = document.getElementById(trackId);
+    const prev = document.getElementById(prevId);
+    const next = document.getElementById(nextId);
+    const atStart = track.scrollLeft <= 1;
+    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    prev.disabled = atStart;
+    next.disabled = atEnd;
+  }
+
+  ['trackTablet', 'trackDesktop'].forEach((id, i) => {
+    const prevId = i === 0 ? 'prevTablet' : 'prevDesktop';
+    const nextId = i === 0 ? 'nextTablet' : 'nextDesktop';
+    document.getElementById(id).addEventListener('scroll', () => updateArrows(id, prevId, nextId));
+    updateArrows(id, prevId, nextId);
+  });
+</script>
+</body>
+</html>
