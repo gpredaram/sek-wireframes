@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-010 | Bloque texto flexible con sub-secciones e imagen</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; -webkit-font-smoothing: antialiased; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; display: block; }
+
+  .mod-sec { padding: 28px 20px; border-bottom: 1px solid var(--gray-200); }
+  .mod-sec:last-child { border-bottom: none; }
+
+  .mod-content h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; line-height: 1.2; }
+  .mod-content h3 { font-size: 14px; font-weight: 500; color: var(--gray-500); margin-bottom: 16px; line-height: 1.4; }
+  .mod-content h3.inner { font-size: 13px; font-weight: 600; color: var(--gray-500); margin: 20px 0 8px; }
+  .mod-content p { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 12px; }
+  .mod-content p:last-of-type { margin-bottom: 0; }
+
+  .mod-grid-2 { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }
+
+  .mod-img-ph { background: var(--gray-200); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray-400); width: 100%; height: 160px; }
+
+  .mod-btn { display: inline-block; background: var(--gray-800); color: var(--white); padding: 10px 18px; border-radius: var(--radius); font-size: 12px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; margin-top: 14px; }
+
+  /* Tablet width override */
+  .vp-tablet .mod-sec { padding: 36px 32px; }
+  .vp-tablet .mod-grid-2 { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .vp-tablet .mod-content h2 { font-size: 24px; }
+  .vp-tablet .mod-content h3 { font-size: 16px; }
+  .vp-tablet .mod-img-ph { height: 220px; }
+
+  /* Desktop width override */
+  .vp-desktop .mod-sec { padding: 44px 40px; }
+  .vp-desktop .mod-grid-2 { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .vp-desktop .mod-content h2 { font-size: 28px; }
+  .vp-desktop .mod-content h3 { font-size: 17px; }
+  .vp-desktop .mod-img-ph { height: 280px; }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-010</strong>
+  <span>Bloque texto flexible con sub-secciones e imagen · v2.0 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-content">
+        <div class="mod-sec">
+          <span class="mod-ex-label">Ejemplo · texto + sub-sección + imagen + CTA</span>
+          <h2>Título de sección</h2>
+          <h3>Subtítulo opcional bajo el H2</h3>
+          <p>Párrafo introductorio. El texto puede acompañarse de una o varias sub-secciones repetibles.</p>
+          <h3 class="inner">Sub-sección opcional</h3>
+          <p>Texto asociado al subtítulo interno.</p>
+          <div class="mod-img-ph">imagen</div>
+          <a href="#" class="mod-btn">Botón CTA opcional</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-content">
+        <div class="mod-sec">
+          <span class="mod-ex-label">Ejemplo · texto + sub-secciones repetibles + imagen + CTA</span>
+          <h2>Título de sección</h2>
+          <h3>Subtítulo opcional bajo el H2</h3>
+          <div class="mod-grid-2">
+            <div>
+              <p>Párrafo introductorio. En desktop/tablet el texto ocupa la columna izquierda y la imagen la derecha.</p>
+              <h3 class="inner">Sub-sección opcional</h3>
+              <p>Texto asociado al subtítulo interno. Se repite tantas veces como necesite el contenido.</p>
+              <h3 class="inner">Otra sub-sección de ejemplo</h3>
+              <p>El módulo admite añadir más bloques de subtítulo interno + texto de forma indefinida.</p>
+              <a href="#" class="mod-btn">Botón CTA opcional</a>
+            </div>
+            <div><div class="mod-img-ph">imagen</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-content">
+        <div class="mod-sec">
+          <span class="mod-ex-label">Ejemplo · texto + sub-secciones repetibles + imagen + CTA</span>
+          <h2>Profesores de Excelencia y Comunidad de Aprendizaje</h2>
+          <h3>El papel de los docentes como facilitadores y la colaboración activa con las familias</h3>
+          <div class="mod-grid-2">
+            <div>
+              <p>Los profesores, a la vanguardia educativa y en constante desarrollo profesional, son facilitadores del aprendizaje.</p>
+              <h3 class="inner">Compromiso con las Familias</h3>
+              <p>En nuestra Comunidad de Aprendizaje, la familia y el entorno del alumno son factores fundamentales.</p>
+              <a href="#" class="mod-btn">Botón CTA opcional</a>
+            </div>
+            <div><div class="mod-img-ph">imagen</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · SIN IMAGEN -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · sin imagen</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-content">
+        <div class="mod-sec">
+          <span class="mod-ex-label">Mismo módulo · imagen desactivada (elemento opcional) · 1 columna</span>
+          <h2>Evaluación Personalizada y Reconocimiento Académico</h2>
+          <h3>Seguimiento del progreso individual y reconocimiento al final de la etapa escolar</h3>
+          <p>Texto evaluación. Sin imagen asociada, el bloque ocupa el ancho completo en una sola columna.</p>
+          <h3 class="inner">Reconocimiento Final</h3>
+          <p>Texto de sub-sección asociado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
