@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-NAV-003 | Menú general de colegios</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+  .icon-ph { background: var(--gray-300); border-radius: 50%; flex-shrink: 0; }
+  .img-ph { background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray-400); }
+
+  .demo-wrap { padding: 36px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .demo-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 6px; }
+  .demo-sub { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-align: center; margin-bottom: 14px; }
+  .demo-frame-outer { display: flex; justify-content: center; }
+  .demo-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; overflow-y: auto; position: relative; }
+  .ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; background: var(--gray-100); position: sticky; top: 0; z-index: 50; height: 24px; line-height: 24px; }
+  .demo-filler { padding: 24px 32px; }
+  .demo-filler p { font-size: 13px; color: var(--gray-500); margin-bottom: 16px; font-family: var(--mono); }
+  .demo-filler-block { height: 160px; background: var(--gray-100); border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray-400); }
+
+  /* ══════════════════════════
+     TOPBAR (mobile + tablet, <1200px)
+  ══════════════════════════ */
+  .nav-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px; padding: 0 20px;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky; top: 24px; z-index: 10000;
+    background: var(--white);
+  }
+  .nav-topbar__logo { width: 130px; height: 24px; border-radius: 3px; }
+
+  .nav-hamburger {
+    background: none; border: none; cursor: pointer; padding: 6px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--gray-700); border-radius: 2px;
+    transition: transform .3s ease, opacity .3s ease;
+    transform-origin: center;
+  }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ══════════════════════════
+     DRAWER (PAT-006) — usado en mobile Y tablet
+  ══════════════════════════ */
+  .nav-drawer {
+    position: absolute;
+    top: 76px; left: 0;
+    width: 100%; height: calc(100% - 76px);
+    background: var(--white);
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform .35s ease;
+    overflow: hidden;
+  }
+  .nav-drawer.open { transform: translateX(0); }
+
+  .drawer-panel {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--white);
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    overflow-y: auto;
+  }
+  .drawer-panel.active { transform: translateX(0); }
+  .drawer-panel.prev { transform: translateX(-100%); }
+
+  .drawer-panel__header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 16px 20px; border-bottom: 1px solid var(--gray-200);
+  }
+  .drawer-panel__back {
+    display: flex; align-items: center; gap: 8px;
+    background: none; border: none; cursor: pointer;
+    font-size: 15px; font-weight: 700; color: var(--gray-800); font-family: var(--font);
+  }
+
+  .drawer-item {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 14px 20px; background: none; border: none;
+    border-bottom: 1px solid var(--gray-200);
+    font-family: var(--font); cursor: pointer; text-align: left;
+  }
+  .drawer-item__text { display: flex; flex-direction: column; gap: 2px; }
+  .drawer-item__title { font-size: 15px; font-weight: 700; color: var(--gray-800); }
+  .drawer-item__subtitle { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+  .drawer-item__chevron { color: var(--gray-400); font-size: 15px; flex-shrink: 0; margin-left: 10px; }
+
+  .drawer-group-label { font-size: 12px; color: var(--gray-500); padding: 16px 20px 6px; }
+  .drawer-link-editorial { display: block; padding: 10px 20px; font-size: 13px; color: var(--gray-700); text-decoration: underline; }
+  .drawer-faq-item { padding: 12px 20px; font-size: 14px; color: var(--gray-700); border-bottom: 1px solid var(--gray-200); }
+
+  .drawer-cards { display: flex; gap: 10px; padding: 16px 20px; overflow-x: auto; }
+  .drawer-card { flex-shrink: 0; width: 150px; background: var(--gray-100); border-radius: var(--radius); padding: 14px; height: 110px; display: flex; align-items: flex-end; font-size: 12px; color: var(--gray-600); }
+
+  .drawer-cta-fixed {
+    position: sticky; bottom: 0; left: 0; right: 0;
+    background: var(--white); border-top: 1px solid var(--gray-200);
+    padding: 14px 20px; margin-top: 40px;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .drawer-cta-fixed__btn {
+    flex: 1; display: flex; align-items: center; justify-content: space-between;
+    background: var(--gray-800); color: var(--white);
+    border: none; border-radius: var(--radius); padding: 13px 16px;
+    font-size: 14px; font-weight: 600; font-family: var(--font); cursor: pointer;
+  }
+  .drawer-cta-fixed__search { width: 44px; height: 44px; border-radius: var(--radius); background: var(--gray-100); border: 1px solid var(--gray-300); flex-shrink: 0; }
+  .drawer-cta-fixed__chevron { transition: transform .2s ease; }
+  .drawer-cta-fixed.open .drawer-cta-fixed__chevron { transform: rotate(180deg); }
+  .drawer-cta-fixed__options { display: none; position: absolute; bottom: 100%; left: 20px; right: 84px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); box-shadow: 0 -4px 12px rgba(0,0,0,.08); padding: 8px; }
+  .drawer-cta-fixed.open .drawer-cta-fixed__options { display: block; }
+  .drawer-cta-fixed__options a { display: block; font-size: 13px; color: var(--gray-700); text-decoration: none; padding: 10px 8px; border-bottom: 1px solid var(--gray-200); }
+  .drawer-cta-fixed__options a:last-child { border-bottom: none; }
+
+  /* ══════════════════════════
+     DESKTOP (≥1200px) — barra + megamenú
+  ══════════════════════════ */
+  .nav-bar {
+    display: flex; align-items: center; gap: 26px;
+    height: 56px; padding: 0 40px;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky; top: 24px; z-index: 30;
+    background: var(--white);
+  }
+  .nav-bar__logo { width: 150px; height: 26px; border-radius: 3px; flex-shrink: 0; }
+  .nav-bar__item { position: relative; }
+  .nav-bar__btn {
+    display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; font-weight: 500; color: var(--gray-700);
+    font-family: var(--font); padding: 0;
+  }
+  .nav-bar__chevron { font-size: 9px; color: var(--gray-500); transition: transform .2s ease; }
+  .nav-bar__item.open .nav-bar__chevron { transform: rotate(180deg); }
+  .nav-bar__right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+  .nav-bar__search { width: 18px; height: 18px; }
+  .nav-bar__cta {
+    display: flex; align-items: center; gap: 6px; white-space: nowrap;
+    border: 1px solid var(--gray-300); border-radius: var(--radius);
+    padding: 7px 12px; font-size: 12px; font-weight: 600; color: var(--gray-800);
+    background: var(--white); cursor: pointer; font-family: var(--font);
+  }
+
+  /* Megamenú */
+  .mega {
+    display: none;
+    position: fixed;
+    background: var(--white); border-top: 1px solid var(--gray-200);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    padding: 32px 56px; z-index: 1000;
+  }
+  .nav-bar__item.open .mega { display: block; }
+  .mega__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1200px; margin: 0 auto; }
+  .mega__col-title { font-size: 11px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 12px; }
+  .mega__link { display: block; margin-bottom: 14px; text-decoration: none; }
+  .mega__link-title { font-size: 14px; font-weight: 600; color: var(--gray-800); margin-bottom: 2px; }
+  .mega__link-sub { font-size: 12px; color: var(--gray-500); }
+  .mega__editorial { font-size: 13px; color: var(--gray-700); text-decoration: underline; display: block; margin-top: 4px; margin-bottom: 14px; }
+  .mega__cards { display: flex; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200); }
+  .mega__card { flex: 1; background: var(--gray-100); border-radius: var(--radius); padding: 16px; height: 90px; display: flex; align-items: flex-end; font-size: 12px; color: var(--gray-600); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     MOBILE · 375px
+═════════════════════════════════════════════ -->
+<div class="demo-wrap">
+  <div class="demo-label">Mobile · 375px</div>
+  <div class="demo-sub">Drawer estilo Apple (PAT-006) · pulsa un ítem con chevron para ver su sub-panel</div>
+  <div class="demo-frame-outer">
+    <div class="demo-frame" style="width:375px; height:600px;">
+      <div class="ex-label">Logo genérico · breakpoint &lt;1200px</div>
+      <header class="nav-topbar">
+        <div class="icon-ph nav-topbar__logo" style="border-radius:3px;"></div>
+        <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleDrawer('M')">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <div class="demo-filler">
+        <p>// contenido de la página</p>
+        <div class="demo-filler-block">sección 1</div>
+        <div class="demo-filler-block">sección 2</div>
+      </div>
+      <div id="drawer-template-M"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TABLET · 768px
+═════════════════════════════════════════════ -->
+<div class="demo-wrap">
+  <div class="demo-label">Tablet · 768px</div>
+  <div class="demo-sub">Mismo drawer que mobile — sin barra horizontal intermedia, breakpoint &lt;1200px comparte comportamiento</div>
+  <div class="demo-frame-outer">
+    <div class="demo-frame" style="width:768px; height:600px;">
+      <div class="ex-label">Logo genérico · idéntico a mobile</div>
+      <header class="nav-topbar">
+        <div class="icon-ph nav-topbar__logo" style="border-radius:3px;"></div>
+        <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleDrawer('T')">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <div class="demo-filler">
+        <p>// contenido de la página</p>
+        <div class="demo-filler-block">sección 1</div>
+        <div class="demo-filler-block">sección 2</div>
+      </div>
+      <div id="drawer-template-T"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     DESKTOP · 1200px — Megamenú
+═════════════════════════════════════════════ -->
+<div class="demo-wrap">
+  <div class="demo-label">Desktop · 1200px</div>
+  <div class="demo-sub">Megamenú por ítem · click para abrir · cierra al click fuera o en otro ítem</div>
+  <div class="demo-frame-outer">
+    <div class="demo-frame" style="width:1200px; height:620px;">
+      <div class="ex-label">Logo genérico + 6 ítems + buscador + CTA</div>
+      <nav class="nav-bar">
+        <div class="icon-ph nav-bar__logo" style="border-radius:3px;"></div>
+
+        <div class="nav-bar__item" id="d-1">
+          <button class="nav-bar__btn" onclick="toggleBar('d-1')">Colegios SEK <span class="nav-bar__chevron">▼</span></button>
+          <div class="mega">
+            <div class="mega__cols">
+              <div>
+                <div class="mega__col-title">Colegios en España</div>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School El Castillo</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Santa Isabel</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Ciudalcampo</div></a>
+                <a href="#" class="mega__editorial">Ver todos los colegios en Madrid</a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Catalunya</div></a>
+              </div>
+              <div>
+                <div class="mega__col-title">Colegios fuera de España</div>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Dublin</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Les Alpes</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Qatar</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Riyadh</div></a>
+              </div>
+              <div>
+                <div class="mega__col-title">Colegio Online</div>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International School Online</div></a>
+                <a href="#" class="mega__editorial">Ver todos los Colegios Internacionales SEK</a>
+              </div>
+              <div class="mega__card" style="height:auto; align-items:flex-end;">imagen destacada</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar__item" id="d-2">
+          <button class="nav-bar__btn" onclick="toggleBar('d-2')">Modelo educativo <span class="nav-bar__chevron">▼</span></button>
+          <div class="mega">
+            <div class="mega__cols">
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Future learning model</div><div class="mega__link-sub">50 años con un modelo innovador</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Bachillerato Internacional</div><div class="mega__link-sub">Educación internacional</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Espacios de aprendizaje</div><div class="mega__link-sub">Experiencias educativas diferenciales</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Idiomas</div><div class="mega__link-sub">Competencia multilingüe</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Etapas educativas</div><div class="mega__link-sub">Nuestra formación por edades</div></a>
+              </div>
+            </div>
+            <div class="mega__cards">
+              <div class="mega__card">"Opinión de un padre o de una madre"</div>
+              <div class="mega__card">Dato numérico SEK</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar__item" id="d-3">
+          <button class="nav-bar__btn">Bachillerato Internacional</button>
+        </div>
+
+        <div class="nav-bar__item" id="d-4">
+          <button class="nav-bar__btn" onclick="toggleBar('d-4')">¿Por qué SEK? <span class="nav-bar__chevron">▼</span></button>
+          <div class="mega">
+            <div class="mega__cols">
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Servicios</div><div class="mega__link-sub">Conoce todo lo que ofrecemos</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Logros y calificaciones</div><div class="mega__link-sub">Historias de alumnos y de SEK</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Integración internacional</div><div class="mega__link-sub">Ayuda con la adaptación al idioma</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Nuestros pilares</div><div class="mega__link-sub">Sistema y currículo educativo</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Altas capacidades</div><div class="mega__link-sub">Potencia su talento excepcional</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Dimensión Internacional</div><div class="mega__link-sub">Acreditaciones y colegios SEK en el extranjero</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Desarrollo Integral del Talento</div><div class="mega__link-sub">Potencia su talento excepcional</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK International Sport Academy</div><div class="mega__link-sub">Programas de alto rendimiento deportivo</div></a>
+              </div>
+            </div>
+            <div class="mega__cards">
+              <div class="mega__card">Servicio destacado</div>
+              <div class="mega__card">"Opinión de un padre o de una madre"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar__item" id="d-5">
+          <button class="nav-bar__btn" onclick="toggleBar('d-5')">Admisiones <span class="nav-bar__chevron">▼</span></button>
+          <div class="mega">
+            <div class="mega__cols">
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Admisiones generales</div><div class="mega__link-sub">Nuestro proceso de matriculación</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Admisiones internacionales</div><div class="mega__link-sub">Acceso de alumnos fuera de España</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Becas y ayudas</div><div class="mega__link-sub">Apoyos económicos</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Ayudas a la enseñanza</div><div class="mega__link-sub">Educación de calidad para todos</div></a>
+              </div>
+              <div>
+                <div class="mega__col-title">Preguntas frecuentes</div>
+                <a href="#" class="mega__editorial">¿A quién está dirigido el programa del Diploma Online?</a>
+                <a href="#" class="mega__editorial">¿En qué consiste el programa del Diploma Online del IB?</a>
+                <a href="#" class="mega__editorial">Ver todas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar__item" id="d-6">
+          <button class="nav-bar__btn" onclick="toggleBar('d-6')">Actualidad <span class="nav-bar__chevron">▼</span></button>
+          <div class="mega">
+            <div class="mega__cols">
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Noticias</div><div class="mega__link-sub">Infórmate de nuestras actividades</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Videos</div><div class="mega__link-sub">Grabaciones de nuestros eventos</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Publicaciones</div><div class="mega__link-sub">Nuestras publicaciones</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Eventos</div><div class="mega__link-sub">Conoce nuestro encuentros</div></a>
+              </div>
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">Gran Alfonso X El Sabio</div><div class="mega__link-sub">Distinción a la educación</div></a>
+              </div>
+            </div>
+            <div class="mega__cards">
+              <div class="mega__card">artículos/eventos destacados</div>
+              <div class="mega__card">artículos/eventos destacados</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bar__right">
+          <div class="icon-ph nav-bar__search"></div>
+          <button class="nav-bar__cta">Solicitar información ▼</button>
+        </div>
+      </nav>
+      <div class="demo-filler">
+        <p>// contenido de la página</p>
+        <div class="demo-filler-block">sección 1</div>
+        <div class="demo-filler-block">sección 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Drawer template — generado por JS para evitar duplicar HTML entre mobile/tablet
+  function buildDrawer(id) {
+    return `
+      <div class="nav-drawer" id="nav-drawer-${id}">
+        <div class="drawer-panel active" id="panel-main-${id}">
+          <button class="drawer-item" onclick="openPanel('${id}','panel-colegios-${id}','Colegios')">
+            <div class="drawer-item__text"><span class="drawer-item__title">Colegios SEK</span><span class="drawer-item__subtitle">Colegios en el mundo</span></div>
+            <span class="drawer-item__chevron">›</span>
+          </button>
+          <button class="drawer-item" onclick="openPanel('${id}','panel-modelo-${id}','Modelo educativo')">
+            <div class="drawer-item__text"><span class="drawer-item__title">Modelo educativo</span><span class="drawer-item__subtitle">130 años aprendiendo y enseñando</span></div>
+            <span class="drawer-item__chevron">›</span>
+          </button>
+          <button class="drawer-item">
+            <div class="drawer-item__text"><span class="drawer-item__title">Bachillerato Internacional</span><span class="drawer-item__subtitle">Programas internacionales</span></div>
+          </button>
+          <button class="drawer-item" onclick="openPanel('${id}','panel-porque-${id}','¿Por qué SEK?')">
+            <div class="drawer-item__text"><span class="drawer-item__title">¿Por qué SEK?</span><span class="drawer-item__subtitle">Servicios, resultados...</span></div>
+            <span class="drawer-item__chevron">›</span>
+          </button>
+          <button class="drawer-item" onclick="openPanel('${id}','panel-admisiones-${id}','Admisiones')">
+            <div class="drawer-item__text"><span class="drawer-item__title">Admisiones</span><span class="drawer-item__subtitle">Matriculación</span></div>
+            <span class="drawer-item__chevron">›</span>
+          </button>
+          <button class="drawer-item" onclick="openPanel('${id}','panel-actualidad-${id}','Actualidad')">
+            <div class="drawer-item__text"><span class="drawer-item__title">Actualidad</span></div>
+            <span class="drawer-item__chevron">›</span>
+          </button>
+          <div class="drawer-cta-fixed" id="cta-${id}">
+            <button class="drawer-cta-fixed__btn" onclick="toggleCta('${id}')">Solicitar información <span class="drawer-cta-fixed__chevron">∧</span></button>
+            <div class="icon-ph drawer-cta-fixed__search" style="border-radius:4px;"></div>
+            <div class="drawer-cta-fixed__options"><a href="#">Necesito información</a><a href="#">Contacto</a><a href="#">Programar visita</a><a href="#">Tour virtual</a></div>
+          </div>
+        </div>
+
+        <div class="drawer-panel" id="panel-colegios-${id}">
+          <div class="drawer-panel__header"><button class="drawer-panel__back" onclick="goBack('${id}')">‹ <span class="panel-back-title">Colegios</span></button></div>
+          <div class="drawer-group-label">Colegios en España</div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School El Castillo</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Santa Isabel</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Ciudalcampo</span></div><span class="drawer-item__chevron">›</span></button>
+          <a href="#" class="drawer-link-editorial">Ver todos los colegios en Madrid</a>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Catalunya</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Atlántico</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Alborán</span></div><span class="drawer-item__chevron">›</span></button>
+          <div class="drawer-group-label">Colegios fuera de España</div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Dublin</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Les Alpes</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Qatar</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Riyadh</span></div><span class="drawer-item__chevron">›</span></button>
+          <div class="drawer-group-label">Colegio Online</div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International School Online</span></div><span class="drawer-item__chevron">›</span></button>
+          <a href="#" class="drawer-link-editorial">Ver todos los Colegios Internacionales SEK</a>
+          <div class="drawer-cta-fixed" id="cta-colegios-${id}">
+            <button class="drawer-cta-fixed__btn" onclick="toggleCta('colegios-${id}')">Solicitar información <span class="drawer-cta-fixed__chevron">∧</span></button>
+            <div class="icon-ph drawer-cta-fixed__search" style="border-radius:4px;"></div>
+            <div class="drawer-cta-fixed__options"><a href="#">Necesito información</a><a href="#">Contacto</a><a href="#">Programar visita</a><a href="#">Tour virtual</a></div>
+          </div>
+        </div>
+
+        <div class="drawer-panel" id="panel-modelo-${id}">
+          <div class="drawer-panel__header"><button class="drawer-panel__back" onclick="goBack('${id}')">‹ <span class="panel-back-title">Modelo educativo</span></button></div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Future learning model</span><span class="drawer-item__subtitle">50 años con un modelo innovador</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Bachillerato Internacional</span><span class="drawer-item__subtitle">Educación internacional</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Espacios de aprendizaje</span><span class="drawer-item__subtitle">Experiencias educativas diferenciales</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Idiomas</span><span class="drawer-item__subtitle">Competencia multilingüe</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Etapas educativas</span><span class="drawer-item__subtitle">Nuestra formación por edades</span></div><span class="drawer-item__chevron">›</span></button>
+          <div class="drawer-cards"><div class="drawer-card">"Opinión de un padre o de una madre"</div><div class="drawer-card">Dato numérico SEK</div></div>
+          <div class="drawer-cta-fixed" id="cta-modelo-${id}">
+            <button class="drawer-cta-fixed__btn" onclick="toggleCta('modelo-${id}')">Solicitar información <span class="drawer-cta-fixed__chevron">∧</span></button>
+            <div class="icon-ph drawer-cta-fixed__search" style="border-radius:4px;"></div>
+            <div class="drawer-cta-fixed__options"><a href="#">Necesito información</a><a href="#">Contacto</a><a href="#">Programar visita</a><a href="#">Tour virtual</a></div>
+          </div>
+        </div>
+
+        <div class="drawer-panel" id="panel-porque-${id}">
+          <div class="drawer-panel__header"><button class="drawer-panel__back" onclick="goBack('${id}')">‹ <span class="panel-back-title">¿Por qué SEK?</span></button></div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Servicios</span><span class="drawer-item__subtitle">Conoce todo lo que ofrecemos</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Logros y calificaciones</span><span class="drawer-item__subtitle">Historias de alumnos y de SEK</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Integración internacional</span><span class="drawer-item__subtitle">Ayuda con la adaptación al idioma</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Nuestros pilares</span><span class="drawer-item__subtitle">Sistema y currículo educativo</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Altas capacidades</span><span class="drawer-item__subtitle">Potencia su talento excepcional</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Dimensión Internacional</span><span class="drawer-item__subtitle">Acreditaciones y colegios SEK en el extranjero</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Desarrollo Integral del Talento</span><span class="drawer-item__subtitle">Potencia su talento excepcional</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">SEK International Sport Academy</span><span class="drawer-item__subtitle">Programas de alto rendimiento deportivo</span></div><span class="drawer-item__chevron">›</span></button>
+          <div class="drawer-cards"><div class="drawer-card">Servicio destacado</div><div class="drawer-card">"Opinión de un padre o de una madre"</div></div>
+          <div class="drawer-cta-fixed" id="cta-porque-${id}">
+            <button class="drawer-cta-fixed__btn" onclick="toggleCta('porque-${id}')">Solicitar información <span class="drawer-cta-fixed__chevron">∧</span></button>
+            <div class="icon-ph drawer-cta-fixed__search" style="border-radius:4px;"></div>
+            <div class="drawer-cta-fixed__options"><a href="#">Necesito información</a><a href="#">Contacto</a><a href="#">Programar visita</a><a href="#">Tour virtual</a></div>
+          </div>
+        </div>
+
+        <div class="drawer-panel" id="panel-admisiones-${id}">
+          <div class="drawer-panel__header"><button class="drawer-panel__back" onclick="goBack('${id}')">‹ <span class="panel-back-title">Admisiones</span></button></div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Admisiones generales</span><span class="drawer-item__subtitle">Nuestro proceso de matriculación</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Admisiones internacionales</span><span class="drawer-item__subtitle">Acceso de alumnos fuera de España</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Becas y ayudas</span><span class="drawer-item__subtitle">Apoyos económicos</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Ayudas a la enseñanza</span><span class="drawer-item__subtitle">Educación de calidad para todos</span></div><span class="drawer-item__chevron">›</span></button>
+          <div class="drawer-faq-item">¿A quién está dirigido el programa del Diploma Online?</div>
+          <div class="drawer-faq-item">¿En qué consiste el programa del Diploma Online del IB?</div>
+          <div class="drawer-faq-item">¿Qué requisitos tiene el programa del diploma del Bachillerato Internacional Online?</div>
+          <a href="#" class="drawer-link-editorial">Ver todas</a>
+          <div class="drawer-cta-fixed" id="cta-admisiones-${id}">
+            <button class="drawer-cta-fixed__btn" onclick="toggleCta('admisiones-${id}')">Solicitar información <span class="drawer-cta-fixed__chevron">∧</span></button>
+            <div class="icon-ph drawer-cta-fixed__search" style="border-radius:4px;"></div>
+            <div class="drawer-cta-fixed__options"><a href="#">Necesito información</a><a href="#">Contacto</a><a href="#">Programar visita</a><a href="#">Tour virtual</a></div>
+          </div>
+        </div>
+
+        <div class="drawer-panel" id="panel-actualidad-${id}">
+          <div class="drawer-panel__header"><button class="drawer-panel__back" onclick="goBack('${id}')">‹ <span class="panel-back-title">Actualidad</span></button></div>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Noticias</span><span class="drawer-item__subtitle">Infórmate de nuestras actividades</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Videos</span><span class="drawer-item__subtitle">Grabaciones de nuestros eventos</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Publicaciones</span><span class="drawer-item__subtitle">Nuestras publicaciones</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Eventos</span><span class="drawer-item__subtitle">Conoce nuestro encuentros</span></div><span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item"><div class="drawer-item__text"><span class="drawer-item__title">Gran Alfonso X El Sabio</span><span class="drawer-item__subtitle">Distinción a la educación</span></div><span class="drawer-item__chevron">›</span></button>
+          <div class="drawer-cards"><div class="drawer-card">artículos/eventos destacados</div><div class="drawer-card">artículos/eventos destacados</div></div>
+          <div class="drawer-cta-fixed" id="cta-actualidad-${id}">
+            <button class="drawer-cta-fixed__btn" onclick="toggleCta('actualidad-${id}')">Solicitar información <span class="drawer-cta-fixed__chevron">∧</span></button>
+            <div class="icon-ph drawer-cta-fixed__search" style="border-radius:4px;"></div>
+            <div class="drawer-cta-fixed__options"><a href="#">Necesito información</a><a href="#">Contacto</a><a href="#">Programar visita</a><a href="#">Tour virtual</a></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('drawer-template-M').outerHTML = buildDrawer('M');
+  document.getElementById('drawer-template-T').outerHTML = buildDrawer('T');
+
+  var panelStacks = {};
+
+  function toggleDrawer(id) {
+    var drawer = document.getElementById('nav-drawer-' + id);
+    var hamburger = drawer.parentElement.querySelector('.nav-hamburger');
+    var isOpen = drawer.classList.contains('open');
+    if (isOpen) {
+      drawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    } else {
+      drawer.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function openPanel(id, panelId, title) {
+    if (!panelStacks[id]) panelStacks[id] = [];
+    var current = document.querySelector('#nav-drawer-' + id + ' .drawer-panel.active');
+    if (current) {
+      current.classList.add('prev');
+      current.classList.remove('active');
+      panelStacks[id].push(current.id);
+    }
+    var next = document.getElementById(panelId);
+    var backTitle = next.querySelector('.panel-back-title');
+    if (backTitle) backTitle.textContent = title;
+    setTimeout(function () { next.classList.add('active'); }, 10);
+  }
+
+  function goBack(id) {
+    var current = document.querySelector('#nav-drawer-' + id + ' .drawer-panel.active');
+    var prevId = panelStacks[id] ? panelStacks[id].pop() : null;
+    if (!prevId) return;
+    var prev = document.getElementById(prevId);
+    current.classList.remove('active');
+    prev.classList.remove('prev');
+    prev.classList.add('active');
+  }
+
+  function toggleCta(id) {
+    document.getElementById('cta-' + id).classList.toggle('open');
+  }
+
+  function toggleBar(itemId) {
+    var item = document.getElementById(itemId);
+    var wasOpen = item.classList.contains('open');
+    var bar = item.closest('.nav-bar');
+    bar.querySelectorAll('.nav-bar__item').forEach(function (i) { i.classList.remove('open'); });
+    if (!wasOpen) {
+      item.classList.add('open');
+      positionMega(item);
+    }
+  }
+
+  function positionMega(item) {
+    var mega = item.querySelector('.mega');
+    if (!mega) return;
+    var frame = item.closest('.demo-frame');
+    var frameRect = frame.getBoundingClientRect();
+    var barRect = item.closest('.nav-bar').getBoundingClientRect();
+    mega.style.left = frameRect.left + 'px';
+    mega.style.width = frameRect.width + 'px';
+    mega.style.top = barRect.bottom + 'px';
+  }
+
+  window.addEventListener('scroll', function () {
+    document.querySelectorAll('.nav-bar__item.open').forEach(positionMega);
+  }, true);
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.nav-bar__item.open').forEach(positionMega);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-bar__item')) {
+      document.querySelectorAll('.nav-bar__item.open').forEach(function (i) { i.classList.remove('open'); });
+    }
+  });
+</script>
+</body>
+</html>
