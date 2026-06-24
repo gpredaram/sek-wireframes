@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-NAV-004 | Menú institucional</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+  .icon-ph { background: var(--gray-300); border-radius: 50%; flex-shrink: 0; }
+
+  .demo-wrap { padding: 36px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .demo-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 6px; }
+  .demo-sub { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-align: center; margin-bottom: 14px; }
+  .demo-frame-outer { display: flex; justify-content: center; }
+  .demo-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; overflow-y: auto; position: relative; }
+  .ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; background: var(--gray-100); position: sticky; top: 0; z-index: 50; height: 24px; line-height: 24px; }
+  .demo-filler { padding: 24px 32px; }
+  .demo-filler p { font-size: 13px; color: var(--gray-500); margin-bottom: 16px; font-family: var(--mono); }
+  .demo-filler-block { height: 160px; background: var(--gray-100); border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray-400); }
+
+  /* TOPBAR */
+  .nav-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px; padding: 0 20px;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky; top: 24px; z-index: 10000;
+    background: var(--white);
+  }
+  .nav-topbar__logo { width: 130px; height: 24px; border-radius: 3px; }
+
+  .nav-hamburger {
+    background: none; border: none; cursor: pointer; padding: 6px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--gray-700); border-radius: 2px; }
+
+  /* DRAWER */
+  .nav-drawer {
+    position: absolute;
+    top: 76px; left: 0;
+    width: 100%; height: calc(100% - 76px);
+    background: var(--white);
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform .35s ease;
+    overflow: hidden;
+  }
+  .nav-drawer.open { transform: translateX(0); }
+
+  .drawer-panel {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--white);
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    overflow-y: auto;
+  }
+  .drawer-panel.active { transform: translateX(0); }
+  .drawer-panel.prev { transform: translateX(-100%); }
+
+  .drawer-panel__header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--gray-200);
+  }
+  .drawer-panel__header-logo { width: 110px; height: 22px; border-radius: 3px; background: var(--gray-300); }
+  .drawer-panel__header-back {
+    display: flex; align-items: center; gap: 8px;
+    background: none; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 600; color: var(--gray-800); font-family: var(--font);
+  }
+  .drawer-panel__close { background: none; border: none; cursor: pointer; font-size: 18px; color: var(--gray-700); line-height: 1; }
+
+  .drawer-item {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 16px 20px; background: none; border: none;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 15px; font-weight: 500; color: var(--gray-800); font-family: var(--font);
+    cursor: pointer; text-align: left;
+  }
+  .drawer-item__chevron { color: var(--gray-400); font-size: 15px; flex-shrink: 0; margin-left: 10px; }
+
+  .placeholder-note { padding: 24px 20px; font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-align: center; }
+
+  /* DESKTOP — barra + megamenú */
+  .nav-bar {
+    display: flex; align-items: center; gap: 26px;
+    height: 56px; padding: 0 40px;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky; top: 24px; z-index: 30;
+    background: var(--white);
+  }
+  .nav-bar__logo { width: 150px; height: 26px; border-radius: 3px; flex-shrink: 0; }
+  .nav-bar__item { position: relative; }
+  .nav-bar__btn {
+    display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; font-weight: 500; color: var(--gray-700);
+    font-family: var(--font); padding: 0;
+  }
+  .nav-bar__link {
+    font-size: 13px; font-weight: 500; color: var(--gray-700);
+    text-decoration: none; white-space: nowrap;
+  }
+  .nav-bar__chevron { font-size: 9px; color: var(--gray-500); transition: transform .2s ease; }
+  .nav-bar__item.open .nav-bar__chevron { transform: rotate(180deg); }
+
+  .mega {
+    display: none;
+    position: fixed;
+    background: var(--white); border-top: 1px solid var(--gray-200);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    padding: 32px 56px; z-index: 1000;
+  }
+  .nav-bar__item.open .mega { display: block; }
+  .mega__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1200px; margin: 0 auto; }
+  .mega__link { display: block; margin-bottom: 14px; text-decoration: none; }
+  .mega__link-title { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     MOBILE · 375px
+═════════════════════════════════════════════ -->
+<div class="demo-wrap">
+  <div class="demo-label">Mobile · 375px</div>
+  <div class="demo-sub">Drawer estilo Apple (PAT-006) · X de cierre explícita · único ítem con sub-panel · el resto son links directos</div>
+  <div class="demo-frame-outer">
+    <div class="demo-frame" style="width:375px; height:560px;">
+      <div class="ex-label">Logo institucional genérico</div>
+      <header class="nav-topbar">
+        <div class="icon-ph nav-topbar__logo" style="border-radius:3px;"></div>
+        <button class="nav-hamburger" aria-label="Abrir menú" onclick="toggleDrawer('M')">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <div class="demo-filler">
+        <p>// Contenido Institución</p>
+        <div class="demo-filler-block">sección 1</div>
+        <div class="demo-filler-block">sección 2</div>
+      </div>
+
+      <div class="nav-drawer" id="nav-drawer-M">
+        <div class="drawer-panel active" id="panel-main-M">
+          <div class="drawer-panel__header">
+            <div class="icon-ph drawer-panel__header-logo" style="border-radius:3px;"></div>
+            <button class="drawer-panel__close" onclick="toggleDrawer('M')">✕</button>
+          </div>
+          <button class="drawer-item">Colegios Internacionales SEK</button>
+          <button class="drawer-item" onclick="openPanel('M','panel-group-M','SEK Education Group')">SEK Education Group <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Universidad Camilo José Cela</button>
+          <button class="drawer-item">Fundación Felipe Segovia</button>
+          <button class="drawer-item">Alumni</button>
+        </div>
+
+        <div class="drawer-panel" id="panel-group-M">
+          <div class="drawer-panel__header"><button class="drawer-panel__header-back" onclick="goBack('M')">‹ <span class="panel-back-title">SEK Education Group</span></button></div>
+          <button class="drawer-item">La Institución <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Historia <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Principios y valores <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Advisory Boards <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">SEK LAB <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">B Corp <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">International Sports Academy <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Desarrollo Integral del Talento <span class="drawer-item__chevron">›</span></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TABLET · 768px
+═════════════════════════════════════════════ -->
+<div class="demo-wrap">
+  <div class="demo-label">Tablet · 768px</div>
+  <div class="demo-sub">Mismo drawer que mobile — breakpoint &lt;1200px comparte comportamiento</div>
+  <div class="demo-frame-outer">
+    <div class="demo-frame" style="width:768px; height:560px;">
+      <div class="ex-label">Idéntico a mobile</div>
+      <header class="nav-topbar">
+        <div class="icon-ph nav-topbar__logo" style="border-radius:3px;"></div>
+        <button class="nav-hamburger" aria-label="Abrir menú" onclick="toggleDrawer('T')">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <div class="demo-filler">
+        <p>// Contenido Institución</p>
+        <div class="demo-filler-block">sección 1</div>
+        <div class="demo-filler-block">sección 2</div>
+      </div>
+
+      <div class="nav-drawer" id="nav-drawer-T">
+        <div class="drawer-panel active" id="panel-main-T">
+          <div class="drawer-panel__header">
+            <div class="icon-ph drawer-panel__header-logo" style="border-radius:3px;"></div>
+            <button class="drawer-panel__close" onclick="toggleDrawer('T')">✕</button>
+          </div>
+          <button class="drawer-item">Colegios Internacionales SEK</button>
+          <button class="drawer-item" onclick="openPanel('T','panel-group-T','SEK Education Group')">SEK Education Group <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Universidad Camilo José Cela</button>
+          <button class="drawer-item">Fundación Felipe Segovia</button>
+          <button class="drawer-item">Alumni</button>
+        </div>
+
+        <div class="drawer-panel" id="panel-group-T">
+          <div class="drawer-panel__header"><button class="drawer-panel__header-back" onclick="goBack('T')">‹ <span class="panel-back-title">SEK Education Group</span></button></div>
+          <button class="drawer-item">La Institución <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Historia <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Principios y valores <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Advisory Boards <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">SEK LAB <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">B Corp <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">International Sports Academy <span class="drawer-item__chevron">›</span></button>
+          <button class="drawer-item">Desarrollo Integral del Talento <span class="drawer-item__chevron">›</span></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     DESKTOP · 1200px
+═════════════════════════════════════════════ -->
+<div class="demo-wrap">
+  <div class="demo-label">Desktop · 1200px</div>
+  <div class="demo-sub">Megamenú solo en "SEK Education Group" · resto son links directos en la barra</div>
+  <div class="demo-frame-outer">
+    <div class="demo-frame" style="width:1200px; height:420px;">
+      <div class="ex-label">Logo institucional + 5 ítems (4 links directos + 1 megamenú)</div>
+      <nav class="nav-bar">
+        <div class="icon-ph nav-bar__logo" style="border-radius:3px;"></div>
+        <a href="#" class="nav-bar__link">Colegios Internacionales SEK</a>
+
+        <div class="nav-bar__item" id="d-group">
+          <button class="nav-bar__btn" onclick="toggleBar('d-group')">SEK Education Group <span class="nav-bar__chevron">▼</span></button>
+          <div class="mega">
+            <div class="mega__cols" style="grid-template-columns: 1fr; max-width: 320px; margin: 0;">
+              <div>
+                <a href="#" class="mega__link"><div class="mega__link-title">La Institución</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Historia</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Principios y valores</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Advisory Boards</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">SEK LAB</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">B Corp</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">International Sports Academy</div></a>
+                <a href="#" class="mega__link"><div class="mega__link-title">Desarrollo Integral del Talento</div></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="nav-bar__link">Universidad Camilo José Cela</a>
+        <a href="#" class="nav-bar__link">Fundación Felipe Segovia</a>
+        <a href="#" class="nav-bar__link">Alumni</a>
+      </nav>
+      <div class="demo-filler">
+        <p>// Contenido Institución</p>
+        <div class="demo-filler-block">sección 1</div>
+        <div class="demo-filler-block">sección 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var panelStacks = {};
+
+  function toggleDrawer(id) {
+    var drawer = document.getElementById('nav-drawer-' + id);
+    var isOpen = drawer.classList.contains('open');
+    drawer.classList.toggle('open', !isOpen);
+  }
+
+  function openPanel(id, panelId, title) {
+    if (!panelStacks[id]) panelStacks[id] = [];
+    var current = document.querySelector('#nav-drawer-' + id + ' .drawer-panel.active');
+    if (current) {
+      current.classList.add('prev');
+      current.classList.remove('active');
+      panelStacks[id].push(current.id);
+    }
+    var next = document.getElementById(panelId);
+    var backTitle = next.querySelector('.panel-back-title');
+    if (backTitle) backTitle.textContent = title;
+    setTimeout(function () { next.classList.add('active'); }, 10);
+  }
+
+  function goBack(id) {
+    var current = document.querySelector('#nav-drawer-' + id + ' .drawer-panel.active');
+    var prevId = panelStacks[id] ? panelStacks[id].pop() : null;
+    if (!prevId) return;
+    var prev = document.getElementById(prevId);
+    current.classList.remove('active');
+    prev.classList.remove('prev');
+    prev.classList.add('active');
+  }
+
+  function toggleBar(itemId) {
+    var item = document.getElementById(itemId);
+    var wasOpen = item.classList.contains('open');
+    var bar = item.closest('.nav-bar');
+    bar.querySelectorAll('.nav-bar__item').forEach(function (i) { i.classList.remove('open'); });
+    if (!wasOpen) {
+      item.classList.add('open');
+      positionMega(item);
+    }
+  }
+
+  function positionMega(item) {
+    var mega = item.querySelector('.mega');
+    if (!mega) return;
+    var frame = item.closest('.demo-frame');
+    var frameRect = frame.getBoundingClientRect();
+    var barRect = item.closest('.nav-bar').getBoundingClientRect();
+    mega.style.left = frameRect.left + 'px';
+    mega.style.width = frameRect.width + 'px';
+    mega.style.top = barRect.bottom + 'px';
+  }
+
+  window.addEventListener('scroll', function () {
+    document.querySelectorAll('.nav-bar__item.open').forEach(positionMega);
+  }, true);
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.nav-bar__item.open').forEach(positionMega);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-bar__item')) {
+      document.querySelectorAll('.nav-bar__item.open').forEach(function (i) { i.classList.remove('open'); });
+    }
+  });
+</script>
+</body>
+</html>
