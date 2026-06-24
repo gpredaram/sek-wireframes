@@ -1,70 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEK-CON-019 · Bloque CTA</title>
-  <link rel="stylesheet" href="../../shared/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-019 | Bloque CTA</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; -webkit-font-smoothing: antialiased; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Bloque CTA
+  ══════════════════════════ */
+  .mod-block { padding: 40px 20px; font-family: var(--font); }
+  .mod-block--alt { background: var(--gray-100); }
+
+  .con019-inner h2 { font-size: 22px; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; line-height: 1.2; }
+  .con019-inner p { font-size: 15px; color: var(--gray-600); margin-bottom: 24px; line-height: 1.6; }
+  .con019-btn { display: inline-block; background: var(--gray-800); color: var(--white); padding: 12px 24px; border-radius: var(--radius); font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-family: inherit; width: 100%; text-align: center; }
+
+  .con019-with-img { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+  .con019-img { width: 100%; aspect-ratio: 16/9; background: var(--gray-200); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; color: var(--gray-500); }
+
+  /* Tablet */
+  .vp-tablet .mod-block { padding: 48px 32px; }
+  .vp-tablet .con019-inner h2 { font-size: 26px; }
+  .vp-tablet .con019-btn { width: auto; }
+  .vp-tablet .con019-with-img { grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  /* Desktop */
+  .vp-desktop .mod-block { padding: 56px 40px; }
+  .vp-desktop .con019-inner h2 { font-size: 30px; }
+  .vp-desktop .con019-btn { width: auto; }
+  .vp-desktop .con019-with-img { grid-template-columns: 1fr 1fr; gap: 40px; }
+</style>
 </head>
 <body>
 
-<div class="mod-chrome">
-  <span class="mod-code">SEK-CON-019</span>
-  <span class="mod-name">Bloque CTA</span>
-  <span class="mod-ver">v1.1</span>
+<div class="wf-toolbar">
+  <strong>SEK-CON-019</strong>
+  <span>Bloque CTA · v1.1 · vistas responsive</span>
 </div>
 
-<div id="page-wrapper">
-
-  <!-- ══ Sin imagen · responsive ↔ · alineado izquierda ══════════ -->
-  <div class="state-block">
-    <div class="state-label">Sin imagen · responsive ↔ · alineado izquierda · botón auto tablet+ / ancho completo mobile</div>
-    <section class="section section--alt">
-      <div class="container">
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">Sin imagen · alineado izquierda · botón ancho completo</div>
+      <div class="mod-block mod-block--alt">
         <div class="con019-inner">
           <h2>Solicita información</h2>
           <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible</p>
-          <button class="cta-btn con019-btn">Continuar</button>
+          <button class="con019-btn">Continuar</button>
         </div>
       </div>
-    </section>
-  </div>
-
-  <!-- ══ Sin imagen · Mobile · 390px ══════════════════════════════ -->
-  <div class="state-block">
-    <div class="state-label">Sin imagen · Mobile · 390px · botón ancho completo</div>
-    <div class="demo-narrow">
-      <section class="section section--alt">
-        <div class="container">
-          <div class="con019-inner">
-            <h2>Solicita información</h2>
-            <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible</p>
-            <button class="cta-btn con019-btn">Continuar</button>
-          </div>
-        </div>
-      </section>
     </div>
   </div>
+</div>
 
-  <!-- ══ Con imagen · responsive ↔ · desktop 50/50 ════════════════ -->
-  <div class="state-block">
-    <div class="state-label">Con imagen · responsive ↔ · desktop imagen izquierda 50% · texto+botón derecha 50% · alineado izquierda</div>
-    <section class="section">
-      <div class="container">
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">Sin imagen · alineado izquierda · botón auto</div>
+      <div class="mod-block mod-block--alt">
+        <div class="con019-inner">
+          <h2>Solicita información</h2>
+          <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible</p>
+          <button class="con019-btn">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · SIN IMAGEN -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · sin imagen</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Sin imagen · alineado izquierda · botón auto</div>
+      <div class="mod-block mod-block--alt">
+        <div class="con019-inner">
+          <h2>Solicita información</h2>
+          <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible</p>
+          <button class="con019-btn">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · CON IMAGEN -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · con imagen</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Con imagen · imagen izquierda 50% · texto+botón derecha 50%</div>
+      <div class="mod-block">
         <div class="con019-with-img">
           <div class="con019-img">imagen</div>
           <div class="con019-inner">
             <h2>Solicita información</h2>
             <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible</p>
-            <button class="cta-btn con019-btn">Continuar</button>
+            <button class="con019-btn">Continuar</button>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
-
 </div>
 
-<script src="../../shared/wireframe.js"></script>
 </body>
 </html>

@@ -1,105 +1,195 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEK-CON-020 · Pareja con CTA</title>
-  <link rel="stylesheet" href="../../shared/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-020 | Pareja con CTA</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; -webkit-font-smoothing: antialiased; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════
+     MÓDULO · Pareja con CTA
+  ══════════════════════════ */
+  .mod-block { padding: 28px 20px; font-family: var(--font); }
+  .mod-block--alt { background: var(--gray-100); }
+
+  .mod-head { margin-bottom: 20px; }
+  .mod-head h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); line-height: 1.2; }
+  .mod-head p { margin-top: 6px; font-size: 13px; color: var(--gray-500); }
+
+  /* Modo Pareja */
+  .con020-pair { display: flex; flex-direction: column; }
+  .con020-block { padding: 28px 0; }
+  .con020-block:first-child { padding-top: 0; }
+  .con020-block:last-child { padding-bottom: 0; }
+  .con020-block + .con020-block { border-top: 1px solid var(--gray-200); }
+  .con020-block h3 { font-size: 16px; font-weight: 600; color: var(--gray-800); margin-bottom: 10px; line-height: 1.3; }
+  .con020-block p { font-size: 14px; color: var(--gray-600); line-height: 1.75; margin-bottom: 16px; }
+
+  /* Modo bloque único */
+  .con020-single { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .con020-single-img { width: 100%; min-height: 200px; background: var(--gray-200); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; color: var(--gray-500); }
+
+  /* CTA button */
+  .con020-btn { display: inline-block; background: var(--gray-800); color: var(--white); padding: 11px 22px; border-radius: var(--radius); font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-family: inherit; }
+
+  /* Tablet */
+  .vp-tablet .mod-block { padding: 36px 32px; }
+  .vp-tablet .mod-head h2 { font-size: 24px; }
+  .vp-tablet .con020-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .vp-tablet .con020-block { padding: 0; }
+  .vp-tablet .con020-block + .con020-block { border-top: none; }
+  .vp-tablet .con020-single { grid-template-columns: 1fr 1fr; align-items: center; }
+  .vp-tablet .con020-single-img { min-height: 260px; }
+
+  /* Desktop */
+  .vp-desktop .mod-block { padding: 44px 40px; }
+  .vp-desktop .mod-head h2 { font-size: 28px; }
+  .vp-desktop .con020-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .vp-desktop .con020-block { padding: 0; }
+  .vp-desktop .con020-block + .con020-block { border-top: none; }
+  .vp-desktop .con020-single { grid-template-columns: 1fr 1fr; align-items: center; }
+  .vp-desktop .con020-single-img { min-height: 280px; }
+</style>
 </head>
 <body>
 
-<div class="mod-chrome">
-  <span class="mod-code">SEK-CON-020</span>
-  <span class="mod-name">Pareja con CTA</span>
-  <span class="mod-ver">v1.0</span>
+<div class="wf-toolbar">
+  <strong>SEK-CON-020</strong>
+  <span>Pareja con CTA · v1.0 · vistas responsive</span>
 </div>
 
-<div id="page-wrapper">
-
-  <!-- ══ Modo Pareja · responsive ↔ ═══════════════════════════════ -->
-  <div class="state-block">
-    <div class="state-label">Modo Pareja (2 bloques) · responsive ↔ · desktop 50/50 · mobile/tablet apilado con separador</div>
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
+<!-- MOBILE 375px · MODO PAREJA -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px · modo pareja</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">2 bloques apilados con separador</div>
+      <div class="mod-block">
+        <div class="mod-head">
           <h2>Visítanos</h2>
           <p>Conoce nuestro centro y equipo de profesores</p>
         </div>
         <div class="con020-pair">
           <div class="con020-block">
             <h3>Visita presencial</h3>
-            <div class="text-block-body">
-              <p>Organiza una visita al centro y conoce de primera mano nuestras instalaciones, metodología y el equipo docente. Nuestros orientadores estarán encantados de acompañarte y resolver todas tus dudas sobre el proyecto educativo y el proceso de admisión.</p>
-            </div>
-            <a href="#" class="cta-btn">Solicitar visita</a>
+            <p>Organiza una visita al centro y conoce de primera mano nuestras instalaciones, metodología y el equipo docente.</p>
+            <a href="#" class="con020-btn">Solicitar visita</a>
           </div>
           <div class="con020-block">
             <h3>Tour virtual</h3>
-            <div class="text-block-body">
-              <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo. Recorre las aulas, espacios deportivos, laboratorios y zonas comunes sin necesidad de desplazarte.</p>
-            </div>
-            <a href="#" class="cta-btn">Realizar tour virtual</a>
+            <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo. Recorre las aulas y espacios deportivos.</p>
+            <a href="#" class="con020-btn">Realizar tour virtual</a>
           </div>
         </div>
       </div>
-    </section>
-  </div>
-
-  <!-- ══ Modo Pareja · Mobile · 390px ══════════════════════════════ -->
-  <div class="state-block">
-    <div class="state-label">Modo Pareja · Mobile · 390px</div>
-    <div class="demo-narrow">
-      <section class="section">
-        <div class="container">
-          <div class="section-head">
-            <h2>Visítanos</h2>
-            <p>Conoce nuestro centro y equipo de profesores</p>
-          </div>
-          <div class="con020-pair">
-            <div class="con020-block">
-              <h3>Visita presencial</h3>
-              <div class="text-block-body">
-                <p>Organiza una visita al centro y conoce de primera mano nuestras instalaciones.</p>
-              </div>
-              <a href="#" class="cta-btn">Solicitar visita</a>
-            </div>
-            <div class="con020-block">
-              <h3>Tour virtual</h3>
-              <div class="text-block-body">
-                <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo.</p>
-              </div>
-              <a href="#" class="cta-btn">Realizar tour virtual</a>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   </div>
+</div>
 
-  <!-- ══ Modo bloque único · responsive ↔ ═════════════════════════ -->
-  <div class="state-block">
-    <div class="state-label">Modo bloque único (solo Bloque A) · responsive ↔ · desktop 50/50 con imagen · mobile apilado</div>
-    <section class="section section--alt">
-      <div class="container">
-        <div class="section-head">
+<!-- TABLET 768px · MODO PAREJA -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px · modo pareja</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">2 bloques en grid 50/50 · sin separador</div>
+      <div class="mod-block">
+        <div class="mod-head">
           <h2>Visítanos</h2>
+          <p>Conoce nuestro centro y equipo de profesores</p>
         </div>
+        <div class="con020-pair">
+          <div class="con020-block">
+            <h3>Visita presencial</h3>
+            <p>Organiza una visita al centro y conoce de primera mano nuestras instalaciones, metodología y el equipo docente. Nuestros orientadores estarán encantados de acompañarte.</p>
+            <a href="#" class="con020-btn">Solicitar visita</a>
+          </div>
+          <div class="con020-block">
+            <h3>Tour virtual</h3>
+            <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo. Recorre las aulas, espacios deportivos, laboratorios y zonas comunes.</p>
+            <a href="#" class="con020-btn">Realizar tour virtual</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · MODO PAREJA -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · modo pareja</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">2 bloques en grid 50/50 · sin separador</div>
+      <div class="mod-block">
+        <div class="mod-head">
+          <h2>Visítanos</h2>
+          <p>Conoce nuestro centro y equipo de profesores</p>
+        </div>
+        <div class="con020-pair">
+          <div class="con020-block">
+            <h3>Visita presencial</h3>
+            <p>Organiza una visita al centro y conoce de primera mano nuestras instalaciones, metodología y el equipo docente. Nuestros orientadores estarán encantados de acompañarte y resolver todas tus dudas sobre el proyecto educativo y el proceso de admisión.</p>
+            <a href="#" class="con020-btn">Solicitar visita</a>
+          </div>
+          <div class="con020-block">
+            <h3>Tour virtual</h3>
+            <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo. Recorre las aulas, espacios deportivos, laboratorios y zonas comunes sin necesidad de desplazarte.</p>
+            <a href="#" class="con020-btn">Realizar tour virtual</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · MODO BLOQUE ÚNICO -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · modo bloque único</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Solo bloque A · texto izquierda · imagen derecha (imagen desactivable)</div>
+      <div class="mod-block mod-block--alt">
+        <div class="mod-head"><h2>Visítanos</h2></div>
         <div class="con020-single">
           <div class="con020-block">
             <h3>Tour virtual</h3>
-            <div class="text-block-body">
-              <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo. Recorre las aulas, espacios deportivos, laboratorios y zonas comunes sin necesidad de desplazarte.</p>
-            </div>
-            <a href="#" class="cta-btn">Realizar tour virtual</a>
+            <p>Explora el colegio desde cualquier lugar con nuestro tour virtual interactivo. Recorre las aulas, espacios deportivos, laboratorios y zonas comunes sin necesidad de desplazarte.</p>
+            <a href="#" class="con020-btn">Realizar tour virtual</a>
           </div>
           <div class="con020-single-img">imagen</div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
-
 </div>
 
-<script src="../../shared/wireframe.js"></script>
 </body>
 </html>
