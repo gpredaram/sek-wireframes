@@ -193,8 +193,203 @@ function closeDrawer() {
   }, 350);
 }
 
+/* ── SEK SCHOOLS DRAWER — fuente única (M-2) ─────────────────── */
+function injectSekSchoolsDrawer() {
+  var el = document.getElementById('nav-drawer');
+  if (el) return; /* ya existe, no duplicar */
+  var div = document.createElement('div');
+  div.innerHTML = `<div id="nav-drawer">
+
+  <!-- Panel principal -->
+  <div id="panel-main" class="drawer-panel active">
+    <div class="drawer-panel-body">
+      <div class="drawer-section-sep">SEK Ciudalcampo</div>
+      <button class="drawer-nav-item" onclick="openPanel('panel-colegio')">El Colegio <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-etapas')">Etapas <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-instalaciones')">Instalaciones <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-servicios')">Servicios <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-vida')">Vida Escolar <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-idiomas')">Idiomas e Internacional <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-admisiones')">Admisiones <span class="drawer-nav-chevron">›</span></button>
+      <div class="drawer-section-sep">SEK</div>
+      <button class="drawer-nav-item" onclick="openPanel('panel-colegios-sek')">Colegios SEK <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-modelo')">Modelo Educativo <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-por-que')">¿Por qué SEK? <span class="drawer-nav-chevron">›</span></button>
+      <button class="drawer-nav-item" onclick="openPanel('panel-actualidad')">Actualidad <span class="drawer-nav-chevron">›</span></button>
+    </div>
+    <div class="drawer-panel-cta">
+      <button class="drawer-cta-btn">Solicitar información</button>
+    </div>
+  </div>
+
+  <!-- Panel: El Colegio -->
+  <div id="panel-colegio" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> El Colegio</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="bienvenida.html" class="drawer-sub-item">Bienvenida</a>
+      <a href="#" class="drawer-sub-item">Curso 25-26</a>
+      <a href="#" class="drawer-sub-item">Calendario de eventos</a>
+      <a href="#" class="drawer-sub-item">Equipo docente</a>
+      <a href="#" class="drawer-sub-item">Resultados</a>
+      <a href="#" class="drawer-sub-item">Dónde estamos</a>
+    </div>
+  </div>
+
+  <!-- Panel: Etapas -->
+  <div id="panel-etapas" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Etapas</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Early Childhood</a>
+      <a href="#" class="drawer-sub-item">Primaria</a>
+      <a href="#" class="drawer-sub-item">Secundaria</a>
+      <a href="#" class="drawer-sub-item">Bachillerato</a>
+    </div>
+  </div>
+
+  <!-- Panel: Instalaciones -->
+  <div id="panel-instalaciones" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Instalaciones</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Espacios de aprendizaje</a>
+      <a href="#" class="drawer-sub-item">Espacios deportivos</a>
+      <a href="#" class="drawer-sub-item">Tour virtual</a>
+    </div>
+  </div>
+
+  <!-- Panel: Servicios -->
+  <div id="panel-servicios" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Servicios</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <div class="drawer-section-sep">Incluidos</div>
+      <a href="#" class="drawer-sub-item">Nutrición</a>
+      <a href="#" class="drawer-sub-item">Servicio Médico</a>
+      <a href="#" class="drawer-sub-item">Dpto. Psicológico y orientación</a>
+      <a href="#" class="drawer-sub-item">Actividades de enriquecimiento curricular</a>
+      <a href="#" class="drawer-sub-item">Aulas para familias</a>
+      <a href="#" class="drawer-sub-item">Uniformes</a>
+      <div class="drawer-section-sep">Complementarios</div>
+      <a href="#" class="drawer-sub-item">Transporte</a>
+      <a href="#" class="drawer-sub-item">Actividades Extraescolares</a>
+      <a href="#" class="drawer-sub-item">Cursos de verano</a>
+      <a href="#" class="drawer-sub-item">Mutualidad SEK</a>
+      <a href="#" class="drawer-sub-item">Residencia</a>
+    </div>
+  </div>
+
+  <!-- Panel: Vida Escolar -->
+  <div id="panel-vida" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Vida Escolar</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <div class="drawer-section-sep">Actividades del centro</div>
+      <a href="#" class="drawer-sub-item">Semana Blanca</a>
+      <a href="#" class="drawer-sub-item">Duke of Edinburgh's</a>
+      <a href="#" class="drawer-sub-item">SEKMUN</a>
+      <div class="drawer-section-sep">Alto rendimiento</div>
+      <a href="#" class="drawer-sub-item">Escuela de alto rendimiento deportivo</a>
+    </div>
+  </div>
+
+  <!-- Panel: Idiomas e Internacional -->
+  <div id="panel-idiomas" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Idiomas e Internacional</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Idiomas y Certificación Oficial</a>
+      <a href="#" class="drawer-sub-item">Estancias internacionales</a>
+      <a href="#" class="drawer-sub-item">Intercambios culturales</a>
+    </div>
+  </div>
+
+  <!-- Panel: Admisiones -->
+  <div id="panel-admisiones" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Admisiones</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Admisiones generales</a>
+      <a href="#" class="drawer-sub-item">Admisiones internacionales</a>
+      <a href="#" class="drawer-sub-item">Becas y ayudas</a>
+      <a href="#" class="drawer-sub-item">Ayudas a la enseñanza</a>
+    </div>
+  </div>
+
+  <!-- Panel: Colegios SEK -->
+  <div id="panel-colegios-sek" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Colegios SEK</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Colegios en Madrid</a>
+      <a href="#" class="drawer-sub-item">Colegios en Cataluña</a>
+      <a href="#" class="drawer-sub-item">Todos los colegios</a>
+    </div>
+  </div>
+
+  <!-- Panel: Modelo Educativo -->
+  <div id="panel-modelo" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Modelo Educativo</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Filosofía SEK</a>
+      <a href="#" class="drawer-sub-item">Aprendizaje activo</a>
+      <a href="future-learning-model.html" class="drawer-sub-item">SEK Future Learning</a>
+    </div>
+  </div>
+
+  <!-- Panel: ¿Por qué SEK? -->
+  <div id="panel-por-que" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> ¿Por qué SEK?</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Resultados académicos</a>
+      <a href="#" class="drawer-sub-item">Comunidad educativa</a>
+      <a href="#" class="drawer-sub-item">Instalaciones</a>
+    </div>
+  </div>
+
+  <!-- Panel: Actualidad -->
+  <div id="panel-actualidad" class="drawer-panel">
+    <div class="drawer-panel-header">
+      <button class="drawer-back-btn" onclick="goBack()"><span class="drawer-back-arrow">‹</span> Actualidad</button>
+      <button class="drawer-close-btn" onclick="closeDrawer()">&#10005;</button>
+    </div>
+    <div class="drawer-panel-body">
+      <a href="#" class="drawer-sub-item">Noticias</a>
+      <a href="#" class="drawer-sub-item">Agenda</a>
+      <a href="#" class="drawer-sub-item">Blog</a>
+    </div>
+  </div>
+
+</div>`;
+  document.body.appendChild(div.firstElementChild);
+}
+
 window.addEventListener('resize', applyCarousel);
 document.addEventListener('DOMContentLoaded', function() {
+  if (document.body.dataset.drawer === 'sek-schools') injectSekSchoolsDrawer();
   applyCarousel();
   syncExpandBtns();
 
@@ -210,6 +405,22 @@ document.addEventListener('DOMContentLoaded', function() {
         anchorBar.style.transform = 'translateY(0)';
       }
       lastScroll = current;
+    });
+  }
+
+  /* PAT-009 — nav institucional (Capa 1) hide on scroll down, ≥768px only */
+  var capa1 = document.querySelector('.nav-layer--red');
+  if (capa1) {
+    var pat009last = 0;
+    window.addEventListener('scroll', function() {
+      if (window.innerWidth < 768) return;
+      var cur = window.scrollY;
+      if (cur > pat009last && cur > 100) {
+        capa1.classList.add('hidden');
+      } else {
+        capa1.classList.remove('hidden');
+      }
+      pat009last = cur;
     });
   }
 });
