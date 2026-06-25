@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso 25-26 — SEK Wireframe</title>
+<link rel="stylesheet" href="../../shared/styles.css">
+<style>
+  /* Offset para topbar mobile fija */
+  body { padding-top: 52px; }
+  @media (min-width: 768px) { body { padding-top: 0; } }
+
+  /* ── SEK-CON-012 — Bloque lista con iconos ─────────────────── */
+  .con012-items {
+    list-style: none;
+    border-top: 1px solid var(--gray-200);
+  }
+  .con012-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .con012-item .icon-placeholder { margin-top: 1px; flex-shrink: 0; }
+  .con012-body {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+  .con012-body strong { color: var(--gray-800); font-weight: 700; }
+  .con012-links {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .con012-links li a {
+    font-size: 13px;
+    color: var(--gray-700);
+    text-decoration: underline;
+  }
+  .con012-links li a:hover { color: var(--gray-800); }
+
+  @media (min-width: 768px) {
+    .con012-items--grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-left: 1px solid var(--gray-200);
+    }
+    .con012-items--grid .con012-item {
+      padding: 16px;
+      border-right: 1px solid var(--gray-200);
+    }
+    .con012-links {
+      flex-direction: row;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .con012-items--grid .con012-item { padding: 20px; }
+  }
+
+  /* ── SEK-CON-013 — Bloque eventos del centro ───────────────── */
+  .con013-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .con013-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .con013-ver-todos {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+  }
+  .con013-ver-todos:hover { color: var(--gray-800); }
+
+  @media (min-width: 768px) {
+    .con013-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .con013-footer { margin-top: 24px; }
+  }
+
+  /* ── SEK-CRD-008 — Card evento ─────────────────────────────── */
+  .crd008-card {
+    width: 328px;
+    flex-shrink: 0;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 14px 14px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .crd008-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+  .crd008-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    flex-shrink: 0;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 7px 4px 6px;
+    background: var(--gray-100);
+    line-height: 1;
+  }
+  .crd008-day {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1;
+  }
+  .crd008-month {
+    display: block;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--gray-500);
+    margin-top: 3px;
+  }
+  .crd008-body { flex: 1; min-width: 0; }
+  .crd008-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1.3;
+  }
+  .crd008-meta {
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .crd008-meta span { display: block; }
+  .crd008-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border: 1px solid var(--gray-200);
+    background: var(--gray-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: "Courier New", monospace;
+    color: var(--gray-500);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .crd008-icon--sq { border-radius: var(--radius); }
+  .crd008-icon:hover { border-color: var(--gray-400); color: var(--gray-700); }
+  .crd008-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 12px;
+    border-top: 1px solid var(--gray-200);
+    min-height: 42px;
+  }
+  .crd008-footer--no-btn { justify-content: flex-end; }
+  .crd008-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--gray-800);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+  .crd008-btn:hover { background: var(--gray-700); }
+</style>
+</head>
+<body data-drawer="sek-schools">
+<div id="page-wrapper">
+
+  <!-- ════════════════════════════════════════════════
+       NAV — SEK-NAV-003 / SEK-NAV-004
+  ════════════════════════════════════════════════ -->
+  <nav id="site-nav">
+
+    <!-- Mobile topbar -->
+    <div class="nav-topbar-mobile">
+      <div class="nav-logo-mobile"></div>
+      <button class="nav-hamburger" aria-expanded="false" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Desktop · Capa 1: barra red SEK -->
+    <div class="nav-layer--red">
+      <div class="container nav-inner">
+        <div class="nav-logo-sm"></div>
+        <ul class="nav-items">
+          <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios')">
+            Colegios SEK <span class="nav-chevron">&#9660;</span>
+          </li>
+          <li class="nav-item" onclick="toggleDropdown(this,'dd-seg')">
+            SEK Education Group <span class="nav-chevron">&#9660;</span>
+          </li>
+          <li class="nav-item">Actualidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Desktop · Capa 2: nav del colegio -->
+    <div class="nav-layer--college">
+      <div class="container nav-inner">
+        <div class="nav-logo-college"></div>
+        <ul class="nav-items">
+          <li class="nav-item active" onclick="toggleDropdown(this,'dd-colegio')">
+            El Colegio <span class="nav-chevron">&#9660;</span>
+          </li>
+          <li class="nav-item" onclick="toggleDropdown(this,'dd-etapas')">
+            Etapas <span class="nav-chevron">&#9660;</span>
+          </li>
+          <li class="nav-item">Servicios</li>
+          <li class="nav-item">Vida Escolar</li>
+          <li class="nav-item">Idiomas</li>
+          <li class="nav-item nav-item--cta">Solicitar información</li>
+        </ul>
+      </div>
+      <!-- Dropdown: El Colegio -->
+      <div id="dd-colegio" class="nav-dropdown">
+        <div class="nav-dropdown-inner">
+          <div class="nav-dd-col">
+            <h4>El Colegio</h4>
+            <ul>
+              <li><a href="#">Bienvenida</a></li>
+              <li><a href="#" class="active">Curso 25-26</a></li>
+              <li><a href="#">Calendario de eventos</a></li>
+              <li><a href="#">Equipo docente</a></li>
+              <li><a href="#">Resultados</a></li>
+              <li><a href="#">D&oacute;nde estamos</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════
+       HERO — SEK-CAB-002
+  ════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg img-placeholder"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="breadcrumb"><span>Inicio</span> / El Colegio / Curso 25-26</div>
+      <div class="hero-text">
+        <h1>Curso 2025-2026</h1>
+        <div class="subtitle">Calendarios, horarios y eventos del curso escolar</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       BARRA DE ANCLAJE — SEK-CON-008
+  ════════════════════════════════════════════════ -->
+  <nav id="anchor-bar">
+    <div class="anchor-inner">
+      <a class="anchor-link anclas__item active" href="#calendario"
+         onclick="setAncla(this,'calendario'); return false;">Calendario</a>
+      <a class="anchor-link anclas__item" href="#horario"
+         onclick="setAncla(this,'horario'); return false;">Horario</a>
+      <a class="anchor-link anclas__item" href="#eventos"
+         onclick="setAncla(this,'eventos'); return false;">Eventos</a>
+      <a class="anchor-link anclas__item" href="#solicita"
+         onclick="setAncla(this,'solicita'); return false;">Solicitar informaci&oacute;n</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════
+       CALENDARIO — SEK-CON-012 con links (2 col tablet+)
+  ════════════════════════════════════════════════ -->
+  <section id="calendario" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Calendario escolar</h2>
+        <p>Fechas clave del curso 2025-2026</p>
+      </div>
+      <ul class="con012-items con012-items--grid">
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>6 sep &mdash; Inicio del curso</strong><br>Primer d&iacute;a lectivo para todos los alumnos</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>31 oct &mdash; Halloween</strong><br>Actividades tem&aacute;ticas para Early Childhood y Primaria</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>11 nov &mdash; D&iacute;a de los Colegios SEK</strong><br>Jornada de puertas abiertas en todos los centros</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>19 dic &mdash; Fin del primer trimestre</strong><br>Las clases se reanudan el 8 de enero de 2026</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>23 feb &mdash; Semana Blanca</strong><br>Actividad de esqu&iacute; y nieve para Primaria</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>19 jun &mdash; Fin del curso</strong><br>&Uacute;ltimo d&iacute;a lectivo y acto de graduaci&oacute;n</span>
+        </li>
+      </ul>
+      <ul class="con012-links">
+        <li><a href="#">Ver el calendario escolar completo</a></li>
+        <li><a href="#">Descargar en PDF</a></li>
+        <li><a href="#">A&ntilde;adir a mi calendario</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       HORARIO — SEK-CON-012 sin links (1 col siempre)
+  ════════════════════════════════════════════════ -->
+  <section id="horario" class="section section--alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Horario del centro</h2>
+        <p>Jornada escolar y servicios complementarios 2025-2026</p>
+      </div>
+      <ul class="con012-items">
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>Jornada ordinaria</strong> &mdash; Lunes a viernes &middot; 09:00 &mdash; 17:00 h</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>Madrugadores</strong> &mdash; Lunes a viernes &middot; 07:30 &mdash; 09:00 h</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>Acogida tarde</strong> &mdash; Lunes a viernes &middot; 17:00 &mdash; 18:30 h</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>Actividades extraescolares</strong> &mdash; Lunes a jueves &middot; 17:30 &mdash; 19:00 h</span>
+        </li>
+        <li class="con012-item">
+          <span class="icon-placeholder"></span>
+          <span class="con012-body"><strong>Jornada reducida</strong> &mdash; Viernes (julio y agosto) &middot; 09:00 &mdash; 14:00 h</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       EVENTOS — SEK-CON-013 con SEK-CRD-008 (máx. 2)
+  ════════════════════════════════════════════════ -->
+  <section id="eventos" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Pr&oacute;ximos eventos</h2>
+        <p>Actividades y citas destacadas del colegio</p>
+      </div>
+      <div class="con013-cards">
+        <!-- SEK-CRD-008 · Variante A: con inscripción -->
+        <div class="crd008-card">
+          <div class="crd008-main">
+            <div class="crd008-badge">
+              <span class="crd008-day">15</span>
+              <span class="crd008-month">OCT</span>
+            </div>
+            <div class="crd008-body">
+              <div class="crd008-title">Jornada de puertas abiertas</div>
+              <div class="crd008-meta">
+                <span>Todas las instalaciones del centro</span>
+                <span>10:00 &mdash; 14:00 h</span>
+              </div>
+            </div>
+            <div class="crd008-icon crd008-icon--sq"></div>
+          </div>
+          <div class="crd008-footer">
+            <button class="crd008-btn">Inscribirme</button>
+            <a class="crd008-icon" href="#">i</a>
+          </div>
+        </div>
+        <!-- SEK-CRD-008 · Variante B: sin inscripción -->
+        <div class="crd008-card">
+          <div class="crd008-main">
+            <div class="crd008-badge">
+              <span class="crd008-day">23</span>
+              <span class="crd008-month">FEB</span>
+            </div>
+            <div class="crd008-body">
+              <div class="crd008-title">Semana Blanca 2026</div>
+              <div class="crd008-meta">
+                <span>Sierra Nevada</span>
+                <span>Salida 08:00 h &middot; regreso viernes 27</span>
+              </div>
+            </div>
+            <div class="crd008-icon crd008-icon--sq"></div>
+          </div>
+          <div class="crd008-footer crd008-footer--no-btn">
+            <a class="crd008-icon" href="#">i</a>
+          </div>
+        </div>
+      </div>
+      <div class="con013-footer">
+        <button class="con013-ver-todos">Ver todos los eventos</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       SOLICITA INFORMACIÓN — SEK-CON-019
+  ════════════════════════════════════════════════ -->
+  <section id="solicita" class="section section--alt">
+    <div class="container">
+      <div class="con019-inner">
+        <h2>Solicita informaci&oacute;n</h2>
+        <p>Nuestro equipo de admisiones te atender&aacute; y resolver&aacute; todas tus dudas sobre el centro y el proceso de matriculaci&oacute;n.</p>
+        <a href="#" class="cta-btn con019-btn">Contactar con admisiones</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       FOOTER — SEK-NAV-002
+  ════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"></div>
+        </div>
+        <div class="footer-col">
+          <h4>El Colegio</h4>
+          <ul>
+            <li><a href="#">Bienvenida</a></li>
+            <li><a href="#">Curso 25-26</a></li>
+            <li><a href="#">Calendario de eventos</a></li>
+            <li><a href="#">Equipo docente</a></li>
+            <li><a href="#">D&oacute;nde estamos</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Etapas</h4>
+          <ul>
+            <li><a href="#">Early Childhood</a></li>
+            <li><a href="#">Primaria</a></li>
+            <li><a href="#">Secundaria</a></li>
+            <li><a href="#">Bachillerato</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <a href="#">Pol&iacute;tica de privacidad</a>
+          <a href="#">Aviso legal</a>
+          <a href="#">Pol&iacute;tica de cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrapper -->
+<script src="../../shared/wireframe.js"></script>
+</body>
+</html>
