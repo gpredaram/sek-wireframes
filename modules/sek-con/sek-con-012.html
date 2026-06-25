@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-012 | Bloque lista con iconos</title>
+<link rel="stylesheet" href="../../shared/styles.css">
+<style>
+  body { padding-top: 40px; }
+
+  /* ── Viewport chrome ───────────────────────────────────────── */
+  .wf-toolbar {
+    position: fixed; top: 0; left: 0; right: 0; height: 40px;
+    background: var(--gray-800); color: var(--gray-400);
+    display: flex; align-items: center; padding: 0 20px; gap: 16px;
+    z-index: 9998; font-family: "Courier New", monospace; font-size: 11px;
+  }
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label {
+    font-family: "Courier New", monospace; font-size: 11px;
+    color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em;
+    text-align: center; margin-bottom: 16px;
+  }
+  .vp-label span { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame {
+    background: var(--white); border: 1px solid var(--gray-300);
+    border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0;
+  }
+  .vp-mobile  { width: 375px; }
+  .vp-tablet  { width: 768px; }
+  .vp-desktop { width: 1200px; }
+  .mod-ex-label {
+    font-family: "Courier New", monospace; font-size: 9px; color: var(--gray-400);
+    text-transform: uppercase; letter-spacing: .08em;
+    text-align: center; padding: 8px 0; background: var(--gray-100);
+  }
+  .mod-pad { padding: 28px 20px; }
+  .vp-tablet .mod-pad  { padding: 36px 32px; }
+  .vp-desktop .mod-pad { padding: 44px 56px; }
+
+  /* Heading */
+  .mod-h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); line-height: 1.2; }
+  .mod-h3 { font-size: 14px; font-weight: 500; color: var(--gray-500); margin-top: 4px; margin-bottom: 20px; line-height: 1.4; }
+  .vp-tablet .mod-h2,
+  .vp-desktop .mod-h2  { font-size: 24px; }
+  .vp-tablet .mod-h3,
+  .vp-desktop .mod-h3  { font-size: 15px; margin-bottom: 24px; }
+
+  /* ── SEK-CON-012 — Bloque lista con iconos ─────────────────── */
+
+  /* Lista base (1 columna siempre) */
+  .con012-items {
+    list-style: none;
+    border-top: 1px solid var(--gray-200);
+  }
+  .con012-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .con012-item .icon-placeholder { margin-top: 1px; }
+  .con012-body {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+  .con012-body strong { color: var(--gray-800); font-weight: 700; }
+
+  /* Variante grid: 2 columnas en tablet/desktop (cuando hay links) */
+  .vp-tablet .con012-items--grid,
+  .vp-desktop .con012-items--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-left: 1px solid var(--gray-200);
+  }
+  .vp-tablet .con012-items--grid .con012-item,
+  .vp-desktop .con012-items--grid .con012-item {
+    padding: 16px;
+    border-right: 1px solid var(--gray-200);
+  }
+  .vp-desktop .con012-items--grid .con012-item { padding: 20px; }
+
+  /* Links editoriales */
+  .con012-links {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .con012-links li a {
+    font-size: 13px;
+    color: var(--gray-700);
+    text-decoration: underline;
+  }
+  .con012-links li a:hover { color: var(--gray-800); }
+  .vp-tablet .con012-links,
+  .vp-desktop .con012-links {
+    flex-direction: row;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-012</strong>
+  <span>Bloque lista con iconos &middot; v1.0 &middot; variantes con / sin links</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANTE CON LINKS (lista en 2 columnas en tablet/desktop)
+═══════════════════════════════════════════════════════════ -->
+
+<!-- MOBILE 375px · con links -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span>· 375px · con links</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile">
+      <div class="mod-ex-label">1 columna siempre en mobile</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <ul class="con012-items con012-items--grid">
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 1</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 2</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 3</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 4</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+        </ul>
+        <ul class="con012-links">
+          <li><a href="#">Enlace editorial 1</a></li>
+          <li><a href="#">Enlace editorial 2</a></li>
+          <li><a href="#">Enlace editorial 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px · con links -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span>· 768px · con links</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet">
+      <div class="mod-ex-label">Con links: lista en 2 columnas · links en fila horizontal</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <ul class="con012-items con012-items--grid">
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 1</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 2</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 3</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 4</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 5</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 6</strong> &mdash; Descripción del ítem con texto explicativo.</span>
+          </li>
+        </ul>
+        <ul class="con012-links">
+          <li><a href="#">Enlace editorial 1</a></li>
+          <li><a href="#">Enlace editorial 2</a></li>
+          <li><a href="#">Enlace editorial 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · con links -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span>· 1200px · con links</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop">
+      <div class="mod-ex-label">Con links: lista en 2 columnas · padding ampliado</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <ul class="con012-items con012-items--grid">
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 1</strong> &mdash; Descripción del ítem con texto explicativo más extenso para rellenar el espacio.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 2</strong> &mdash; Descripción del ítem con texto explicativo más extenso para rellenar el espacio.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 3</strong> &mdash; Descripción del ítem con texto explicativo más extenso para rellenar el espacio.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 4</strong> &mdash; Descripción del ítem con texto explicativo más extenso para rellenar el espacio.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 5</strong> &mdash; Descripción del ítem con texto explicativo más extenso para rellenar el espacio.</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Elemento 6</strong> &mdash; Descripción del ítem con texto explicativo más extenso para rellenar el espacio.</span>
+          </li>
+        </ul>
+        <ul class="con012-links">
+          <li><a href="#">Enlace editorial 1</a></li>
+          <li><a href="#">Enlace editorial 2</a></li>
+          <li><a href="#">Enlace editorial 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANTE SIN LINKS (lista en 1 columna siempre)
+═══════════════════════════════════════════════════════════ -->
+
+<!-- TABLET 768px · sin links -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span>· 768px · sin links</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet">
+      <div class="mod-ex-label">Sin links: lista siempre en 1 columna (sin modificador --grid)</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <ul class="con012-items">
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem A</strong> &mdash; Días / Rango horario o descripción del ítem</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem B</strong> &mdash; Días / Rango horario o descripción del ítem</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem C</strong> &mdash; Días / Rango horario o descripción del ítem</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem D</strong> &mdash; Días / Rango horario o descripción del ítem</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · sin links -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span>· 1200px · sin links</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop">
+      <div class="mod-ex-label">Sin links: lista siempre en 1 columna · padding ampliado</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <ul class="con012-items">
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem A</strong> &mdash; Descripción detallada del ítem o rango horario</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem B</strong> &mdash; Descripción detallada del ítem o rango horario</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem C</strong> &mdash; Descripción detallada del ítem o rango horario</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem D</strong> &mdash; Descripción detallada del ítem o rango horario</span>
+          </li>
+          <li class="con012-item">
+            <span class="icon-placeholder"></span>
+            <span class="con012-body"><strong>Ítem E</strong> &mdash; Descripción detallada del ítem o rango horario</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../shared/wireframe.js"></script>
+</body>
+</html>

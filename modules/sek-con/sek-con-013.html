@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-013 | Bloque eventos del centro</title>
+<link rel="stylesheet" href="../../shared/styles.css">
+<style>
+  body { padding-top: 40px; }
+
+  /* ── Viewport chrome ───────────────────────────────────────── */
+  .wf-toolbar {
+    position: fixed; top: 0; left: 0; right: 0; height: 40px;
+    background: var(--gray-800); color: var(--gray-400);
+    display: flex; align-items: center; padding: 0 20px; gap: 16px;
+    z-index: 9998; font-family: "Courier New", monospace; font-size: 11px;
+  }
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label {
+    font-family: "Courier New", monospace; font-size: 11px;
+    color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em;
+    text-align: center; margin-bottom: 16px;
+  }
+  .vp-label span { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame {
+    background: var(--white); border: 1px solid var(--gray-300);
+    border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0;
+  }
+  .vp-mobile  { width: 375px; }
+  .vp-tablet  { width: 768px; }
+  .vp-desktop { width: 1200px; }
+  .mod-ex-label {
+    font-family: "Courier New", monospace; font-size: 9px; color: var(--gray-400);
+    text-transform: uppercase; letter-spacing: .08em;
+    text-align: center; padding: 8px 0; background: var(--gray-100);
+  }
+  .mod-pad { padding: 28px 20px; }
+  .vp-tablet .mod-pad  { padding: 36px 32px; }
+  .vp-desktop .mod-pad { padding: 44px 56px; }
+
+  /* Heading */
+  .mod-h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); line-height: 1.2; }
+  .mod-h3 { font-size: 14px; font-weight: 500; color: var(--gray-500); margin-top: 4px; margin-bottom: 20px; line-height: 1.4; }
+  .vp-tablet .mod-h2,
+  .vp-desktop .mod-h2  { font-size: 24px; }
+  .vp-tablet .mod-h3,
+  .vp-desktop .mod-h3  { font-size: 15px; margin-bottom: 24px; }
+
+  /* ── SEK-CON-013 — Bloque eventos del centro ───────────────── */
+  .con013-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .vp-tablet .con013-cards,
+  .vp-desktop .con013-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .con013-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .vp-tablet .con013-footer,
+  .vp-desktop .con013-footer { margin-top: 24px; }
+  .con013-ver-todos {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+  }
+  .con013-ver-todos:hover { color: var(--gray-800); }
+
+  /* ── SEK-CRD-008 embebido ──────────────────────────────────── */
+  .crd008-card {
+    width: 328px;
+    flex-shrink: 0;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 14px 14px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .crd008-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+  .crd008-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    flex-shrink: 0;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 7px 4px 6px;
+    background: var(--gray-100);
+    line-height: 1;
+  }
+  .crd008-day {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1;
+  }
+  .crd008-month {
+    display: block;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--gray-500);
+    margin-top: 3px;
+  }
+  .crd008-body { flex: 1; min-width: 0; }
+  .crd008-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1.3;
+  }
+  .crd008-meta {
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .crd008-meta span { display: block; }
+  .crd008-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border: 1px solid var(--gray-200);
+    background: var(--gray-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: "Courier New", monospace;
+    color: var(--gray-500);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .crd008-icon--sq { border-radius: var(--radius); }
+  .crd008-icon:hover { border-color: var(--gray-400); color: var(--gray-700); }
+  .crd008-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 12px;
+    border-top: 1px solid var(--gray-200);
+    min-height: 42px;
+  }
+  .crd008-footer--no-btn { justify-content: flex-end; }
+  .crd008-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--gray-800);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+  .crd008-btn:hover { background: var(--gray-700); }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-013</strong>
+  <span>Bloque eventos del centro &middot; v1.0 &middot; usa SEK-CRD-008</span>
+</div>
+
+<!-- ══ MOBILE 375px ══════════════════════════════════════════ -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span>· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile">
+      <div class="mod-ex-label">1 columna · máx. 2 cards visibles · link "Ver todos"</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <div class="con013-cards">
+          <div class="crd008-card">
+            <div class="crd008-main">
+              <div class="crd008-badge">
+                <span class="crd008-day">15</span>
+                <span class="crd008-month">OCT</span>
+              </div>
+              <div class="crd008-body">
+                <div class="crd008-title">Título del evento</div>
+                <div class="crd008-meta">
+                  <span>Lugar o espacio del evento</span>
+                  <span>00:00 &mdash; 00:00 h</span>
+                </div>
+              </div>
+              <div class="crd008-icon crd008-icon--sq"></div>
+            </div>
+            <div class="crd008-footer">
+              <button class="crd008-btn">Inscribirme</button>
+              <a class="crd008-icon" href="#">i</a>
+            </div>
+          </div>
+          <div class="crd008-card">
+            <div class="crd008-main">
+              <div class="crd008-badge">
+                <span class="crd008-day">23</span>
+                <span class="crd008-month">FEB</span>
+              </div>
+              <div class="crd008-body">
+                <div class="crd008-title">Título del evento</div>
+                <div class="crd008-meta">
+                  <span>Lugar o espacio del evento</span>
+                  <span>Salida 00:00 h</span>
+                </div>
+              </div>
+              <div class="crd008-icon crd008-icon--sq"></div>
+            </div>
+            <div class="crd008-footer crd008-footer--no-btn">
+              <a class="crd008-icon" href="#">i</a>
+            </div>
+          </div>
+        </div>
+        <div class="con013-footer">
+          <button class="con013-ver-todos">Ver todos los eventos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TABLET 768px ══════════════════════════════════════════ -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span>· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet">
+      <div class="mod-ex-label">Cards en fila con flex-wrap · ancho fijo 328px · no se estiran</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <div class="con013-cards">
+          <div class="crd008-card">
+            <div class="crd008-main">
+              <div class="crd008-badge">
+                <span class="crd008-day">15</span>
+                <span class="crd008-month">OCT</span>
+              </div>
+              <div class="crd008-body">
+                <div class="crd008-title">Título del evento</div>
+                <div class="crd008-meta">
+                  <span>Lugar o espacio del evento</span>
+                  <span>00:00 &mdash; 00:00 h</span>
+                </div>
+              </div>
+              <div class="crd008-icon crd008-icon--sq"></div>
+            </div>
+            <div class="crd008-footer">
+              <button class="crd008-btn">Inscribirme</button>
+              <a class="crd008-icon" href="#">i</a>
+            </div>
+          </div>
+          <div class="crd008-card">
+            <div class="crd008-main">
+              <div class="crd008-badge">
+                <span class="crd008-day">23</span>
+                <span class="crd008-month">FEB</span>
+              </div>
+              <div class="crd008-body">
+                <div class="crd008-title">Título del evento</div>
+                <div class="crd008-meta">
+                  <span>Lugar o espacio del evento</span>
+                  <span>Salida 00:00 h</span>
+                </div>
+              </div>
+              <div class="crd008-icon crd008-icon--sq"></div>
+            </div>
+            <div class="crd008-footer crd008-footer--no-btn">
+              <a class="crd008-icon" href="#">i</a>
+            </div>
+          </div>
+        </div>
+        <div class="con013-footer">
+          <button class="con013-ver-todos">Ver todos los eventos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DESKTOP 1200px ════════════════════════════════════════ -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span>· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop">
+      <div class="mod-ex-label">Cards en fila · padding ampliado · link "Ver todos" condicional</div>
+      <div class="mod-pad">
+        <h2 class="mod-h2">Título de sección</h2>
+        <h3 class="mod-h3">Subtítulo opcional</h3>
+        <div class="con013-cards">
+          <div class="crd008-card">
+            <div class="crd008-main">
+              <div class="crd008-badge">
+                <span class="crd008-day">15</span>
+                <span class="crd008-month">OCT</span>
+              </div>
+              <div class="crd008-body">
+                <div class="crd008-title">Título del evento</div>
+                <div class="crd008-meta">
+                  <span>Lugar o espacio del evento</span>
+                  <span>00:00 &mdash; 00:00 h</span>
+                </div>
+              </div>
+              <div class="crd008-icon crd008-icon--sq"></div>
+            </div>
+            <div class="crd008-footer">
+              <button class="crd008-btn">Inscribirme</button>
+              <a class="crd008-icon" href="#">i</a>
+            </div>
+          </div>
+          <div class="crd008-card">
+            <div class="crd008-main">
+              <div class="crd008-badge">
+                <span class="crd008-day">23</span>
+                <span class="crd008-month">FEB</span>
+              </div>
+              <div class="crd008-body">
+                <div class="crd008-title">Título del evento</div>
+                <div class="crd008-meta">
+                  <span>Lugar o espacio del evento</span>
+                  <span>Salida 00:00 h</span>
+                </div>
+              </div>
+              <div class="crd008-icon crd008-icon--sq"></div>
+            </div>
+            <div class="crd008-footer crd008-footer--no-btn">
+              <a class="crd008-icon" href="#">i</a>
+            </div>
+          </div>
+        </div>
+        <div class="con013-footer">
+          <button class="con013-ver-todos">Ver todos los eventos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../shared/wireframe.js"></script>
+</body>
+</html>
