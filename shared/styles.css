@@ -1171,3 +1171,48 @@ body {
   .con020-single { grid-template-columns: 1fr 1fr; align-items: center; }
   .con020-single-img { min-height: 280px; }
 }
+
+/* CON-021 — Acordeón con cabecera ilustrada (v1.3) */
+.con021-list { margin-top: 8px; }
+.con021-item { border-bottom: 1px solid var(--gray-200); border-left: 4px solid transparent; transition: border-left-color 0.15s; overflow: hidden; }
+.con021-item:first-child { border-top: 1px solid var(--gray-200); }
+.con021-item.open { border-left-color: var(--gray-800); }
+.con021-head { display: flex; align-items: center; gap: 14px; padding: 20px 16px 20px 12px; cursor: pointer; user-select: none; }
+.con021-head:hover { background: var(--gray-100); }
+.con021-icon { width: 32px; height: 32px; background: var(--gray-300); border-radius: 50%; flex-shrink: 0; }
+.con021-head-text { flex: 1; min-width: 0; }
+.con021-head-name { font-size: 15px; font-weight: 700; color: var(--gray-800); line-height: 1.2; margin-bottom: 4px; }
+.con021-head-phrase { font-size: 13px; color: var(--gray-500); line-height: 1.4; }
+.con021-chevron { color: var(--gray-500); transition: transform 0.2s ease; flex-shrink: 0; font-size: 11px; }
+.con021-item.open .con021-chevron { transform: rotate(180deg); }
+.con021-body { display: none; }
+.con021-item.open .con021-body { display: block; }
+.con021-subblock { padding: 22px 20px 22px 58px; border-bottom: 1px solid var(--gray-200); }
+.con021-subblock:last-child { border-bottom: none; }
+.con021-subblock:nth-child(odd)  { background: var(--white); }
+.con021-subblock:nth-child(even) { background: var(--gray-100); }
+.con021-subblock h4 { font-size: 12px; font-weight: 700; color: var(--gray-700); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.con021-subblock p { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 640px; }
+.con021-media-ph { margin-top: 14px; width: 100%; max-width: 640px; aspect-ratio: 16/9; background: var(--gray-200); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 11px; color: var(--gray-400); }
+.con021-icons-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 14px; max-width: 640px; }
+.con021-icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.con021-icon-ph { width: 32px; height: 32px; background: var(--gray-300); border-radius: 50%; }
+.con021-icon-label { font-size: 12px; color: var(--gray-600); line-height: 1.3; }
+
+@media (min-width: 768px) {
+  .con021-icon { width: 44px; height: 44px; }
+  .con021-head-name { font-size: 17px; }
+  .con021-subblock { padding: 24px 24px 24px 70px; }
+  .con021-icons-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1200px) {
+  .con021-icon { width: 60px; height: 60px; }
+  .con021-head { gap: 20px; padding: 24px 24px 24px 16px; }
+  .con021-head-name { font-size: 19px; margin-bottom: 6px; }
+  .con021-head-phrase { font-size: 14px; }
+  .con021-subblock { padding: 32px 32px 32px 96px; }
+  .con021-icons-grid { grid-template-columns: repeat(6, 1fr); }
+  .con021-icon-item { gap: 8px; }
+  .con021-icon-ph { width: 40px; height: 40px; }
+}

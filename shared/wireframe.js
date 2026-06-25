@@ -463,3 +463,12 @@ function toggleAccordion(btn) {
   document.querySelectorAll('.accordion__item').forEach(function(i) { i.classList.remove('open'); });
   if (!isOpen) item.classList.add('open');
 }
+
+/* ── ACORDEÓN CON CABECERA ILUSTRADA — PAT-001 exclusivo (SEK-CON-021 v1.3) */
+function toggleCon021(head) {
+  var item   = head.closest('.con021-item');
+  var list   = item.closest('.con021-list');
+  var isOpen = item.classList.contains('open');
+  list.querySelectorAll('.con021-item').forEach(function(i) { i.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
