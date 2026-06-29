@@ -110,8 +110,58 @@ function closeVideoModal() {
   document.getElementById('video-modal').style.display = 'none';
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeVideoModal(); closeAllDropdowns(); closeDrawer(); }
+  if (e.key === 'Escape') { closeVideoModal(); closeBioModal(); closeAllDropdowns(); closeDrawer(); }
 });
+
+/* ── PAT-004 — Bio modal ─────────────────────────────────────── */
+function openBioModal(cardEl) {
+  var overlay = document.getElementById('bio-modal-overlay');
+  if (!overlay) return;
+  overlay.querySelector('.bio-modal-area').textContent  = cardEl.dataset.area  || '';
+  overlay.querySelector('.bio-modal-name').textContent  = cardEl.dataset.name  || '';
+  overlay.querySelector('.bio-modal-cargo').textContent = cardEl.dataset.cargo || '';
+  overlay.querySelector('.bio-modal-text').textContent  = cardEl.dataset.bio   || '';
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  var closeBtn = overlay.querySelector('.bio-modal-close');
+  if (closeBtn) setTimeout(function() { closeBtn.focus(); }, 50);
+}
+
+function closeBioModal() {
+  var overlay = document.getElementById('bio-modal-overlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* Focus trap for bio modal */
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Tab') return;
+  var overlay = document.getElementById('bio-modal-overlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  var inner = overlay.querySelector('.bio-modal-inner');
+  if (!inner) return;
+  var focusable = Array.from(inner.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+  if (focusable.length < 2) return;
+  var first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+  else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+});
+
+/* ── SEG DRAWER — 2-level nav (SEK Education Group pages) ───── */
+function segDrawerShowL2(panelId) {
+  var l1 = document.getElementById('seg-drawer-l1');
+  if (l1) l1.classList.add('hidden');
+  document.querySelectorAll('.seg-drawer-l2').forEach(function(p) { p.classList.remove('active'); });
+  var panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+
+function segDrawerBack() {
+  var l1 = document.getElementById('seg-drawer-l1');
+  if (l1) l1.classList.remove('hidden');
+  document.querySelectorAll('.seg-drawer-l2').forEach(function(p) { p.classList.remove('active'); });
+}
 
 /* ── NAVIGATION — Desktop dropdowns ────────────────────────── */
 function toggleDropdown(item, ddId) {

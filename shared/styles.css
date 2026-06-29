@@ -233,7 +233,9 @@ body {
 .con003-director .carta-body p + p { margin-top: 16px; }
 
 .ver-mas-carta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 10px;
   font-size: 13px;
   font-weight: 600;
@@ -242,8 +244,8 @@ body {
   background: none;
   border: none;
   padding: 0;
-  text-decoration: underline;
 }
+.ver-mas-chevron { font-size: 14px; line-height: 1; }
 
 /* ═══════════════════════════════════════════════════════════════
    3. RECONOCIMIENTOS — SEK-CON-006  (mobile-first: 1 col)
@@ -1011,8 +1013,7 @@ body {
    SEK-CON-010 — Bloque Modelo Educativo  (mobile-first)
 ══════════════════════════════════════════════════════════════ */
 .section--alt { background: var(--gray-100); }
-.cta-btn { display: inline-block; margin-top: 24px; padding: 12px 24px; background: var(--gray-800); color: var(--white); font-size: 16
-px; font-weight: 600; text-decoration: none; border-radius: var(--radius); cursor: pointer; border: none; font-family: inherit; }
+.cta-btn { display: inline-block; margin-top: 24px; padding: 12px 24px; background: var(--gray-800); color: var(--white); font-size: 16px; font-weight: 600; text-decoration: none; border-radius: var(--radius); cursor: pointer; border: none; font-family: inherit; }
 .cta-btn:hover { background: var(--gray-700); }
 .con010-bullets { list-style: disc; padding-left: 20px; margin: 12px 0; font-size: 14px; color: var(--gray-600); line-height: 1.75; }
 .con010-bullets li + li { margin-top: 4px; }
@@ -1045,6 +1046,158 @@ px; font-weight: 600; text-decoration: none; border-radius: var(--radius); curso
   .con011-grid { grid-template-columns: 1fr 1fr; }
   .con011-img { height: 260px; }
   .acord-excl-items { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SEG DRAWER — 2-level mobile nav  (SEK Education Group)
+══════════════════════════════════════════════════════════════ */
+.nav-drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 52px;
+  border-bottom: 1px solid var(--gray-200); flex-shrink: 0;
+}
+.drawer-logo { width: 80px; height: 22px; background: var(--gray-300); border-radius: 2px; }
+.drawer-close { background: none; border: none; font-size: 20px; color: var(--gray-600); cursor: pointer; padding: 4px; line-height: 1; }
+.seg-drawer-content { position: relative; overflow: hidden; height: calc(100% - 52px); }
+#seg-drawer-l1 { position: absolute; inset: 0; overflow-y: auto; transition: transform .3s ease; }
+#seg-drawer-l1.hidden { transform: translateX(-100%); }
+.seg-drawer-item {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 16px 20px;
+  border: none; border-bottom: 1px solid var(--gray-200);
+  background: none; font-size: 15px; font-weight: 600;
+  color: var(--gray-800); text-align: left; cursor: pointer;
+  font-family: inherit; text-decoration: none;
+}
+.seg-drawer-item:hover { background: var(--gray-100); }
+.seg-drawer-item-arrow { font-size: 16px; color: var(--gray-400); }
+.seg-drawer-l2 {
+  position: absolute; inset: 0; overflow-y: auto;
+  background: var(--white);
+  transform: translateX(100%); transition: transform .3s ease;
+}
+.seg-drawer-l2.active { transform: translateX(0); }
+.seg-drawer-back {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 14px 20px;
+  border: none; border-bottom: 1px solid var(--gray-200);
+  background: none; font-size: 15px; font-weight: 600;
+  color: var(--gray-800); cursor: pointer; font-family: inherit;
+}
+.seg-drawer-back-arrow { font-size: 18px; color: var(--gray-500); display: inline-block; transform: rotate(180deg); }
+.seg-drawer-subitem {
+  display: block; padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 15px; color: var(--gray-700); text-decoration: none;
+}
+.seg-drawer-subitem:hover { background: var(--gray-100); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CRD-007 VARIANTE PERSONA — Cards IAB  (mobile-first)
+══════════════════════════════════════════════════════════════ */
+.iab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.card-person {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-align: left;
+  font-family: inherit;
+}
+.card-person:hover { border-color: var(--gray-500); }
+.card-person__img { width: 100%; aspect-ratio: 4/3; overflow: hidden; flex-shrink: 0; }
+.card-person__body { padding: 10px 12px 14px; }
+.card-person__area {
+  font-size: 9px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--gray-500); margin-bottom: 5px;
+}
+.card-person__name { font-size: 13px; font-weight: 700; color: var(--gray-800); line-height: 1.25; margin-bottom: 4px; }
+.card-person__cargo { font-size: 11px; color: var(--gray-500); line-height: 1.4; }
+.card-person--more { display: none; }
+.iab-load-more-wrap { text-align: center; padding-top: 24px; grid-column: 1 / -1; }
+
+/* PAT-004 — Bio modal */
+.bio-modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.65); z-index: 3000;
+  align-items: flex-start; justify-content: center;
+  overflow-y: auto; padding: 20px 16px;
+}
+.bio-modal-overlay.open { display: flex; }
+.bio-modal-inner {
+  position: relative;
+  background: var(--white);
+  width: min(680px, 100%);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: auto;
+  flex-shrink: 0;
+}
+.bio-modal-close {
+  position: absolute; top: 10px; right: 10px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,.9); border: none;
+  color: var(--gray-700); font-size: 14px;
+  cursor: pointer; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.bio-modal-close:hover { background: var(--gray-200); }
+.bio-modal-img { width: 100%; aspect-ratio: 4/3; display: block; }
+.bio-modal-body { padding: 20px 24px 24px; }
+.bio-modal-area { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-500); margin-bottom: 6px; }
+.bio-modal-name { font-size: 20px; font-weight: 700; color: var(--gray-800); line-height: 1.15; margin-bottom: 4px; }
+.bio-modal-cargo { font-size: 13px; color: var(--gray-500); line-height: 1.4; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); }
+.bio-modal-text { font-size: 14px; color: var(--gray-600); line-height: 1.75; }
+.bio-modal-text p + p { margin-top: 12px; }
+
+/* Junior Advisory */
+.junior-list { margin-top: 16px; display: flex; flex-direction: column; gap: 28px; }
+.junior-college-name {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--gray-500); margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.junior-students { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.junior-students li { font-size: 14px; color: var(--gray-700); }
+
+@media (min-width: 768px) {
+  /* IAB grid: 3 columns */
+  .iab-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card-person--more { display: block; }
+  .iab-load-more-wrap { display: none; }
+  .card-person__area { font-size: 10px; }
+  .card-person__name { font-size: 14px; }
+
+  /* Bio modal: image left, text right */
+  .bio-modal-inner { display: grid; grid-template-columns: 200px 1fr; }
+  .bio-modal-img { aspect-ratio: unset; height: 100%; min-height: 260px; object-fit: cover; }
+  .bio-modal-close { top: 10px; right: 10px; }
+
+  /* Junior list: 2 columns */
+  .junior-list { display: grid; grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1200px) {
+  /* IAB grid: 4 columns */
+  .iab-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+  /* Bio modal: wider image */
+  .bio-modal-inner { grid-template-columns: 240px 1fr; }
+  .bio-modal-body { padding: 28px 32px 32px; }
+  .bio-modal-name { font-size: 22px; }
+
+  /* Junior list: 3 columns */
+  .junior-list { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
