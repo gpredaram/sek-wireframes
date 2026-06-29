@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEK International Sports Academy — SEK Wireframe</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+</head>
+<body data-drawer="sek-schools">
+
+<div id="page-wrapper">
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVEGACIÓN GLOBAL
+  ══════════════════════════════════════════════════════════ -->
+  <nav id="site-nav">
+
+    <div class="nav-layer nav-layer--red">
+      <div class="container">
+        <div class="nav-inner">
+          <div class="nav-logo-sm"></div>
+          <ul class="nav-items">
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios-sek')">Colegios SEK <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-modelo')">Modelo Educativo <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-programas')">Programas IB <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-por-que-sek')">¿Por qué SEK? <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-red')">Admisiones <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-actualidad')">Actualidad <span class="nav-chevron">▾</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-layer nav-layer--college">
+      <div class="container">
+        <div class="nav-inner">
+          <div class="nav-logo-college"></div>
+          <ul class="nav-items">
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegio')">El Colegio <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-etapas')">Etapas <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-instalaciones')">Instalaciones <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-servicios')">Servicios <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-vida')">Vida Escolar <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-idiomas')">Idiomas e Internacional <span class="nav-chevron">▾</span></li>
+            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-col')">Admisiones <span class="nav-chevron">▾</span></li>
+            <li class="nav-item nav-item--cta" onclick="toggleDropdown(this,'dd-solicitar-inf')">Solicitar INF <span class="nav-chevron">▾</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dropdowns capa 1 -->
+    <div class="nav-dropdown" id="dd-colegios-sek"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#">Colegios en Madrid</a></li>
+      <li><a href="#">Colegios en Cataluña</a></li>
+      <li><a href="#">Todos los colegios</a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-modelo"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#">Filosofía SEK</a></li>
+      <li><a href="#">Aprendizaje activo</a></li>
+      <li><a href="#">SEK Future Learning</a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-programas"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="bachillerato-internacional.html"><span class="nav-dd-link-title">Programas IB</span><span class="nav-dd-link-desc">PEP · PAI · PD · POP</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Bachillerato Online</span><span class="nav-dd-link-desc">Diploma IB a distancia</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-por-que-sek"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#"><span class="nav-dd-link-title">Resultados académicos</span><span class="nav-dd-link-desc">Logros y calificaciones</span></a></li>
+      <li><a href="sek-international-sport-academy.html"><span class="nav-dd-link-title">SEK International Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-admisiones-red"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#">Proceso de admisión</a></li>
+      <li><a href="#">Documentación</a></li>
+      <li><a href="#">Contactar</a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-actualidad"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#">Noticias</a></li>
+      <li><a href="#">Eventos</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul></div></div></div>
+
+    <!-- Dropdowns capa 2 -->
+    <div class="nav-dropdown" id="dd-colegio"><div class="nav-dropdown-inner">
+      <div class="nav-dd-col"><ul>
+        <li><a href="bienvenida.html"><span class="nav-dd-link-title">Bienvenida</span><span class="nav-dd-link-desc">Comienza el curso escolar</span></a></li>
+        <li><a href="#"><span class="nav-dd-link-title">Curso 25-26</span><span class="nav-dd-link-desc">Calendario, noticias y actividades</span></a></li>
+        <li><a href="#"><span class="nav-dd-link-title">Equipo de liderazgo</span><span class="nav-dd-link-desc">Conoce a nuestro equipo</span></a></li>
+        <li><a href="#"><span class="nav-dd-link-title">Resultados</span><span class="nav-dd-link-desc">Datos académicos</span></a></li>
+        <li><a href="donde-estamos.html"><span class="nav-dd-link-title">Dónde estamos</span><span class="nav-dd-link-desc">Contacto con el centro</span></a></li>
+      </ul></div>
+      <div class="nav-dd-divider"></div>
+      <div class="nav-dd-extra">
+        <div class="nav-dd-event">
+          <div class="nav-dd-event-label">Evento destacado</div>
+          <div class="nav-dd-event-title">Jornada de puertas abiertas · Enero 2026</div>
+        </div>
+        <div class="nav-dd-stat">
+          <span class="nav-dd-stat-num">+52</span>
+          <span class="nav-dd-stat-text">años formando a las mejores generaciones</span>
+        </div>
+      </div>
+    </div></div>
+    <div class="nav-dropdown" id="dd-etapas"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#"><span class="nav-dd-link-title">Early Childhood</span><span class="nav-dd-link-desc">4 meses a 6 años</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Primaria</span><span class="nav-dd-link-desc">6 a 12 años</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Secundaria</span><span class="nav-dd-link-desc">12 a 16 años</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Bachillerato</span><span class="nav-dd-link-desc">16 a 18 años</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-instalaciones"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#"><span class="nav-dd-link-title">Espacios de aprendizaje</span><span class="nav-dd-link-desc">Aulas educativas únicas</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Espacios deportivos</span><span class="nav-dd-link-desc">Aprendizaje en movimiento</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Tour virtual</span><span class="nav-dd-link-desc">Visita desde casa</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-servicios"><div class="nav-dropdown-inner">
+      <div class="nav-dd-col">
+        <h4>Servicios incluidos</h4>
+        <ul>
+          <li><a href="#">Nutrición</a></li>
+          <li><a href="#">Servicio Médico</a></li>
+          <li><a href="#">Departamento Psicológico</a></li>
+          <li><a href="#">Actividades de enriquecimiento</a></li>
+          <li><a href="#">Aulas para familias</a></li>
+        </ul>
+      </div>
+      <div class="nav-dd-divider"></div>
+      <div class="nav-dd-col">
+        <h4>Servicios complementarios</h4>
+        <ul>
+          <li><a href="#">Transporte</a></li>
+          <li><a href="#">Extraescolares</a></li>
+          <li><a href="#">Cursos de verano</a></li>
+          <li><a href="#">Mutualidad SEK</a></li>
+          <li><a href="#">Residencia</a></li>
+        </ul>
+      </div>
+    </div></div>
+    <div class="nav-dropdown" id="dd-vida"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#"><span class="nav-dd-link-title">Actividades del centro</span><span class="nav-dd-link-desc">Semana Blanca · Duke of Edinburgh's</span></a></li>
+      <li><a href="sek-international-sport-academy.html"><span class="nav-dd-link-title">SEK International Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-idiomas"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#"><span class="nav-dd-link-title">Idiomas y Certificación Oficial</span><span class="nav-dd-link-desc">Cambridge, Goethe Institut y Alliance Française</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Estancias internacionales</span><span class="nav-dd-link-desc">Dublín y Les Alpes</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Intercambios culturales</span><span class="nav-dd-link-desc">Colegios en el mundo</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-admisiones-col"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#"><span class="nav-dd-link-title">Admisiones generales</span><span class="nav-dd-link-desc">Proceso de matriculación</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Admisiones internacionales</span><span class="nav-dd-link-desc">Acceso de fuera de España</span></a></li>
+      <li><a href="#"><span class="nav-dd-link-title">Becas y ayudas</span><span class="nav-dd-link-desc">Apoyos económicos</span></a></li>
+    </ul></div></div></div>
+    <div class="nav-dropdown" id="dd-solicitar-inf"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
+      <li><a href="#">Necesito información</a></li>
+      <li><a href="#">Contacto</a></li>
+      <li><a href="#">Programar visita</a></li>
+      <li><a href="#">Tour virtual</a></li>
+    </ul></div></div></div>
+
+    <div class="nav-topbar-mobile">
+      <div class="nav-logo-mobile"></div>
+      <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       1. HERO CON VÍDEO — SEK-CAB-002-VID
+       Placeholder claro · overlay gradiente · badge SISA · play → modal
+  ══════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg img-placeholder">imagen / vídeo loop</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-logo-badge">SISA</div>
+    <div class="hero-play-center">
+      <button class="play-hero-btn" onclick="openVideoModal('hero')" aria-label="Reproducir vídeo">&#9654;</button>
+    </div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>SEK International Sports Academy</h1>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       2. BARRA DE ANCLAJE — SEK-CON-008 (PAT-009)
+  ══════════════════════════════════════════════════════════ -->
+  <nav id="anchor-bar" aria-label="Navegación de sección">
+    <div class="anchor-inner">
+      <a class="anchor-link active" href="#que-es">¿Qué es?</a>
+      <a class="anchor-link" href="#especial">Qué lo hace especial</a>
+      <a class="anchor-link" href="#deportistas">Nuestros deportistas</a>
+      <a class="anchor-link" href="#descubre">Descubre más</a>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       3. ¿QUÉ ES? — SEK-CON-010
+       Texto izquierda · vídeo derecha (desktop) / debajo (mobile)
+  ══════════════════════════════════════════════════════════ -->
+  <section class="section" id="que-es">
+    <div class="container">
+      <h2>¿Qué es SEK International Sports Academy?</h2>
+      <div class="con010-c2-grid">
+
+        <div class="text-block-body">
+          <p>SEK International Sports Academy es un programa <strong>único en España</strong> que permite a los estudiantes de Colegios y Universidad combinar, de forma personalizada, sus estudios y la práctica deportiva de <strong>alto rendimiento</strong>. Coherente con el Modelo Educativo SEK, proporciona un <strong>desarrollo completo en el plano deportivo, académico y personal</strong>.</p>
+          <p>Actualmente cuenta con deportistas de tenis, golf, fútbol, hípica, balonmano, natación, deportes de invierno, pádel y atletismo, entre otras modalidades. SISA ofrece además un completo <strong>programa de becas</strong> y acompaña a sus alumnos en la consecución de becas universitarias internacionales.</p>
+        </div>
+
+        <div class="con010-c2-img video-ph" onclick="openVideoModal('seccion')">vídeo</div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       4. ESTADÍSTICAS — SEK-CON-022
+       Sin H2 · fondo alterno · va justo después de ¿Qué es?
+  ══════════════════════════════════════════════════════════ -->
+  <div class="section section--alt">
+    <div class="container">
+      <div class="colegios-stats">
+        <div class="colegio-stat">
+          <div class="colegio-stat-num">XX</div>
+          <div class="colegio-stat-label">Campus SEK</div>
+        </div>
+        <div class="colegio-stat">
+          <div class="colegio-stat-num">+XX</div>
+          <div class="colegio-stat-label">Deportes</div>
+        </div>
+        <div class="colegio-stat">
+          <div class="colegio-stat-num">+XX</div>
+          <div class="colegio-stat-label">Alumnos deportistas</div>
+        </div>
+        <div class="colegio-stat">
+          <div class="colegio-stat-num">+XX</div>
+          <div class="colegio-stat-label">Olímpicos formados</div>
+        </div>
+        <div class="colegio-stat">
+          <div class="colegio-stat-num">+XX</div>
+          <div class="colegio-stat-label">Años de trayectoria</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       5. QUÉ LO HACE ESPECIAL — SEK-CON-004 (acordeón)
+       Incluye "A quién va dirigido" como ítem del acordeón
+  ══════════════════════════════════════════════════════════ -->
+  <section class="section" id="especial">
+    <div class="container">
+      <div class="section-head">
+        <h2>Qué lo hace especial</h2>
+      </div>
+      <div class="acord-grid">
+
+        <div class="acord-item">
+          <div class="acord-header" onclick="toggleAcord(this)">
+            <div class="acord-logo">img</div>
+            <span class="acord-title">Pioneros en alto rendimiento deportivo</span>
+            <span class="acord-chevron">&#8964;</span>
+          </div>
+          <div class="acord-body">
+            SISA es la <strong>primera institución privada en España</strong> en ofrecer escuelas de alto rendimiento deportivo integradas en un proyecto educativo completo. Un modelo que ningún otro colegio ha replicado.
+          </div>
+        </div>
+
+        <div class="acord-item">
+          <div class="acord-header" onclick="toggleAcord(this)">
+            <div class="acord-logo">img</div>
+            <span class="acord-title">Deporte y estudios en el mismo horario</span>
+            <span class="acord-chevron">&#8964;</span>
+          </div>
+          <div class="acord-body">
+            Los horarios lectivos se adaptan al calendario deportivo de cada alumno. No hay que elegir entre competir y estudiar — el programa está diseñado para que ambas cosas ocurran a la vez.
+          </div>
+        </div>
+
+        <div class="acord-item">
+          <div class="acord-header" onclick="toggleAcord(this)">
+            <div class="acord-logo">img</div>
+            <span class="acord-title">Equipo técnico y psicológico especializado</span>
+            <span class="acord-chevron">&#8964;</span>
+          </div>
+          <div class="acord-body">
+            Preparadores físicos, fisioterapeutas y psicólogos deportivos trabajan coordinados para maximizar el rendimiento del alumno y prevenir lesiones, dentro y fuera de la competición.
+          </div>
+        </div>
+
+        <div class="acord-item">
+          <div class="acord-header" onclick="toggleAcord(this)">
+            <div class="acord-logo">img</div>
+            <span class="acord-title">Acceso a becas universitarias internacionales</span>
+            <span class="acord-chevron">&#8964;</span>
+          </div>
+          <div class="acord-body">
+            SISA tiene un historial sólido de alumnos que han accedido a universidades de élite en EEUU, Europa y Asia gracias a su perfil deportivo. El equipo acompaña todo el proceso de candidatura.
+          </div>
+        </div>
+
+        <div class="acord-item">
+          <div class="acord-header" onclick="toggleAcord(this)">
+            <div class="acord-logo">img</div>
+            <span class="acord-title">Para alumnos de 8 años hasta la universidad</span>
+            <span class="acord-chevron">&#8964;</span>
+          </div>
+          <div class="acord-body">
+            El programa acompaña al deportista en todas las etapas: desde las Escuelas de Rendimiento (8-18 años) hasta los estudios universitarios en la UCJC, con seguimiento continuo en cada transición.
+          </div>
+        </div>
+
+        <div class="acord-item">
+          <div class="acord-header" onclick="toggleAcord(this)">
+            <div class="acord-logo">img</div>
+            <span class="acord-title">Deportes de competición nacional e internacional</span>
+            <span class="acord-chevron">&#8964;</span>
+          </div>
+          <div class="acord-body">
+            Tenis, golf, fútbol, hípica, balonmano, natación, pádel, atletismo, deportes de invierno y más. Si el alumno compite a nivel federado, hay opciones para integrarse en el programa.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       6. CARRUSEL DEPORTISTAS — SEK-CRD-002 (galería)
+       Fotos portrait 3:4 · sin labels · PAT-005
+  ══════════════════════════════════════════════════════════ -->
+  <section class="section section--alt" id="deportistas">
+    <div class="container">
+      <div class="section-head">
+        <h2>Ellos han formado parte del programa</h2>
+        <p>Deportistas que combinaron sus estudios en SEK con una carrera de alto rendimiento. Algunos llegaron a lo más alto.</p>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel-track-outer" id="sisa-carousel-outer">
+          <div class="carousel-track" id="sisa-carousel-track">
+            <div class="card-nav"><div class="card-img img-placeholder">foto</div><div class="card-overlay"></div><span class="card-label">Nombre Apellido</span><span class="card-cta">Tenis · Pendiente foto</span></div>
+            <div class="card-nav"><div class="card-img img-placeholder">foto</div><div class="card-overlay"></div><span class="card-label">Nombre Apellido</span><span class="card-cta">Golf · Pendiente foto</span></div>
+            <div class="card-nav"><div class="card-img img-placeholder">foto</div><div class="card-overlay"></div><span class="card-label">Nombre Apellido</span><span class="card-cta">Fútbol · Pendiente foto</span></div>
+            <div class="card-nav"><div class="card-img img-placeholder">foto</div><div class="card-overlay"></div><span class="card-label">Nombre Apellido</span><span class="card-cta">Balonmano · Pendiente foto</span></div>
+            <div class="card-nav"><div class="card-img img-placeholder">foto</div><div class="card-overlay"></div><span class="card-label">Nombre Apellido</span><span class="card-cta">Natación · Pendiente foto</span></div>
+            <div class="card-nav"><div class="card-img img-placeholder">foto</div><div class="card-overlay"></div><span class="card-label">Nombre Apellido</span><span class="card-cta">Atletismo · Pendiente foto</span></div>
+          </div>
+        </div>
+        <div class="carousel-arrows">
+          <button class="arrow-btn" id="sisa-arrow-prev" onclick="moveSisaCarousel(-1)">&#8592;</button>
+          <button class="arrow-btn" id="sisa-arrow-next" onclick="moveSisaCarousel(1)">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       7. CTA — SEK-CON-019
+  ══════════════════════════════════════════════════════════ -->
+  <section class="section section--dark" id="descubre">
+    <div class="container">
+      <div class="con019-with-img">
+        <div class="con019-inner">
+          <h2>¿Te quedas con ganas de saber más?</h2>
+          <p>Descubre todos los deportes, programas, becas y testimonios de alumnos en la página oficial de SEK International Sports Academy.</p>
+          <a class="cta-btn con019-btn" href="https://www.seksportsacademy.com/" target="_blank" rel="noopener">Ir a la página oficial →</a>
+        </div>
+        <div class="con019-img img-placeholder">imagen</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       8. FOOTER — SEK-NAV-002
+  ══════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo"></div>
+        </div>
+        <div class="footer-col">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">MYSEK</a></li>
+            <li><a href="#">Webmail</a></li>
+            <li><a href="#">Email alumnos</a></li>
+            <li><a href="#">Gestión de servicios</a></li>
+            <li><a href="#">Teams</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <div class="footer-social">
+            <div class="social-icon">In</div>
+            <div class="social-icon">Tw</div>
+            <div class="social-icon">Li</div>
+            <div class="social-icon">Pi</div>
+            <div class="social-icon">Yt</div>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Política de cookies</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 SEK Education Group. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MODAL VÍDEO — PAT-004
+══════════════════════════════════════════════════════════ -->
+<div id="video-modal" class="modal-overlay" style="display:none" onclick="closeVideoModal()">
+  <div class="modal-inner modal-inner--video" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeVideoModal()">&#10005;</button>
+    <iframe id="video-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+
+<script src="../../shared/wireframe.js" defer></script>
+<script>
+  /* ── Modal vídeo (PAT-004) ── */
+  var VIDEO_HERO    = 'PENDIENTE_ID_HERO';
+  var VIDEO_SECCION = 'PENDIENTE_ID_SECCION';
+
+  function openVideoModal(which) {
+    var id = which === 'hero' ? VIDEO_HERO : VIDEO_SECCION;
+    document.getElementById('video-iframe').src =
+      'https://www.youtube.com/embed/' + id + '?autoplay=1';
+    document.getElementById('video-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideoModal() {
+    document.getElementById('video-iframe').src = '';
+    document.getElementById('video-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  /* ── Carrusel deportistas (PAT-005) ── */
+  var sisaIndex = 0;
+  function moveSisaCarousel(dir) {
+    if (window.innerWidth < 768) {
+      var track = document.getElementById('sisa-carousel-track');
+      var item  = track && track.querySelector('.card-nav');
+      if (item) track.scrollBy({ left: dir * (item.offsetWidth + 12), behavior: 'smooth' });
+      return;
+    }
+    sisaIndex += dir;
+    applySisaCarousel();
+  }
+  function applySisaCarousel() {
+    var track = document.getElementById('sisa-carousel-track');
+    var prev  = document.getElementById('sisa-arrow-prev');
+    var next  = document.getElementById('sisa-arrow-next');
+    if (!track) return;
+    var cards    = track.querySelectorAll('.card-nav');
+    var cardW    = cards[0] ? cards[0].offsetWidth + 12 : 0;
+    var visible  = Math.round(track.parentElement.offsetWidth / cardW);
+    var maxIndex = Math.max(0, cards.length - visible);
+    sisaIndex    = Math.max(0, Math.min(sisaIndex, maxIndex));
+    track.style.transform = 'translateX(-' + (sisaIndex * cardW) + 'px)';
+    if (prev) { prev.style.opacity = sisaIndex === 0 ? '0.3' : '1'; prev.style.pointerEvents = sisaIndex === 0 ? 'none' : ''; }
+    if (next) { next.style.opacity = sisaIndex >= maxIndex ? '0.3' : '1'; next.style.pointerEvents = sisaIndex >= maxIndex ? 'none' : ''; }
+  }
+
+  /* ── Scroll spy anclaje ── */
+  (function() {
+    var secs  = ['que-es', 'especial', 'deportistas', 'descubre'];
+    var links = document.querySelectorAll('#anchor-bar .anchor-link');
+    window.addEventListener('scroll', function() {
+      var current = secs[0];
+      secs.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) current = id;
+      });
+      links.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }, { passive: true });
+  })();
+
+  document.addEventListener('DOMContentLoaded', function() {
+    applySisaCarousel();
+    window.addEventListener('resize', applySisaCarousel);
+  });
+</script>
+</body>
+</html>
