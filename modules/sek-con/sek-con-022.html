@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEK-CON-022 | Bloque estadísticas</title>
+<style>
+  :root {
+    --white:    #ffffff;
+    --gray-50:  #fafafa;
+    --gray-100: #f0f0f0;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #aaaaaa;
+    --gray-500: #888888;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --radius:   4px;
+    --font:     'Helvetica Neue', Arial, sans-serif;
+    --mono:     'Courier New', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--gray-50); color: var(--gray-800); padding-top: 40px; -webkit-font-smoothing: antialiased; }
+
+  .wf-toolbar { position: fixed; top: 0; left: 0; right: 0; height: 40px; background: var(--gray-800); color: var(--gray-400); display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 9998; font-family: var(--mono); font-size: 11px; }
+
+  .vp-section { padding: 40px 20px; border-bottom: 1px dashed var(--gray-300); }
+  .vp-label { font-family: var(--mono); font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin-bottom: 16px; }
+  .vp-label span.w { color: var(--gray-400); }
+  .vp-frame-outer { display: flex; justify-content: center; overflow-x: auto; }
+  .vp-frame { background: var(--white); border: 1px solid var(--gray-300); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.06); flex-shrink: 0; }
+
+  .mod-ex-label { font-family: var(--mono); font-size: 9px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; text-align: center; padding: 8px 0; background: var(--gray-100); }
+
+  /* ══════════════════════════════════════
+     MÓDULO · Bloque estadísticas
+  ══════════════════════════════════════ */
+  .mod-stats { padding: 32px 20px; background: var(--white); border-bottom: 1px solid var(--gray-200); }
+
+  /* Grid mobile: 2 columnas */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 16px;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-300);
+    margin-bottom: 6px;
+  }
+
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.4;
+    max-width: 140px;
+  }
+
+  /* Separador vertical entre stats en tablet/desktop */
+  .stat-item + .stat-item { border-left: none; }
+
+  /* Tablet */
+  .vp-tablet .mod-stats { padding: 36px 32px; }
+  .vp-tablet .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .vp-tablet .stat-item {
+    padding: 0 32px;
+    border-left: 1px solid var(--gray-200);
+  }
+  .vp-tablet .stat-item:first-child { border-left: none; padding-left: 0; }
+  .vp-tablet .stat-num { font-size: 32px; }
+
+  /* Desktop */
+  .vp-desktop .mod-stats { padding: 40px 56px; }
+  .vp-desktop .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .vp-desktop .stat-item {
+    padding: 0 48px;
+    border-left: 1px solid var(--gray-200);
+  }
+  .vp-desktop .stat-item:first-child { border-left: none; padding-left: 0; }
+  .vp-desktop .stat-num { font-size: 40px; }
+  .vp-desktop .stat-label { font-size: 13px; max-width: 200px; }
+
+  /* Variante: fondo alterno */
+  .mod-stats--alt { background: var(--gray-100); }
+</style>
+</head>
+<body>
+
+<div class="wf-toolbar">
+  <strong>SEK-CON-022</strong>
+  <span>Bloque estadísticas · v1.0 · vistas responsive</span>
+</div>
+
+<!-- MOBILE 375px -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">2 columnas · sin separadores · con icono opcional</div>
+      <div class="mod-stats">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+999</div>
+            <div class="stat-label">Etiqueta del dato 2</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE 375px · sin icono -->
+<div class="vp-section">
+  <div class="vp-label">Mobile <span class="w">· 375px · sin icono</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-mobile" style="width:375px;">
+      <div class="mod-ex-label">Sin icono · número directo</div>
+      <div class="mod-stats mod-stats--alt">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+999</div>
+            <div class="stat-label">Etiqueta del dato 2</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLET 768px -->
+<div class="vp-section">
+  <div class="vp-label">Tablet <span class="w">· 768px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-tablet" style="width:768px;">
+      <div class="mod-ex-label">Fila horizontal · separador vertical entre stats</div>
+      <div class="mod-stats">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+999</div>
+            <div class="stat-label">Etiqueta del dato 2</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">Fila horizontal · números grandes · separador vertical</div>
+      <div class="mod-stats">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+999</div>
+            <div class="stat-label">Etiqueta del dato 2</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"></div>
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP 1200px · 5 stats -->
+<div class="vp-section">
+  <div class="vp-label">Desktop <span class="w">· 1200px · 5 stats (máximo recomendado)</span></div>
+  <div class="vp-frame-outer">
+    <div class="vp-frame vp-desktop" style="width:1200px;">
+      <div class="mod-ex-label">5 stats · sin icono · máximo recomendado</div>
+      <div class="mod-stats mod-stats--alt">
+        <div class="stats-grid" style="grid-template-columns: repeat(5,1fr);">
+          <div class="stat-item">
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+999</div>
+            <div class="stat-label">Etiqueta del dato 2</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 3</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 4</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+99</div>
+            <div class="stat-label">Etiqueta del dato 5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
