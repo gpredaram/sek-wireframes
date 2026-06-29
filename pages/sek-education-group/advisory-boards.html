@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advisory Boards — SEK Education Group</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <script src="../../shared/wireframe.js" defer></script>
+</head>
+<body>
+<div id="page-wrapper">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVEGACIÓN — SEK Education Group
+  ═══════════════════════════════════════════════════════════ -->
+  <nav id="seg-nav">
+
+    <div class="container">
+      <div class="nav-inner">
+        <div class="seg-nav-logo">SEK Education Group</div>
+        <ul class="nav-items">
+          <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios'); event.stopPropagation();">
+            Colegios <span class="nav-chevron">▾</span>
+          </li>
+          <li class="nav-item active" onclick="toggleDropdown(this,'dd-seg-group'); event.stopPropagation();">
+            SEK Education Group <span class="nav-chevron">▾</span>
+          </li>
+          <li class="nav-item">UCJC</li>
+          <li class="nav-item">Fundación FS</li>
+          <li class="nav-item">Alumni</li>
+          <li class="nav-item">Contacto</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dropdown: Colegios -->
+    <div class="nav-dropdown" id="dd-colegios">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col">
+          <h4>En España</h4>
+          <ul>
+            <li><a href="#">SEK El Castillo</a></li>
+            <li><a href="#">SEK Santa Isabel</a></li>
+            <li><a href="#">SEK Ciudalcampo</a></li>
+            <li><a href="#">SEK Cataluña</a></li>
+            <li><a href="#">SEK Atlántico</a></li>
+            <li><a href="#">SEK Alborbán</a></li>
+          </ul>
+        </div>
+        <div class="nav-dd-col">
+          <h4>Fuera de España</h4>
+          <ul>
+            <li><a href="#">SEK Dublín</a></li>
+            <li><a href="#">SEK Les Alpes</a></li>
+            <li><a href="#">SEK Qatar</a></li>
+            <li><a href="#">SEK Riyadh</a></li>
+          </ul>
+          <h4 style="margin-top:14px">Online</h4>
+          <ul><li><a href="#">SEK Online</a></li></ul>
+        </div>
+        <div class="nav-dd-divider"></div>
+        <div class="nav-dd-extra">
+          <div class="nav-dd-stat">
+            <span class="nav-dd-stat-num">11</span>
+            <span class="nav-dd-stat-text">colegios en 4 países</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dropdown: SEK Education Group -->
+    <div class="nav-dropdown" id="dd-seg-group">
+      <div class="nav-dropdown-inner">
+        <div class="nav-dd-col" style="min-width:280px">
+          <ul>
+            <li style="padding-bottom:4px"><a href="la-institucion.html"><span class="nav-dd-link-title">La Institución</span><span class="nav-dd-link-desc">Historia y trayectoria del grupo</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Principios y valores</span><span class="nav-dd-link-desc">Nuestra filosofía educativa</span></a></li>
+            <li style="padding-bottom:4px"><a href="advisory-boards.html"><span class="nav-dd-link-title">Advisory Boards</span><span class="nav-dd-link-desc">Consejo asesor internacional</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">SEK Lab</span><span class="nav-dd-link-desc">Innovación y pedagogía</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">B Corp</span><span class="nav-dd-link-desc">Empresa B certificada</span></a></li>
+            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Int Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
+            <li><a href="#"><span class="nav-dd-link-title">Desarrollo Integral del Talento</span><span class="nav-dd-link-desc">Desarrollo personal integral</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-dd-divider"></div>
+        <div class="nav-dd-extra">
+          <div class="nav-dd-stat">
+            <span class="nav-dd-stat-num">130</span>
+            <span class="nav-dd-stat-text">años formando generaciones</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile topbar -->
+    <div class="nav-topbar-mobile">
+      <div class="nav-logo-mobile"></div>
+      <button class="nav-hamburger" aria-expanded="false" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       A · HERO — SEK-CAB-002 IMG
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg img-placeholder">foto IAB</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="breadcrumb"><span>SEK Education Group ›</span> Advisory Boards</div>
+      <div class="hero-text">
+        <h1>Advisory Boards</h1>
+        <p class="subtitle">Expertos globales que inspiran el futuro de la educación SEK</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       A1 · BARRA DE ANCLAJE — SEK-CON-008
+  ═══════════════════════════════════════════════════════════ -->
+  <nav id="anchor-bar" aria-label="Navegación de sección">
+    <div class="anchor-inner">
+      <a class="anchor-link active" href="#intro-iab">International Advisory Board</a>
+      <a class="anchor-link" href="#consejo-iab">Consejo IAB</a>
+      <a class="anchor-link" href="#junior-advisory">Junior Advisory Board</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       B1 · INTRO IAB — SEK-CON-001 (sin imagen)
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section" id="intro-iab">
+    <div class="container">
+      <div class="section-head">
+        <h2>International Advisory Board</h2>
+      </div>
+      <div class="text-block-body">
+        <p>El International Advisory Board (IAB) de SEK nació en 2016 para conectar el proyecto educativo del grupo con el pensamiento global más avanzado. Está integrado por 26 expertos de reconocido prestigio internacional, nombrados a título personal por sus trayectorias en educación, ciencia, empresa, salud y relaciones internacionales. El IAB se reúne periódicamente y sus aportaciones orientan la estrategia educativa del grupo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       B2 · CONSEJO IAB — SEK-CRD-007 variante persona
+       26 consejeros · Mobile: carrusel · Tablet/Desktop: grid
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section section--alt" id="consejo-iab">
+    <div class="container">
+      <div class="section-head">
+        <h2>Consejo IAB</h2>
+        <p>26 expertos internacionales en educación, empresa, ciencia y cultura</p>
+      </div>
+
+      <div class="iab-grid">
+
+        <!-- 1 · Arpad von Lazar -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Educación e Instituciones Internacionales"
+          data-name="Arpad von Lazar"
+          data-cargo="Presidente Honorario IAB · Professor Emeritus, Tufts Fletcher School"
+          data-bio="Arpad von Lazar es profesor emérito de la Fletcher School of Law and Diplomacy (Universidad de Tufts), donde enseñó durante más de tres décadas. En esta facultad, la más antigua de posgrado en Relaciones Internacionales de Estados Unidos, fundó el Programa de Desarrollo Internacional, el Programa de Políticas Internacionales sobre Recursos y Medio Ambiente, y el Programa de Relaciones Comerciales Internacionales. Ha sido profesor visitante e invitado en universidades de prestigio en Norteamérica, Sudamérica, Europa y Asia, y ha asesorado a gobiernos, empresas y organizaciones incluyendo la Fundación Rockefeller, la Fundación Ford y el Banco Mundial.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación e Instituciones Internacionales</div>
+            <div class="card-person__name">Arpad von Lazar</div>
+            <div class="card-person__cargo">Presidente Honorario IAB · Professor Emeritus, Tufts Fletcher School</div>
+          </div>
+        </button>
+
+        <!-- 2 · Alexander Schindler -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Gestión de Activos y Finanzas"
+          data-name="Alexander Schindler"
+          data-cargo="Presidente IAB · Asesor Principal, Union Investment"
+          data-bio="Alexander Schindler cuenta con más de 30 años de experiencia asesorando a instituciones europeas e internacionales en la asignación estratégica de inversiones. Fue presidente de la Asociación Europea de Fondos y Gestión de Activos (EFAMA) y de BVI, la Confederación Alemana de Sociedades de Inversión y Gestión de Activos. En estos roles, representó al sector ante la Comisión Europea y participó en el Securities &amp; Markets Stakeholder Group de la Autoridad Europea de Valores y Mercados (AEVM). Formado como banquero y abogado, combina conocimientos técnicos y legales que le han permitido contribuir significativamente al desarrollo del sector financiero europeo.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Gestión de Activos y Finanzas</div>
+            <div class="card-person__name">Alexander Schindler</div>
+            <div class="card-person__cargo">Presidente IAB · Asesor Principal, Union Investment</div>
+          </div>
+        </button>
+
+        <!-- 3 · José Luis Delso Martínez-Trevijano -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Educación y Gestión Educativa"
+          data-name="José Luis Delso Martínez-Trevijano"
+          data-cargo="Vicepresidente, SEK Education Group"
+          data-bio="José Luis Delso Martínez-Trevijano es abogado con una amplia trayectoria en el ámbito legal y académico. Licenciado en Derecho por CEU San Pablo-Universidad Complutense, completó un Executive MBA en el Instituto de Empresa y una especialización en Derecho Comunitario Europeo en el King's College de Londres. Es Partner Fellow del Advanced Leadership Initiative Program de la Universidad de Harvard. Ha ocupado posiciones clave en fundaciones educativas como secretario general de la Fundación Camilo José Cela y la Universidad Camilo José Cela. Actualmente es vocal de la Fundación Felipe Segovia y vicepresidente de CICAE.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación y Gestión Educativa</div>
+            <div class="card-person__name">José Luis Delso Martínez-Trevijano</div>
+            <div class="card-person__cargo">Vicepresidente, SEK Education Group</div>
+          </div>
+        </button>
+
+        <!-- 4 · Nieves Segovia Bonet -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Gestión e Innovación Educativa"
+          data-name="Nieves Segovia Bonet"
+          data-cargo="Presidenta SEK Education Group"
+          data-bio="Nieves Segovia Bonet es presidenta de SEK Education Group, que engloba SEK International Schools en Europa y Oriente Medio, así como la Universidad Camilo José Cela. Educadora y experta en innovación educativa, preside el Comité de Dirección del Talloires Network of Engaged Universities y forma parte del Consejo de Liderazgo del Center for Universal Education de la Brookings Institution. También es Advanced Leadership Initiative Fellow de la Universidad de Harvard. Fundó el Global Education Forum y SEK Lab, aceleradora de tecnología educativa. Ha recibido el Premio UNICEF por la Educación en Valores.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Gestión e Innovación Educativa</div>
+            <div class="card-person__name">Nieves Segovia Bonet</div>
+            <div class="card-person__cargo">Presidenta SEK Education Group</div>
+          </div>
+        </button>
+
+        <!-- 5 · Klaus Barbknecht -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Educación Universitaria, Comercio Internacional y Energía"
+          data-name="Klaus Barbknecht"
+          data-cargo="Rector, Freiberg University of Mining and Technology"
+          data-bio="Klaus-Dieter Barbknecht, jurista alemán, es rector de la Freiberg University of Mining and Technology (TU Bergakademie Freiberg) desde 2015. Estudió Economía y Derecho en la Universidad Georg-August de Gotinga y fue miembro de la Junta Ejecutiva de VNG – Verbundnetz Gas AG entre 2007 y 2015. Profesor honorario en la TU Bergakademie Freiberg desde 2012, imparte derecho energético y laboral. Es vicepresidente de Comunidades de Liderazgo Estratégico en el Consejo Mundial de la Energía y, desde 2018, preside la Conferencia de Rectores de Sajonia.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación Universitaria, Comercio Internacional y Energía</div>
+            <div class="card-person__name">Klaus Barbknecht</div>
+            <div class="card-person__cargo">Rector, Freiberg University of Mining and Technology</div>
+          </div>
+        </button>
+
+        <!-- 6 · Barbara Arrowsmith Young -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Educación y Terapia Cognitiva"
+          data-name="Barbara Arrowsmith Young"
+          data-cargo="Fundadora, Arrowsmith Program"
+          data-bio="Barbara Arrowsmith es fundadora del Programa Arrowsmith, un innovador enfoque basado en la neuroplasticidad que combina evaluaciones detalladas y ejercicios cognitivos diseñados para identificar y fortalecer áreas débiles del funcionamiento cognitivo responsables de las dificultades de aprendizaje. Inspirada por sus propias experiencias como estudiante con desafíos de aprendizaje, desarrolló este programa para transformar las vidas de quienes enfrentan obstáculos similares. Desde su creación, el Programa Arrowsmith ha sido implementado en escuelas de diversos países, ayudando a estudiantes a superar barreras cognitivas.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación y Terapia Cognitiva</div>
+            <div class="card-person__name">Barbara Arrowsmith Young</div>
+            <div class="card-person__cargo">Fundadora, Arrowsmith Program</div>
+          </div>
+        </button>
+
+        <!-- 7 · Álvaro Fernández Ibáñez -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Neurociencia Aplicada, Innovación y Aprendizaje Permanente"
+          data-name="Álvaro Fernández Ibáñez"
+          data-cargo="CEO y Redactor Jefe, SharpBrains"
+          data-bio="Álvaro Fernández Ibáñez es director de SharpBrains, empresa líder en estudios de mercado sobre neurociencia aplicada y tecnologías digitales emergentes. Reconocido internacionalmente, ha sido citado por The New York Times y The Wall Street Journal, y es coautor de The SharpBrains Guide to Brain Fitness y El Cerebro que Cura. Cuenta con un MBA y un Máster en Educación por Stanford, además de una licenciatura en Economía por la Universidad de Deusto. En 2012, fue nombrado Joven Líder Global por el Foro Económico Mundial.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Neurociencia Aplicada, Innovación y Aprendizaje Permanente</div>
+            <div class="card-person__name">Álvaro Fernández Ibáñez</div>
+            <div class="card-person__cargo">CEO y Redactor Jefe, SharpBrains</div>
+          </div>
+        </button>
+
+        <!-- 8 · Alejandro Delso Segovia -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Desarrollo de Negocio"
+          data-name="Alejandro Delso Segovia"
+          data-cargo="Director de Desarrollo, SEK Education Group"
+          data-bio="Alejandro Delso es director de Desarrollo e Innovación en SEK Education Group desde 2022, liderando proyectos clave en transformación educativa. Como Project Manager (2019-2022), destacó en iniciativas como la certificación BCorp y la apertura de SEK International School Riyadh en 2021. Graduado en Emprendimiento y Mercados Emergentes por la Universidad de Syracuse, completó un Máster en Dirección de Empresas en IE University en 2018.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Desarrollo de Negocio</div>
+            <div class="card-person__name">Alejandro Delso Segovia</div>
+            <div class="card-person__cargo">Director de Desarrollo, SEK Education Group</div>
+          </div>
+        </button>
+
+        <!-- 9 · Stephen Heppell -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Innovación, Tecnología Educativa"
+          data-name="Stephen Heppell"
+          data-cargo="Fundador &amp; CEO, Heppell.net"
+          data-bio="Stephen Heppell, titular de la Cátedra Felipe Segovia de Innovación para el Aprendizaje en la Universidad Camilo José Cela, es un referente mundial en tecnología educativa y diseño de espacios de aprendizaje. Fundó Ultralab, un influyente centro de investigación en e-learning, y en 2004 creó Heppell.net, consultora especializada en espacios de aprendizaje innovadores para instituciones y empresas Fortune 500. Es catedrático emérito en las universidades Anglia Ruskin y Bournemouth, y miembro del consejo de BAFTA.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Innovación, Tecnología Educativa</div>
+            <div class="card-person__name">Stephen Heppell</div>
+            <div class="card-person__cargo">Fundador &amp; CEO, Heppell.net</div>
+          </div>
+        </button>
+
+        <!-- 10+ · cards ocultas en mobile hasta "Cargar más" -->
+        <!-- 10 · Bertold Fridlender -->
+        <button class="card-person" onclick="openBioModal(this)"
+          data-area="Educación Universitaria"
+          data-name="Bertold Fridlender"
+          data-cargo="Professor Emeritus, Jerusalem Multidisciplinary College"
+          data-bio="Bertold Fridlender es doctor en Microbiología Médica e Inmunología por la UCLA y máster en Bioquímica por la Universidad de Chile. Fundó y presidió el primer programa de Licenciatura en Biotecnología en Israel, en el Hadassah College de Jerusalén, asumiendo la presidencia de dicha institución en 2012. Durante su gestión, el College se convirtió en la segunda institución académica más grande de Jerusalén en términos de matrícula. Ha liderado la obtención de la subvención internacional Bio-Xplore, financiada por la UE, para investigar propiedades medicinales en plantas mediterráneas.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación Universitaria</div>
+            <div class="card-person__name">Bertold Fridlender</div>
+            <div class="card-person__cargo">Professor Emeritus, Jerusalem Multidisciplinary College</div>
+          </div>
+        </button>
+
+        <!-- 11 · Bruce Magid -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Educación Universitaria, Edutainment y Negocio Internacional"
+          data-name="Bruce Magid"
+          data-cargo="Rector y vicepresidente de Asuntos Académicos, Golden Gate University"
+          data-bio="El Dr. Bruce Magid es Rector y Director Académico de la Golden Gate University. Fue vicepresidente ejecutivo de INTO University Partnerships, decano de Brandeis International Business School y ocupó cargos directivos en San José State y Michigan State University. Antes del mundo académico, trabajó más de 20 años en el Bank of America en América Latina y Estados Unidos, especializado en finanzas corporativas. Posee un doctorado en Relaciones Internacionales por Tufts y Harvard y una licenciatura por la Universidad de Georgetown.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación Universitaria, Edutainment y Negocio Internacional</div>
+            <div class="card-person__name">Bruce Magid</div>
+            <div class="card-person__cargo">Rector y vicepresidente de Asuntos Académicos, Golden Gate University</div>
+          </div>
+        </button>
+
+        <!-- 12 · Eduardo López -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Finanzas, Consultoría, Educación e Innovación"
+          data-name="Eduardo López"
+          data-cargo="Fundador, Columbus Avenue Investments"
+          data-bio="Eduardo López es fundador y socio gerente de Columbus Avenue Investments, donde lidera actividades de financiación, consultoría y gestión en diversos sectores, con un enfoque en empresas cuyas tecnologías generan un impacto positivo en la sociedad. Licenciado en Pedagogía, aporta décadas de experiencia clínica, comercial y de marketing en los sectores veterinario y sanitario. Es un firme defensor del aprendizaje permanente y de proporcionar a los estudiantes las herramientas cognitivas necesarias para maximizar su capacidad de aprendizaje.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Finanzas, Consultoría, Educación e Innovación</div>
+            <div class="card-person__name">Eduardo López</div>
+            <div class="card-person__cargo">Fundador, Columbus Avenue Investments</div>
+          </div>
+        </button>
+
+        <!-- 13 · Iván Martínez Pastor -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Educación Internacional y Gestión Educativa"
+          data-name="Iván Martínez Pastor"
+          data-cargo="Director General SEK International Schools (ex officio)"
+          data-bio="Iván Martínez, director general de SEK International Schools, es licenciado en Biología por la Universidad Autónoma de Madrid, especializado en Ecología Humana. Con más de 20 años de experiencia en colegios internacionales en Europa, Latinoamérica y Oriente Medio, fue el primer director de SEK International School Riyadh. Es examinador del Middle Years Programme del IB y ha liderado programas como el Premio Internacional del Duque de Edimburgo, integrando sostenibilidad e innovación en su gestión educativa.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Educación Internacional y Gestión Educativa</div>
+            <div class="card-person__name">Iván Martínez Pastor</div>
+            <div class="card-person__cargo">Director General SEK International Schools (ex officio)</div>
+          </div>
+        </button>
+
+        <!-- 14 · Gonzalo Martín-Villa Peña -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Innovación, Transformación Organizativa"
+          data-name="Gonzalo Martín-Villa Peña"
+          data-cargo="CEO SEK Education Group (ex officio)"
+          data-bio="Gonzalo Martín-Villa cuenta con más de veinticinco años de trayectoria en el Grupo Telefónica, siendo CEO de Telefónica IoT &amp; Big Data Tech, Chief Innovation Officer del Grupo, fundador y CEO de Wayra, y Chief Operating Officer de Telefónica Tech para Reino Unido, Irlanda y Europa Central. En todos estos roles lideró procesos de crecimiento, creación de nuevas unidades de negocio y la integración de tecnologías emergentes en la transformación de modelos operativos.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Innovación, Transformación Organizativa</div>
+            <div class="card-person__name">Gonzalo Martín-Villa Peña</div>
+            <div class="card-person__cargo">CEO SEK Education Group (ex officio)</div>
+          </div>
+        </button>
+
+        <!-- 15 · Jaime Olmedo Ramos -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Humanidades e Innovación · Gestión Educativa y Cultural"
+          data-name="Jaime Olmedo Ramos"
+          data-cargo="Rector UCJC (ex officio)"
+          data-bio="Jaime Olmedo, rector de la Universidad Camilo José Cela, es filólogo español, doctor summa cum laude por la Universidad de Bolonia. Ha cursado estudios de posgrado en Gestión Cultural, Patrimonio y Tecnología Educativa en la UOC, Harvard y el MIT. Formó parte de la Dirección Académica del Instituto Cervantes y fue director técnico en la Real Academia de la Historia, donde desarrolló proyectos como el Diccionario Biográfico Electrónico. Ha recibido el Premio ASLAN 2024 al mejor proyecto digital de la Administración Española.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Humanidades e Innovación · Gestión Educativa y Cultural</div>
+            <div class="card-person__name">Jaime Olmedo Ramos</div>
+            <div class="card-person__cargo">Rector UCJC (ex officio)</div>
+          </div>
+        </button>
+
+        <!-- 16 · Adrian Monck -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Comunicación Internacional y Periodismo"
+          data-name="Adrian Monck"
+          data-cargo="Asesor principal MBZUAI · ex Foro Económico Mundial"
+          data-bio="Adrian Monck es asesor principal de la Universidad Mohamed bin Zayed de Inteligencia Artificial (MBZUAI) de Abu Dhabi y autor del boletín Seven Things, con más de 160.000 suscriptores en todo el mundo. Como director de Participación Pública y Social del Foro Económico Mundial, transformó la organización en una potencia digital. Fundador del canal británico Five News, fue ejecutivo de noticias galardonado y corresponsal de guerra en Sky News, ITN y CBS News. Es autor de Can You Trust the Media? y Crunch Time, y licenciado por la Universidad de Oxford y la London Business School.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Comunicación Internacional y Periodismo</div>
+            <div class="card-person__name">Adrian Monck</div>
+            <div class="card-person__cargo">Asesor principal MBZUAI · ex Foro Económico Mundial</div>
+          </div>
+        </button>
+
+        <!-- 17 · Ursina Plüss -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Criminología, Periodismo y Gestión de Crisis"
+          data-name="Ursina Plüss"
+          data-cargo="Coordinadora, Swiss Federal Department of Defence"
+          data-bio="Ursina Plüss es experta en gestión de crisis y seguridad, con formación en criminología, periodismo y gestión de crisis. Comenzó como asesora en la Policía Federal Suiza, desarrollando estrategias y protocolos de respuesta ante emergencias. Posteriormente, se unió al Departamento Federal de Defensa, Protección de la Población y Deportes de Suiza, coordinando la gestión de crisis y la protección civil a nivel nacional. Combina su sólida formación académica con una amplia experiencia práctica en seguridad y defensa.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Criminología, Periodismo y Gestión de Crisis</div>
+            <div class="card-person__name">Ursina Plüss</div>
+            <div class="card-person__cargo">Coordinadora, Swiss Federal Department of Defence</div>
+          </div>
+        </button>
+
+        <!-- 18 · Omar S. Qandeel -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Inversión de Impacto, Tecnología, Negocios Internacionales"
+          data-name="Omar S. Qandeel"
+          data-cargo="Vicepresidente IAB · Blue Orchard Finance Ltd"
+          data-bio="Omar S. Qandeel es experto en inversiones sociales y de impacto, desarrollo de proyectos y consultoría empresarial, con un enfoque en el uso de plataformas tecnológicas y energéticas para generar resultados sostenibles. Su trabajo se centra en apoyar a empresas europeas y asiáticas en su expansión en Oriente Medio y el norte de África. Ha liderado importantes proyectos de fabricación y distribución para empresas europeas de los sectores alimentario y de envasado.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Inversión de Impacto, Tecnología, Negocios Internacionales</div>
+            <div class="card-person__name">Omar S. Qandeel</div>
+            <div class="card-person__cargo">Vicepresidente IAB · Blue Orchard Finance Ltd</div>
+          </div>
+        </button>
+
+        <!-- 19 · Magda Salarich Fernández de Valderrama -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Finanzas y Gestión Empresarial"
+          data-name="Magda Salarich Fernández de Valderrama"
+          data-cargo="Consejera Banco Santander España · Asesora Senior Grupo Santander"
+          data-bio="Magda Salarich es ingeniera por el ICAI, con programas de dirección general en IESE e IE. Su experiencia abarca sectores clave como el automovilístico (Citroën), financiero (Banco Santander) y retail (El Corte Inglés). Actualmente es consejera en varias instituciones y miembro del Patronato de la Universidad Camilo José Cela. Su contribución profesional y social ha sido reconocida con numerosos premios, incluyendo la Légion d'Honneur de la República Francesa.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Finanzas y Gestión Empresarial</div>
+            <div class="card-person__name">Magda Salarich Fernández de Valderrama</div>
+            <div class="card-person__cargo">Consejera Banco Santander España · Asesora Senior Grupo Santander</div>
+          </div>
+        </button>
+
+        <!-- 20 · Andrés J. Recoder -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Finanzas Internacionales"
+          data-name="Andrés J. Recoder"
+          data-cargo="Inversor Privado y Emprendedor"
+          data-bio="Andrés J. Recoder ha desarrollado una actividad profesional de más de 30 años en los mercados financieros globales, basado en Nueva York y en Londres, con enfoque en Mercados de Capitales, Financiación Estructurada e Ingeniería Financiera. Durante 20 años estuvo en Citigroup liderando mandatos regionales y globales dentro de la división de Mercados Globales. Actualmente es Co-Presidente de VEUU Finance Inc, entidad fintech enfocada en la industria sanitaria en EE.UU.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Finanzas Internacionales</div>
+            <div class="card-person__name">Andrés J. Recoder</div>
+            <div class="card-person__cargo">Inversor Privado y Emprendedor</div>
+          </div>
+        </button>
+
+        <!-- 21 · Stephen Grobmyer -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Salud y Oncología"
+          data-name="Stephen Grobmyer"
+          data-cargo="Presidente, Cancer Institute · Cleveland Clinic Abu Dhabi"
+          data-bio="El Dr. Stephen Grobmyer preside el Cancer Institute en el Cleveland Clinic Abu Dhabi–Fatima bint Mubarak Center (Abu Dabi, Emiratos Árabes Unidos). Es profesor de cirugía en Cleveland Clinic Lerner College of Medicine y profesor adjunto de cirugía en Khalifa University. Actualmente lidera el Programa Insignia de Cáncer del Proyecto Genoma Emiratí.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Salud y Oncología</div>
+            <div class="card-person__name">Stephen Grobmyer</div>
+            <div class="card-person__cargo">Presidente, Cancer Institute · Cleveland Clinic Abu Dhabi</div>
+          </div>
+        </button>
+
+        <!-- 22 · Jeanette van Beek -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Salud y Gestión de Sistemas Sanitarios"
+          data-name="Jeanette van Beek"
+          data-cargo="Directora, Symphony ZorgAcademie · Fundadora, Gezonder Leven Loont"
+          data-bio="Jeanette van Beek cuenta con una sólida formación en ingeniería electrotécnica y procesamiento informático, y una trayectoria profesional diversa en sanidad, tecnología, finanzas y educación. Inició su carrera como asistente técnica cardiovascular, luego trabajó como controladora aérea en el ejército y posteriormente ocupó un rol internacional en desarrollo de negocios en el sector TIC. Desde 2003, es directora y accionista de diversas organizaciones financieras, sanitarias y educativas.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Salud y Gestión de Sistemas Sanitarios</div>
+            <div class="card-person__name">Jeanette van Beek</div>
+            <div class="card-person__cargo">Directora, Symphony ZorgAcademie · Fundadora, Gezonder Leven Loont</div>
+          </div>
+        </button>
+
+        <!-- 23 · Georg von Habsburg -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Relaciones Internacionales y Comunicación"
+          data-name="Georg von Habsburg"
+          data-cargo="Embajador de Hungría en España"
+          data-bio="Georg von Habsburg es Embajador de la República de Hungría y asesor de la oficina europea de la Federación Internacional de Sociedades de la Cruz Roja y de la Media Luna Roja. Entre 2006 y 2012, presidió la Cruz Roja Húngara. Nieto de Carlos I y IV, último monarca del Imperio austrohúngaro, es un firme defensor de los valores de la diplomacia y la cooperación internacional como herramientas para resolver conflictos en un mundo complejo y globalizado.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Relaciones Internacionales y Comunicación</div>
+            <div class="card-person__name">Georg von Habsburg</div>
+            <div class="card-person__cargo">Embajador de Hungría en España</div>
+          </div>
+        </button>
+
+        <!-- 24 · Albrecht von Müller -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Pensamiento, Lógica y Complejidad"
+          data-name="Albrecht von Müller"
+          data-cargo="Director, Parmenides Center for the Study of Thinking"
+          data-bio="Albrecht von Müller es director del Parmenides Center for the Study of Thinking y profesor de filosofía en la Universidad Ludwig Maximilians de Munich (LMU). Fundó en 2001 la Fundación Parménides, un centro de investigación interdisciplinar dedicado a explorar los fundamentos y las fronteras del pensamiento humano. Ha desarrollado el Magister Cogitationis Artium (MCA) y el Programa de Excelencia Cognitiva (CEP), centrados en el estudio avanzado de las capacidades cognitivas. Es miembro externo del Centro de Ciencias Humanas y del Centro de Neurociencia de Múnich.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Pensamiento, Lógica y Complejidad</div>
+            <div class="card-person__name">Albrecht von Müller</div>
+            <div class="card-person__cargo">Director, Parmenides Center for the Study of Thinking</div>
+          </div>
+        </button>
+
+        <!-- 25 · Stavros N. Yiannouka -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Innovación, Investigación y Defensa de la Educación"
+          data-name="Stavros N. Yiannouka"
+          data-cargo="CEO, World Innovation Summit for Education (Qatar Foundation)"
+          data-bio="Stavros N. Yiannouka es director general del World Innovation Summit for Education (WISE), una iniciativa global de la Fundación Qatar dedicada a impulsar la innovación educativa. Antes de unirse a WISE en 2012, fue vicedecano ejecutivo de la Lee Kuan Yew School of Public Policy en la Universidad Nacional de Singapur y trabajó en McKinsey &amp; Company. Tiene un MBA de la London Business School y un LLB de la Universidad de Bristol, y es miembro de la Royal Society of Arts (RSA).">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Innovación, Investigación y Defensa de la Educación</div>
+            <div class="card-person__name">Stavros N. Yiannouka</div>
+            <div class="card-person__cargo">CEO, World Innovation Summit for Education (Qatar Foundation)</div>
+          </div>
+        </button>
+
+        <!-- 26 · Benjamin Ziff -->
+        <button class="card-person card-person--more" onclick="openBioModal(this)"
+          data-area="Asuntos Internacionales"
+          data-name="Benjamin Ziff"
+          data-cargo="Diplomático estadounidense (retirado)"
+          data-bio="Benjamin Ziff es un diplomático estadounidense con más de 30 años de experiencia en Washington D.C. y países de América Latina, Oriente Medio, Europa y Asia. Ha ocupado cargos como subsecretario de Estado Adjunto para Europa y Eurasia, jefe de misión en Cuba y embajador adjunto en España y Colombia. Fue director del Grupo de Trabajo sobre Migración del Departamento de Estado y Senior Fellow en el German Marshall Fund. Habla español, hebreo e italiano y ha recibido el Premio Murrow a la Excelencia en Diplomacia Pública.">
+          <div class="card-person__img img-placeholder">foto</div>
+          <div class="card-person__body">
+            <div class="card-person__area">Asuntos Internacionales</div>
+            <div class="card-person__name">Benjamin Ziff</div>
+            <div class="card-person__cargo">Diplomático estadounidense (retirado)</div>
+          </div>
+        </button>
+
+        <!-- Cargar más (solo mobile) -->
+        <div class="iab-load-more-wrap" id="iab-load-more-wrap">
+          <button class="ver-mas-carta" id="iab-cargar-mas-btn" onclick="iabLoadMore()" aria-expanded="false">
+            <span class="ver-mas-text">Cargar más</span><span class="ver-mas-chevron" aria-hidden="true">∨</span>
+          </button>
+        </div>
+
+      </div><!-- /iab-grid -->
+    </div>
+  </section>
+
+  <!-- PAT-004 · Bio modal (single, populated via JS) -->
+  <div class="bio-modal-overlay" id="bio-modal-overlay"
+    onclick="handleBioOverlayClick(event)" role="dialog" aria-modal="true" aria-labelledby="bio-modal-name">
+    <div class="bio-modal-inner" onclick="event.stopPropagation()">
+      <button class="bio-modal-close" onclick="closeBioModal()" aria-label="Cerrar">&#10005;</button>
+      <div class="bio-modal-img img-placeholder">foto</div>
+      <div class="bio-modal-body">
+        <div class="bio-modal-area" id="bio-modal-area-label"></div>
+        <div class="bio-modal-name" id="bio-modal-name"></div>
+        <div class="bio-modal-cargo" id="bio-modal-cargo"></div>
+        <div class="bio-modal-text" id="bio-modal-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       B3 · JUNIOR ADVISORY BOARD (sin cards ni modal)
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section" id="junior-advisory">
+    <div class="container">
+      <div class="section-head">
+        <h2>Junior Advisory Board</h2>
+      </div>
+      <div class="text-block-body" style="max-width:680px">
+        <p>El Junior Advisory Board está formado por alumnos de la red SEK que representan la voz de los estudiantes en la evolución del modelo educativo. Su participación garantiza que las iniciativas pedagógicas del grupo respondan a las necesidades e intereses reales de quienes aprenden.</p>
+      </div>
+
+      <div class="junior-list" style="margin-top:32px">
+
+        <div>
+          <div class="junior-college-name">SEK El Castillo</div>
+          <ul class="junior-students">
+            <li>Alejandro García Montoya</li>
+            <li>Sofía Martínez Redondo</li>
+            <li>Pablo López Tejerina</li>
+            <li>Carmen Rodríguez Alameda</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="junior-college-name">SEK Santa Isabel</div>
+          <ul class="junior-students">
+            <li>Miguel Fernández Castillo</li>
+            <li>Laura Sánchez Vargas</li>
+            <li>Diego Torres Paredes</li>
+            <li>Inés Moreno Llorente</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="junior-college-name">SEK Ciudalcampo</div>
+          <ul class="junior-students">
+            <li>Álvaro Jiménez Herrera</li>
+            <li>Valentina Cruz Bernal</li>
+            <li>Nicolás Ruiz Olmedo</li>
+            <li>Andrea Gómez Fuentes</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="junior-college-name">SEK Cataluña</div>
+          <ul class="junior-students">
+            <li>Marc Puig Anglada</li>
+            <li>Laia Vidal Navarro</li>
+            <li>Oriol Serra Mestres</li>
+            <li>Núria Pons Casanovas</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="junior-college-name">SEK Atlántico</div>
+          <ul class="junior-students">
+            <li>Xoán Varela Domínguez</li>
+            <li>Antía Castro Moreira</li>
+            <li>Roi Blanco Ferreiro</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="junior-college-name">SEK Dublín</div>
+          <ul class="junior-students">
+            <li>Aoife O'Brien</li>
+            <li>Ciarán Murphy</li>
+            <li>Siobhán Kelly</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       C1 · ¿POR QUÉ ELEGIR SEK? — SEK-CRD-002 (8 cards)
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section" id="por-que">
+    <div class="container">
+      <div class="section-head">
+        <h2>¿Por qué elegir SEK?</h2>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel-track-outer">
+          <div class="carousel-track" id="carousel-track">
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">130 años de historia</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">Modelo educativo propio</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">Red internacional de colegios</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">B Corp certificada</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">Bilingüismo e internacionalidad</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">Advisory Boards globales</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">Instalaciones de excelencia</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+            <div class="card-nav">
+              <div class="card-img img-placeholder"></div>
+              <div class="card-overlay"></div>
+              <div class="card-label">Comunidad SEK Alumni</div>
+              <div class="card-cta">Conocer más →</div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-arrows">
+          <button class="arrow-btn" id="arrow-prev" onclick="moveCarousel(-1)">&#8592;</button>
+          <button class="arrow-btn" id="arrow-next" onclick="moveCarousel(1)">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       C2 · FOOTER — SEK-NAV-002
+  ═══════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo"></div>
+        </div>
+        <div class="footer-col">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">MYSEK</a></li>
+            <li><a href="#">Webmail</a></li>
+            <li><a href="#">Email alumnos</a></li>
+            <li><a href="#">Gestión de servicios</a></li>
+            <li><a href="#">Teams</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <div class="footer-social">
+            <div class="social-icon">In</div>
+            <div class="social-icon">Tw</div>
+            <div class="social-icon">Li</div>
+            <div class="social-icon">Pi</div>
+            <div class="social-icon">Yt</div>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Política de cookies</a>
+            <a href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 SEK Education Group. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<!-- MOBILE DRAWER — SEK Education Group (2 niveles) -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <div class="drawer-logo"></div>
+    <button class="drawer-close" onclick="segCloseDrawer()">&#10005;</button>
+  </div>
+  <div class="seg-drawer-content">
+
+    <div id="seg-drawer-l1">
+      <button class="seg-drawer-item" onclick="segDrawerShowL2('seg-dl2-colegios')">
+        Colegios Internacionales SEK <span class="seg-drawer-item-arrow">›</span>
+      </button>
+      <button class="seg-drawer-item" onclick="segDrawerShowL2('seg-dl2-group')">
+        SEK Education Group <span class="seg-drawer-item-arrow">›</span>
+      </button>
+      <a href="#" class="seg-drawer-item">Universidad Camilo José Cela</a>
+      <a href="#" class="seg-drawer-item">Fundación Felipe Segovia</a>
+      <a href="#" class="seg-drawer-item">Alumni</a>
+      <a href="#" class="seg-drawer-item">Contacto</a>
+    </div>
+
+    <div id="seg-dl2-colegios" class="seg-drawer-l2">
+      <button class="seg-drawer-back" onclick="segDrawerBack()">
+        <span class="seg-drawer-back-arrow">›</span> Colegios
+      </button>
+      <a href="#" class="seg-drawer-subitem">SEK El Castillo</a>
+      <a href="#" class="seg-drawer-subitem">SEK Santa Isabel</a>
+      <a href="#" class="seg-drawer-subitem">SEK Ciudalcampo</a>
+      <a href="#" class="seg-drawer-subitem">SEK Cataluña</a>
+      <a href="#" class="seg-drawer-subitem">SEK Atlántico</a>
+      <a href="#" class="seg-drawer-subitem">SEK Alborbán</a>
+      <a href="#" class="seg-drawer-subitem">SEK Dublín</a>
+      <a href="#" class="seg-drawer-subitem">SEK Les Alpes</a>
+      <a href="#" class="seg-drawer-subitem">SEK Qatar</a>
+      <a href="#" class="seg-drawer-subitem">SEK Riyadh</a>
+      <a href="#" class="seg-drawer-subitem">SEK Online</a>
+    </div>
+
+    <div id="seg-dl2-group" class="seg-drawer-l2">
+      <button class="seg-drawer-back" onclick="segDrawerBack()">
+        <span class="seg-drawer-back-arrow">›</span> SEK Education Group
+      </button>
+      <a href="la-institucion.html" class="seg-drawer-subitem">La Institución</a>
+      <a href="#" class="seg-drawer-subitem">Principios y valores</a>
+      <a href="advisory-boards.html" class="seg-drawer-subitem">Advisory Boards</a>
+      <a href="#" class="seg-drawer-subitem">SEK Lab</a>
+      <a href="#" class="seg-drawer-subitem">B Corp</a>
+      <a href="#" class="seg-drawer-subitem">International Sports Academy</a>
+      <a href="#" class="seg-drawer-subitem">Desarrollo Integral del Talento</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* SEK-CON-008 — Scroll spy: marca ancla activa según sección visible */
+  (function() {
+    var sections = ['intro-iab', 'consejo-iab', 'junior-advisory'];
+    var links = document.querySelectorAll('#anchor-bar .anchor-link');
+    function onScroll() {
+      var current = '';
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) current = id;
+      });
+      links.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  /* Bio modal — backdrop click */
+  function handleBioOverlayClick(e) {
+    if (e.target === document.getElementById('bio-modal-overlay')) closeBioModal();
+  }
+
+  /* openBioModal: populate single modal from card data attributes */
+  function openBioModal(cardEl) {
+    var overlay = document.getElementById('bio-modal-overlay');
+    if (!overlay) return;
+    document.getElementById('bio-modal-area-label').textContent = cardEl.dataset.area  || '';
+    document.getElementById('bio-modal-name').textContent       = cardEl.dataset.name  || '';
+    document.getElementById('bio-modal-cargo').textContent      = cardEl.dataset.cargo || '';
+    document.getElementById('bio-modal-text').textContent       = cardEl.dataset.bio   || '';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = overlay.querySelector('.bio-modal-close');
+    if (closeBtn) setTimeout(function() { closeBtn.focus(); }, 50);
+  }
+
+  /* IAB grid — Cargar más / Ver menos (solo mobile) */
+  function iabLoadMore() {
+    var btn = document.getElementById('iab-cargar-mas-btn');
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    var cards = document.querySelectorAll('.card-person--more');
+    var textEl = btn.querySelector('.ver-mas-text');
+    var chevronEl = btn.querySelector('.ver-mas-chevron');
+    cards.forEach(function(c) { c.style.display = expanded ? '' : 'block'; });
+    textEl.textContent = expanded ? 'Cargar más' : 'Ver menos';
+    chevronEl.textContent = expanded ? '∨' : '∧';
+    btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  }
+
+  /* SEG drawer close */
+  function segCloseDrawer() {
+    var drawer = document.getElementById('nav-drawer');
+    if (!drawer) return;
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+    var btn = document.querySelector('.nav-hamburger');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    segDrawerBack();
+  }
+
+  /* Override toggleDrawer / closeDrawer for SEG pages */
+  function toggleDrawer() {
+    var drawer = document.getElementById('nav-drawer');
+    if (!drawer) return;
+    if (drawer.classList.contains('open')) {
+      segCloseDrawer();
+    } else {
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var btn = document.querySelector('.nav-hamburger');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+  function closeDrawer() { segCloseDrawer(); }
+</script>
+
+</body>
+</html>
