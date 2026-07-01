@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Institución — SEK Education Group</title>
-  <link rel="stylesheet" href="/shared/styles.css">
+  <link rel="stylesheet" href="../../shared/styles.css">
   <style>
-    /* Anchor bar: justo debajo del seg-nav (52px) */
-    #anchor-bar { top: 52px; }
+    #anchor-bar { top: 0; }
 
     /* Stats: mobile-first columna → row en tablet+ */
     .colegios-stats {
+      display: flex;
       flex-direction: column;
       gap: 16px;
       margin-bottom: 24px;
@@ -21,12 +21,16 @@
       flex-direction: row;
       align-items: center;
       gap: 14px;
+      border-left: none;
+      padding: 0;
     }
     .colegio-stat-num   { font-size: 22px; font-weight: 700; color: var(--gray-800); line-height: 1.2; }
     .colegio-stat-label { font-size: 13px; color: var(--gray-500); }
 
     @media (min-width: 768px) {
       .colegios-stats { flex-direction: row; gap: 32px; margin-bottom: 40px; padding-bottom: 32px; }
+      .colegio-stat { padding: 0 32px; border-left: 1px solid var(--gray-200); }
+      .colegio-stat:first-child { border-left: none; padding-left: 0; }
     }
 
     /* Carousel nativo: scroll container (siempre outer) */
@@ -91,103 +95,6 @@
 <!-- PAGE WRAPPER -->
 <div id="page-wrapper">
 
-  <!-- ═══════════════════════════════════════════════════════════
-       NAVEGACIÓN — SEK Education Group (menú único, 2 niveles)
-  ═══════════════════════════════════════════════════════════ -->
-  <nav id="seg-nav">
-
-    <!-- Desktop -->
-    <div class="container">
-      <div class="nav-inner">
-        <div class="seg-nav-logo">SEK Education Group</div>
-        <ul class="nav-items">
-          <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios'); event.stopPropagation();">
-            Colegios <span class="nav-chevron">▾</span>
-          </li>
-          <li class="nav-item" onclick="toggleDropdown(this,'dd-seg-group'); event.stopPropagation();">
-            SEK Education Group <span class="nav-chevron">▾</span>
-          </li>
-          <li class="nav-item">UCJC</li>
-          <li class="nav-item">Fundación FS</li>
-          <li class="nav-item">Alumni</li>
-          <li class="nav-item">Contacto</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Dropdown: Colegios -->
-    <div class="nav-dropdown" id="dd-colegios">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col">
-          <h4>En España</h4>
-          <ul>
-            <li><a href="#">SEK El Castillo</a></li>
-            <li><a href="#">SEK Santa Isabel</a></li>
-            <li><a href="#">SEK Ciudalcampo</a></li>
-            <li><a href="#">SEK Cataluña</a></li>
-            <li><a href="#">SEK Atlántico</a></li>
-            <li><a href="#">SEK Alborbán</a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-col">
-          <h4>Fuera de España</h4>
-          <ul>
-            <li><a href="#">SEK Dublín</a></li>
-            <li><a href="#">SEK Les Alpes</a></li>
-            <li><a href="#">SEK Qatar</a></li>
-            <li><a href="#">SEK Riyadh</a></li>
-          </ul>
-          <h4 style="margin-top:14px">Online</h4>
-          <ul>
-            <li><a href="#">SEK Online</a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-stat">
-            <span class="nav-dd-stat-num">11</span>
-            <span class="nav-dd-stat-text">colegios en 4 países</span>
-          </div>
-          <div style="margin-top:10px">
-            <a href="#" class="nav-dd-link-title">Ver todos los colegios</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dropdown: SEK Education Group -->
-    <div class="nav-dropdown" id="dd-seg-group">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col" style="min-width:280px">
-          <ul>
-            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">La Institución</span><span class="nav-dd-link-desc">Historia y trayectoria del grupo</span></a></li>
-            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Principios y valores</span><span class="nav-dd-link-desc">Nuestra filosofía educativa</span></a></li>
-            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Advisory Boards</span><span class="nav-dd-link-desc">Consejo asesor internacional</span></a></li>
-            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">SEK Lab</span><span class="nav-dd-link-desc">Innovación y pedagogía</span></a></li>
-            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">B Corp</span><span class="nav-dd-link-desc">Empresa B certificada</span></a></li>
-            <li style="padding-bottom:4px"><a href="#"><span class="nav-dd-link-title">Int Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
-            <li><a href="#"><span class="nav-dd-link-title">Desarrollo Integral del Talento</span><span class="nav-dd-link-desc">Desarrollo personal integral</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-stat">
-            <span class="nav-dd-stat-num">130</span>
-            <span class="nav-dd-stat-text">años formando generaciones</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile topbar -->
-    <div class="nav-topbar-mobile">
-      <div class="nav-logo-mobile"></div>
-      <button class="nav-hamburger" onclick="openDrawer()">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-  </nav>
 
   <!-- ═══════════════════════════════════════════════════════════
        1. HERO — SEK-CAB-002 variante VID-LOOP
@@ -211,14 +118,14 @@
   <!-- ═══════════════════════════════════════════════════════════
        2. BARRA DE ANCLAJE — SEK-CON-008 · PAT-009
   ═══════════════════════════════════════════════════════════ -->
-  <div id="anchor-bar">
+  <nav id="anchor-bar" aria-label="Navegación de sección">
     <div class="anchor-inner">
       <a href="#quienes-somos"  class="anchor-link active">Quiénes somos</a>
       <a href="#colegios"       class="anchor-link">Colegios</a>
       <a href="#ucjc"           class="anchor-link">UCJC</a>
       <a href="#ciento-treinta" class="anchor-link">130 años</a>
     </div>
-  </div>
+  </nav>
 
   <!-- ═══════════════════════════════════════════════════════════
        3. QUIÉNES SOMOS — SEK-CON-001 variante A (sin imagen)
@@ -690,7 +597,7 @@
   </div>
 </div>
 
-<script src="/shared/wireframe.js"></script>
+<script src="../../shared/wireframe.js" defer></script>
 <script>
   /* applyCarousel hookeado al toggle de vista — esta página usa scroll nativo */
   function applyCarousel() { segRefreshAll(); }
