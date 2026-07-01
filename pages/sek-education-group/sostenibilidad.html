@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sostenibilidad — SEK Education Group</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+
+    /* Sin nav: anchor bar arranca en el tope */
+    #anchor-bar { top: 0; }
+
+    /* ── FONDOS ALTERNANTES ─────────────────────────────────────── */
+    .bg-gray { background: var(--gray-100); }
+
+    /* ── HERO ──────────────────────────────────────────────────── */
+    @media (min-width: 768px)  { #hero { height: 380px; } }
+    @media (min-width: 1200px) { #hero { height: 480px; } }
+
+    /* ── CRD-003-V · Feature cards vertical ────────────────────── */
+    .mod-icon-ph { width: 44px; height: 44px; border-radius: 50%; background: var(--gray-300); margin-bottom: 14px; flex-shrink: 0; }
+    .mod-crd-title { font-size: 14px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; }
+    .mod-crd-text  { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+    .mod-crd-v-list { display: flex; flex-direction: column; gap: 10px; }
+    .mod-crd-v {
+      border: 1px solid var(--gray-200); border-radius: var(--radius);
+      padding: 16px; display: flex; gap: 14px; align-items: flex-start;
+    }
+    .mod-crd-v .mod-icon-ph { margin-bottom: 0; width: 40px; height: 40px; }
+    @media (min-width: 768px) {
+      .mod-crd-v-list { flex-direction: row; }
+      .mod-crd-v { flex-direction: column; flex: 1; }
+      .mod-crd-v .mod-icon-ph { margin-bottom: 14px; }
+    }
+
+    /* ── CON-021 ACORDEÓN CON CABECERA ILUSTRADA ───────────────── */
+    .con021-list { border-top: 1px solid var(--gray-200); }
+    .con021-item {
+      border-bottom: 1px solid var(--gray-200);
+      border-left: 4px solid transparent;
+      transition: border-left-color 0.15s;
+      overflow: hidden;
+    }
+    .con021-item.open { border-left-color: var(--gray-800); }
+    .con021-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 16px 20px 12px; cursor: pointer; user-select: none;
+    }
+    .con021-head:hover { background: var(--gray-100); }
+    .con021-icon { width: 36px; height: 36px; background: var(--gray-300); border-radius: 50%; flex-shrink: 0; }
+    .con021-head-text { flex: 1; min-width: 0; }
+    .con021-head-name  { font-size: 18px; font-weight: 700; color: var(--gray-800); line-height: 1.2; margin-bottom: 5px; }
+    .con021-head-phrase { font-size: 14px; color: var(--gray-500); line-height: 1.4; }
+    .con021-chevron { color: var(--gray-500); font-size: 12px; flex-shrink: 0; transition: transform 0.2s; }
+    .con021-item.open .con021-chevron { transform: rotate(180deg); }
+    .con021-body { display: none; }
+    .con021-item.open .con021-body { display: block; }
+    .con021-subblock { padding: 24px 24px 24px 60px; border-bottom: 1px solid var(--gray-200); }
+    .con021-subblock:last-child { border-bottom: none; }
+    .con021-subblock:nth-child(odd)  { background: var(--white); }
+    .con021-subblock:nth-child(even) { background: var(--gray-100); }
+    .con021-subblock h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-500); margin-bottom: 12px; }
+    .con021-subblock p  { font-size: 16px; color: var(--gray-600); line-height: 1.65; max-width: 640px; }
+    .con021-subblock p + p { margin-top: 10px; }
+
+    @media (min-width: 768px) {
+      .con021-icon         { width: 48px; height: 48px; }
+      .con021-head         { gap: 20px; padding: 22px 20px 22px 14px; }
+      .con021-head-name    { font-size: 20px; }
+      .con021-head-phrase  { font-size: 15px; }
+      .con021-subblock     { padding: 28px 32px 28px 82px; }
+    }
+    @media (min-width: 1200px) {
+      .con021-icon         { width: 64px; height: 64px; }
+      .con021-head         { gap: 24px; padding: 28px 28px 28px 16px; }
+      .con021-head-name    { font-size: 22px; margin-bottom: 6px; }
+      .con021-head-phrase  { font-size: 16px; }
+      .con021-subblock     { padding: 36px 40px 36px 104px; }
+    }
+
+    /* ── NOTICIAS — CRD-009 ────────────────────────────────────── */
+    /* ── CRD-009 Noticias ─────────────────────────────────────── */
+    .sos-news-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px; margin-bottom: 20px;
+    }
+    .sos-news-header h2 { font-size: 20px; font-weight: 700; color: var(--gray-800); margin-bottom: 4px; }
+    .sos-news-header p  { font-size: 13px; color: var(--gray-500); margin: 0; }
+    .sos-news-ver-mas-header {
+      font-size: 13px; font-weight: 600; color: var(--gray-700);
+      text-decoration: underline; white-space: nowrap; align-self: center; flex-shrink: 0;
+    }
+    .sos-news-outer {
+      overflow-x: auto; scrollbar-width: none;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    .sos-news-outer::-webkit-scrollbar { display: none; }
+    .sos-news-track { display: flex; gap: 16px; }
+    .sos-news-card {
+      flex-shrink: 0; width: min(272px, calc(100vw - 72px)); scroll-snap-align: start;
+      border: 1px solid var(--gray-200); border-radius: var(--radius);
+      overflow: hidden; background: var(--white); display: flex; flex-direction: column;
+    }
+    .sos-news-media { position: relative; width: 100%; aspect-ratio: 16 / 9; flex-shrink: 0; }
+    .sos-news-tags { position: absolute; top: 10px; left: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .sos-news-tag {
+      font-size: 11px; font-weight: 600; color: var(--gray-700);
+      background: rgba(255,255,255,.92); border: 1px solid rgba(0,0,0,.06);
+      border-radius: 20px; padding: 3px 9px;
+    }
+    .sos-news-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+    .sos-news-title {
+      font-size: 15px; font-weight: 700; color: var(--gray-800);
+      line-height: 1.3; margin-bottom: 8px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .sos-news-excerpt {
+      font-size: 14px; color: var(--gray-600); line-height: 1.55; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .sos-news-date { font-size: 11px; color: var(--gray-400); font-family: monospace; margin-bottom: 10px; }
+    .sos-news-link { font-size: 13px; font-weight: 600; color: var(--gray-700); text-decoration: none; }
+    .sos-news-link::after { content: " \2192"; }
+    .sos-news-arrows { display: flex; gap: 8px; margin-top: 14px; justify-content: flex-end; }
+
+    @media (min-width: 768px) { .sos-news-card { width: calc(50% - 8px); } }
+    @media (min-width: 1200px) {
+      .sos-news-outer  { overflow: visible; scroll-snap-type: none; }
+      .sos-news-track  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+      .sos-news-card   { width: auto; scroll-snap-align: unset; }
+      .sos-news-arrows { display: none; }
+      .sos-news-header h2 { font-size: 26px; }
+    }
+
+    /* ── POR QUE ELEGIR SEK — CRD-002 ─────────────────────────── */
+    .sos-porque-outer {
+      overflow-x: auto; scrollbar-width: none;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    .sos-porque-outer::-webkit-scrollbar { display: none; }
+    .sos-porque-track { display: flex; flex-wrap: nowrap; gap: 12px; }
+    .sos-porque-track .card-nav { scroll-snap-align: start; }
+
+    /* ── CON-010 · Texto con imagen/vídeo lado a lado ──────────── */
+    .mod-grid-2 { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .mod-content p  { font-size: 14px; color: var(--gray-600); line-height: 1.65; margin-bottom: 12px; }
+    .mod-content p:last-of-type { margin-bottom: 0; }
+    .mod-img-ph { background: var(--gray-200); border-radius: var(--radius); width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
+    .mod-img-ph::before { content: ''; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.92); position: absolute; }
+    .mod-img-ph::after  { content: ''; border-left: 14px solid var(--gray-700); border-top: 8px solid transparent; border-bottom: 8px solid transparent; position: absolute; margin-left: 4px; }
+    @media (min-width: 768px)  {
+      .mod-grid-2 { grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+      .mod-img-ph { height: 260px; }
+    }
+    @media (min-width: 1200px) { .mod-img-ph { height: 320px; } }
+
+    /* Modal vídeo */
+    .vid-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 9999; align-items: center; justify-content: center; }
+    .vid-modal.open { display: flex; }
+    .vid-modal__inner { background: var(--gray-800); border-radius: var(--radius); padding: 24px; width: 90%; max-width: 640px; position: relative; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+    .vid-modal__close { position: absolute; top: -14px; right: -14px; width: 28px; height: 28px; border-radius: 50%; background: var(--white); border: none; cursor: pointer; font-size: 14px; font-weight: 700; color: var(--gray-800); display: flex; align-items: center; justify-content: center; }
+    .vid-modal__label { font-size: 12px; color: var(--gray-400); font-family: monospace; }
+
+  </style>
+</head>
+<body>
+<div id="page-wrapper">
+
+  <!-- A HERO SEK-CAB-002 -->
+  <section id="hero">
+    <div class="hero-bg img-placeholder">imagen sostenibilidad SEK Education Group</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="breadcrumb"><span>SEK</span> Sostenibilidad</div>
+      <div class="hero-text">
+        <h1>Sostenibilidad e Impacto Positivo</h1>
+        <p class="subtitle">Educar con prop&#xF3;sito es formar ciudadanos capaces de transformar su entorno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- B BARRA DE ANCLAJE SEK-CON-008 -->
+  <div id="anchor-bar">
+    <div class="anchor-inner">
+      <a href="#educacion"  class="anchor-link active">Educaci&#xF3;n</a>
+      <a href="#compromiso" class="anchor-link">Medioambiente</a>
+      <a href="#gestion"    class="anchor-link">Gesti&#xF3;n</a>
+      <a href="#noticias"   class="anchor-link">Noticias</a>
+    </div>
+  </div>
+
+  <!-- C INTRO + PILARES VISUAL — SEK-CON-001 + SEK-CRD-003-V — misma sección -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Sostenibilidad e Impacto Positivo</h2>
+        <p>Educar con prop&#xF3;sito es formar ciudadanos capaces de transformar su entorno.</p>
+      </div>
+      <div class="text-block-body" style="margin-bottom:8px">
+        <p>En SEK International Schools entendemos la sostenibilidad como una forma de vivir, aprender y estar en el mundo. Desde 1892, preparamos a nuestros estudiantes para liderar con responsabilidad, empat&#xED;a y visi&#xF3;n global.</p>
+      </div>
+      <p style="font-size:13px;color:var(--gray-500);margin-bottom:28px">Nos apoyamos en tres grandes pilares para generar un impacto positivo real:</p>
+      <div class="mod-crd-v-list">
+        <div class="mod-crd-v">
+          <div class="mod-icon-ph"></div>
+          <div>
+            <div class="mod-crd-title">Educaci&#xF3;n transformadora</div>
+            <p class="mod-crd-text">Creemos firmemente que la educaci&#xF3;n tiene un poder transformador imparable.</p>
+          </div>
+        </div>
+        <div class="mod-crd-v">
+          <div class="mod-icon-ph"></div>
+          <div>
+            <div class="mod-crd-title">Compromiso medioambiental</div>
+            <p class="mod-crd-text">Cuidar del planeta es una responsabilidad compartida y una prioridad educativa.</p>
+          </div>
+        </div>
+        <div class="mod-crd-v">
+          <div class="mod-icon-ph"></div>
+          <div>
+            <div class="mod-crd-title">Gesti&#xF3;n responsable</div>
+            <p class="mod-crd-text">Nuestro modelo de sostenibilidad incluye la escucha activa y la participaci&#xF3;n de toda la comunidad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- D PILAR 1 EDUCACION TRANSFORMADORA SEK-CON-021 -->
+  <section id="educacion" class="section bg-gray">
+    <div class="container">
+      <div class="section-head">
+        <h2>Educaci&#xF3;n transformadora</h2>
+        <p>Nuestro modelo fomenta el pensamiento cr&#xED;tico, la acci&#xF3;n responsable y el compromiso con los grandes retos globales.</p>
+      </div>
+      <div class="con021-list">
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Premios al mejor Proyecto Personal y Monograf&#xED;a con impacto positivo</div>
+              <div class="con021-head-phrase">Reconocemos el impacto positivo desde el aula</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Desde el curso 2024/25, reconocemos los proyectos personales y monograf&#xED;as m&#xE1;s inspiradores por su impacto positivo, que son premiados durante el D&#xED;a SEK y reconocidos por toda la comunidad en eventos y canales del grupo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Ciudadan&#xED;a Global en el aula</div>
+              <div class="con021-head-phrase">Inspirados por Harvard, conectados con los ODS</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Implementamos el enfoque de ciudadan&#xED;a global activa inspirado por el trabajo del prof. Reimers, de la Universidad de Harvard. Fomentamos la reflexi&#xF3;n en torno al prop&#xF3;sito personal, el servicio comunitario y los retos alineados a los Objetivos de Desarrollo Sostenible.</p>
+              <p>Desde esta mirada naci&#xF3; <em>Empowering Young Voices for a Sustainable Future</em>, un congreso anual en el que estudiantes de Europa, Oriente Medio y otros centros internacionales reflexionan juntos sobre sostenibilidad e impacto social.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Emprendimiento con impacto desde edades tempranas</div>
+              <div class="con021-head-phrase">Soluciones reales a retos reales</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Gracias a alianzas como Junior Achievement, Design for Change o nuestro Impact Lab Junior SEK, los estudiantes identifican retos reales y dise&#xF1;an soluciones con impacto.</p>
+              <p>Tambi&#xE9;n participamos en otras convocatorias como Flow to the Future (Fundaci&#xF3;n Capgemini), Ecoeduca (Port Aventura), Tecnolog&#xED;a Humanitaria (Cruz Roja) o los Zayed Sustainability Prize, en la categor&#xED;a Global High Schools.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">SEKMUN</div>
+              <div class="con021-head-phrase">6.000 j&#xF3;venes diplom&#xE1;ticos formados desde 2006</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Nuestro modelo de Naciones Unidas, autorizado por la ONU desde 2006, ya ha formado a m&#xE1;s de 6.000 j&#xF3;venes de entre 15 y 18 a&#xF1;os, como diplom&#xE1;ticos del futuro. Participan estudiantes de nuestros colegios, pero tambi&#xE9;n de otros centros educativos del mundo (Colombia, Kuwait, Egipto, Estados Unidos&#x2026;).</p>
+              <p>Durante varios d&#xED;as, estos estudiantes asumen el rol de delegados, embajadores y autoridades para debatir, reflexionar y proponer soluciones a desaf&#xED;os como el cambio clim&#xE1;tico, los derechos humanos o el impacto de la IA.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Una comunidad sensibilizada y solidaria</div>
+              <div class="con021-head-phrase">Campa&#xF1;as, festivales y carreras ben&#xE9;ficas</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Estudiantes y profesores promueven campa&#xF1;as, festivales y carreras ben&#xE9;ficas para apoyar a entidades como Cruz Roja, Fundaci&#xF3;n CardioDreams o Por la Sonrisa de un Ni&#xF1;o. Tambi&#xE9;n conmemoramos d&#xED;as internacionales clave como el D&#xED;a de la Paz, la Tierra, la Infancia o la Mujer, con actividades para reflexionar, aprender y actuar junto a toda la comunidad SEK.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- E PILAR 2 COMPROMISO MEDIOAMBIENTAL SEK-CON-021 -->
+  <section id="compromiso" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Compromiso medioambiental</h2>
+        <p>Impulsamos acciones concretas para reducir nuestra huella ecol&#xF3;gica y generar conciencia ambiental desde el aula.</p>
+      </div>
+      <div class="con021-list">
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Red Internacional Eco-Schools</div>
+              <div class="con021-head-phrase">52.000 escuelas, 13 millones de estudiantes</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Desde el curso 2024/25, todos nuestros colegios SEK est&#xE1;n sum&#xE1;ndose a esta red global, formada ya por m&#xE1;s de 52.000 escuelas y m&#xE1;s de 13 millones de estudiantes que comparten el mismo prop&#xF3;sito: cuidar nuestro planeta.</p>
+              <p>A trav&#xE9;s de Eco-Comit&#xE9;s liderados por alumnos, se diagnostican las necesidades de cada centro y se ejecutan planes de acci&#xF3;n en &#xE1;reas clave como residuos, biodiversidad, alimentaci&#xF3;n, bienestar o agua.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Reducci&#xF3;n de nuestra huella de carbono</div>
+              <div class="con021-head-phrase">&#x2212;85% emisiones, Bosque SEK en &#xC1;frica</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Desde hace casi una d&#xE9;cada, SEK-El Castillo y SEK-Catalunya desarrollan su actividad gracias a dos plantas de biomasa con la que redujimos en un 85% nuestras emisiones en estos centros. Sustituimos as&#xED; el consumo de gas&#xF3;leo por astillas de madera procedentes de actividades para la prevenci&#xF3;n de incendios.</p>
+              <p>Adem&#xE1;s, compensamos nuestra huella de carbono total con la ONG Trees4Humanity, fundada por un alumni de SEK International Schools, con la que hemos creado el Bosque SEK en comunidades de Kenia y Uganda, a trav&#xE9;s de la plantaci&#xF3;n de m&#xE1;s de 10.000 &#xE1;rboles.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Gesti&#xF3;n responsable de residuos y recursos</div>
+              <div class="con021-head-phrase">Digitalizaci&#xF3;n, agua filtrada, residuos cero</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Promovemos la digitalizaci&#xF3;n de comunicaciones y procesos internos con el objetivo de reducir el uso del papel. Tambi&#xE9;n estamos sustituyendo paulatinamente el consumo de agua embotellada por fuentes de agua filtrada, jarras de vidrio y, en los casos inevitables, botellas 100% recicladas y reciclables.</p>
+              <p>Estas acciones se refuerzan con la separaci&#xF3;n de residuos en interiores y patios, compostaje en algunos de nuestros centros, y acuerdos de colaboraci&#xF3;n con empresas especializadas para residuos electr&#xF3;nicos o de laboratorio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Ecosia como buscador predeterminado</div>
+              <div class="con021-head-phrase">208.000 b&#xFA;squedas = 4.168 &#xE1;rboles plantados</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Desde 2025, Ecosia se ha convertido en el buscador predeterminado de todos nuestros dispositivos, habiendo acumulado ya m&#xE1;s de 208.000 b&#xFA;squedas que equivalen a 4.168 &#xE1;rboles plantados, contribuyendo activamente a la recuperaci&#xF3;n de ecosistemas a trav&#xE9;s de la reforestaci&#xF3;n global.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- F PILAR 3 GESTION RESPONSABLE SEK-CON-021 -->
+  <section id="gestion" class="section bg-gray">
+    <div class="container">
+      <div class="section-head">
+        <h2>Gesti&#xF3;n responsable</h2>
+        <p>Crear el presente y el futuro que queremos es responsabilidad de todos los que hacemos posible SEK.</p>
+      </div>
+      <div class="con021-list">
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Junior Advisory Board</div>
+              <div class="con021-head-phrase">Los estudiantes asesoran directamente a la presidencia</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Un consejo de estudiantes asesora cada a&#xF1;o directamente a nuestra presidenta, Nieves Segovia, compartiendo sus propuestas e inquietudes sobre educaci&#xF3;n, sostenibilidad, innovaci&#xF3;n, tecnolog&#xED;a o bienestar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Escucha activa a familias y docentes</div>
+              <div class="con021-head-phrase">Di&#xE1;logo continuo en todos los niveles</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Desde el Aula de Familias hasta los desayunos con Direcci&#xF3;n, encuestas, focus groups o sesiones abiertas, creamos espacios de di&#xE1;logo y mejora continua. Abordamos tem&#xE1;ticas como la seguridad en entornos digitales, el bienestar y la gesti&#xF3;n emocional, la autonom&#xED;a y el pensamiento cr&#xED;tico, o el desarrollo profesional.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Reconocimiento UNICEF Espa&#xF1;a</div>
+              <div class="con021-head-phrase">Centros referentes en Derechos de Infancia</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>Todos los colegios SEK en Espa&#xF1;a han sido reconocidos como <em>centros referentes en Derechos de Infancia</em> por UNICEF.</p>
+              <p>Este programa impulsa la formaci&#xF3;n docente, la participaci&#xF3;n estudiantil y la creaci&#xF3;n de espacios de bienestar, en l&#xED;nea con la Convenci&#xF3;n sobre los Derechos del Ni&#xF1;o.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="con021-item">
+          <div class="con021-head" onclick="toggleCon021(this)">
+            <div class="con021-icon"></div>
+            <div class="con021-head-text">
+              <div class="con021-head-name">Somos B Corp</div>
+              <div class="con021-head-phrase">Primera instituci&#xF3;n educativa espa&#xF1;ola certificada B Corp</div>
+            </div>
+            <span class="con021-chevron">&#x2228;</span>
+          </div>
+          <div class="con021-body">
+            <div class="con021-subblock">
+              <p>SEK Education Group fue la primera instituci&#xF3;n educativa espa&#xF1;ola en certificar como B Corp en 2020. Demostramos con evidencias los altos est&#xE1;ndares en impacto social y ambiental que gu&#xED;an nuestras decisiones y nuestra experiencia de aprendizaje.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- G.5 BCORP VIDEO · SEK-CON-010 -->
+  <section class="section">
+    <div class="container mod-content">
+      <div class="section-head">
+        <h2>La primera instituci&#xF3;n educativa espa&#xF1;ola certificada B Corp</h2>
+      </div>
+      <div class="mod-grid-2">
+        <div>
+          <p>La certificaci&#xF3;n B Corp reconoce a las empresas que cumplen los m&#xE1;s altos est&#xE1;ndares de desempe&#xF1;o social y ambiental, transparencia y responsabilidad. SEK Education Group la obtuvo en 2020, demostrando con evidencias que el bienestar de las personas y del planeta est&#xE1; en el centro de todo lo que hacemos.</p>
+          <p>Queremos dar las gracias por poner su voz y su coraz&#xF3;n en este v&#xED;deo a <strong>Menc&#xED;a G&#xF3;mez</strong> e <strong>Ignacio Busto</strong>, alumnos de primaria y bachillerato, de SEK International Schools; a <strong>Cristina Herrero</strong>, alumna del Grado de Odontolog&#xED;a de la UCJC; a <strong>Ana Bel&#xE9;n Fr&#xED;as</strong>, profesora del Colegio SEK-El Castillo, a <strong>Max R&#xF6;mer</strong>, profesor de la UCJC; y a <strong>Nieves Segovia</strong>, presidenta de SEK Education Group.</p>
+        </div>
+        <div>
+          <div class="mod-img-ph" onclick="openVidModal()"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal vídeo B Corp -->
+  <div class="vid-modal" id="vidModal" onclick="closeVidModal(event)">
+    <div class="vid-modal__inner">
+      <button class="vid-modal__close" onclick="closeVidModal()">&#x2715;</button>
+      <span class="vid-modal__label">[ v&#xED;deo YouTube — embed ]</span>
+    </div>
+  </div>
+
+  <!-- G TE LO CONTAMOS SEK-CRD-009 -->
+  <section id="noticias" class="section">
+    <div class="container">
+      <div class="sos-news-header">
+        <div>
+          <h2>Te lo contamos</h2>
+          <p>Art&#xED;culos, noticias e iniciativas sobre sostenibilidad en SEK</p>
+        </div>
+        <a href="#" class="sos-news-ver-mas-header">Ver todos &#x2192;</a>
+      </div>
+
+      <div class="sos-news-outer" id="outerNews">
+        <div class="sos-news-track">
+
+          <div class="sos-news-card">
+            <div class="sos-news-media img-placeholder">
+              <div class="sos-news-tags"><span class="sos-news-tag">Medio ambiente</span></div>
+            </div>
+            <div class="sos-news-body">
+              <div class="sos-news-title">SEK avanza hacia la neutralidad de carbono en todos sus centros</div>
+              <p class="sos-news-excerpt">El grupo presenta su hoja de ruta para reducir las emisiones un 40% antes de 2030, con inversi&#xF3;n en energ&#xED;as renovables y eficiencia energ&#xE9;tica.</p>
+              <div class="sos-news-date">12 jun 2025</div>
+              <a href="#" class="sos-news-link">Saber m&#xE1;s</a>
+            </div>
+          </div>
+
+          <div class="sos-news-card">
+            <div class="sos-news-media img-placeholder">
+              <div class="sos-news-tags">
+                <span class="sos-news-tag">Comunidad</span>
+                <span class="sos-news-tag">Impacto social</span>
+              </div>
+            </div>
+            <div class="sos-news-body">
+              <div class="sos-news-title">M&#xE1;s de 3.000 alumnos de SEK participan en proyectos de impacto social este curso</div>
+              <p class="sos-news-excerpt">Huertos urbanos, bancos de alimentos y programas de voluntariado son algunas de las iniciativas que los colegios SEK han impulsado en colaboraci&#xF3;n con sus comunidades locales.</p>
+              <div class="sos-news-date">3 abr 2025</div>
+              <a href="#" class="sos-news-link">Saber m&#xE1;s</a>
+            </div>
+          </div>
+
+          <div class="sos-news-card">
+            <div class="sos-news-media img-placeholder">
+              <div class="sos-news-tags"><span class="sos-news-tag">B Corp</span></div>
+            </div>
+            <div class="sos-news-body">
+              <div class="sos-news-title">SEK renueva su certificaci&#xF3;n B Corp con la puntuaci&#xF3;n m&#xE1;s alta hasta la fecha</div>
+              <p class="sos-news-excerpt">La evaluaci&#xF3;n independiente reconoce los avances del grupo en gobernanza, impacto ambiental y bienestar de trabajadores y comunidades.</p>
+              <div class="sos-news-date">18 feb 2025</div>
+              <a href="#" class="sos-news-link">Saber m&#xE1;s</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sos-news-arrows">
+        <button class="arrow-btn" id="prevNews" onclick="scrollNews(-1)">&#x2190;</button>
+        <button class="arrow-btn" id="nextNews" onclick="scrollNews(1)">&#x2192;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- H POR QUE ELEGIR SEK SEK-CRD-002 -->
+  <section id="por-que" class="section bg-gray">
+    <div class="container">
+      <div class="section-head">
+        <h2>&#xBF;Por qu&#xE9; elegir SEK?</h2>
+      </div>
+      <div class="sos-porque-outer" id="porque-outer">
+        <div class="sos-porque-track">
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Modelo educativo</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Sostenibilidad</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Programa IB</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Idiomas</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Instalaciones</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Comunidad</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Etapas educativas</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+          <div class="card-nav"><div class="card-img img-placeholder">imagen</div><div class="card-overlay"></div><span class="card-label">Experiencias internacionales</span><span class="card-cta">Descubre m&#xE1;s &#x203A;</span></div>
+        </div>
+      </div>
+      <div class="carousel-arrows">
+        <button class="arrow-btn" id="prev-porque" onclick="porqueScroll(-1)">&#x2190;</button>
+        <button class="arrow-btn" id="next-porque" onclick="porqueScroll(1)">&#x2192;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- I FOOTER SEK-NAV-002 -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"></div>
+          <div class="footer-social" style="margin-top:16px">
+            <div class="social-icon">in</div>
+            <div class="social-icon">tw</div>
+            <div class="social-icon">ig</div>
+            <div class="social-icon">yt</div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>SEK Education Group</h4>
+          <ul>
+            <li><a href="#">La Instituci&#xF3;n</a></li>
+            <li><a href="#">Principios y valores</a></li>
+            <li><a href="#">Sostenibilidad</a></li>
+            <li><a href="#">Advisory Boards</a></li>
+            <li><a href="#">B Corp</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Colegios</h4>
+          <ul>
+            <li><a href="#">SEK El Castillo</a></li>
+            <li><a href="#">SEK Santa Isabel</a></li>
+            <li><a href="#">SEK Ciudalcampo</a></li>
+            <li><a href="#">SEK Catalu&#xF1;a</a></li>
+            <li><a href="#">SEK Atl&#xE1;ntico</a></li>
+            <li><a href="#">SEK Albor&#xE1;n</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Internacional</h4>
+          <ul>
+            <li><a href="#">SEK Dubl&#xED;n</a></li>
+            <li><a href="#">SEK Les Alpes</a></li>
+            <li><a href="#">SEK Qatar</a></li>
+            <li><a href="#">UCJC</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal" style="flex-direction:row; gap:16px; margin-bottom:12px">
+          <a href="#">Pol&#xED;tica de privacidad</a>
+          <a href="#">Aviso legal</a>
+          <a href="#">Cookies</a>
+        </div>
+        <span>&#xA9; 2025 SEK Education Group</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../../shared/wireframe.js"></script>
+<script>
+
+  /* Anchor bar highlight */
+  (function() {
+    var sections = ['educacion','compromiso','gestion','noticias'];
+    var links = document.querySelectorAll('.anchor-link');
+    window.addEventListener('scroll', function() {
+      var y = window.scrollY + 80;
+      var active = null;
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && el.offsetTop <= y) active = id;
+      });
+      links.forEach(function(l) {
+        l.classList.toggle('active', l.getAttribute('href').replace('#','') === active);
+      });
+    }, { passive: true });
+  })();
+
+  /* Modal vídeo B Corp */
+  function openVidModal() { document.getElementById('vidModal').classList.add('open'); }
+  function closeVidModal(e) {
+    if (!e || e.target === document.getElementById('vidModal') || e.currentTarget.classList.contains('vid-modal__close')) {
+      document.getElementById('vidModal').classList.remove('open');
+    }
+  }
+
+  /* CON-021 Acordeon exclusivo (PAT-001) */
+  function toggleCon021(head) {
+    var item = head.closest('.con021-item');
+    var list = item.closest('.con021-list');
+    var isOpen = item.classList.contains('open');
+    list.querySelectorAll('.con021-item').forEach(function(i) { i.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* News carousel */
+  function scrollNews(dir) {
+    var outer = document.getElementById('outerNews');
+    var card  = outer.querySelector('.sos-news-card');
+    outer.scrollBy({ left: dir * (card.offsetWidth + 16), behavior: 'smooth' });
+    setTimeout(updateNewsArrows, 350);
+  }
+  function updateNewsArrows() {
+    var outer = document.getElementById('outerNews');
+    var prev  = document.getElementById('prevNews');
+    var next  = document.getElementById('nextNews');
+    if (!outer || !prev || !next) return;
+    var hidden = outer.scrollWidth <= outer.clientWidth + 1;
+    if (hidden) { prev.style.display = 'none'; next.style.display = 'none'; return; }
+    prev.style.display = 'flex'; next.style.display = 'flex';
+    prev.disabled = outer.scrollLeft <= 1;
+    next.disabled = outer.scrollLeft + outer.clientWidth >= outer.scrollWidth - 1;
+  }
+  document.getElementById('outerNews').addEventListener('scroll', updateNewsArrows, { passive:true });
+  window.addEventListener('load', updateNewsArrows);
+
+  /* Por que elegir SEK carousel */
+  function porqueScroll(dir) {
+    var outer = document.getElementById('porque-outer');
+    var card  = outer.querySelector('.card-nav');
+    outer.scrollBy({ left: dir * (card.offsetWidth + 12), behavior: 'smooth' });
+  }
+
+</script>
+</body>
+</html>
