@@ -247,6 +247,38 @@ body {
 }
 .ver-mas-chevron { font-size: 14px; line-height: 1; }
 
+/* ── PATRÓN GENÉRICO VER MÁS — mobile (PAT-VER-MAS) ──────────
+   Uso: <div class="text-expand">…texto largo…</div>
+         <button class="text-expand-btn" onclick="toggleTextExpand(this)">Ver más</button>
+   En tablet+ el texto se muestra completo y el botón se oculta.
+──────────────────────────────────────────────────────────────── */
+.text-expand {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  margin-bottom: 8px;
+}
+.text-expand.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  margin-bottom: 16px;
+}
+.text-expand p + p { margin-top: 16px; }
+.text-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    3. RECONOCIMIENTOS — SEK-CON-006  (mobile-first: 1 col)
 ══════════════════════════════════════════════════════════════ */
@@ -763,16 +795,14 @@ body {
 ══════════════════════════════════════════════════════════════ */
 #colegios { background: var(--gray-100); }
 .colegios-stats {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 16px;
   margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--gray-200);
 }
-.colegio-stat { display: flex; flex-direction: column; gap: 3px; }
-.colegio-stat-icon { font-size: 20px; color: var(--gray-500); margin-bottom: 4px; }
-.colegio-stat-num   { font-size: 24px; font-weight: 700; color: var(--gray-800); line-height: 1; }
+.colegio-stat { display: flex; flex-direction: column; gap: 4px; }
+.colegio-stat-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--gray-300); margin-bottom: 6px; }
+.colegio-stat-num   { font-size: 28px; font-weight: 700; color: var(--gray-800); line-height: 1; }
 .colegio-stat-label { font-size: 12px; color: var(--gray-500); line-height: 1.4; max-width: 160px; }
 .colegios-grupo { margin-bottom: 28px; }
 .colegios-grupo-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-500); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
@@ -987,9 +1017,14 @@ body {
   .text-block-body     { font-size: 15px; }
   .text-block-subtitle { font-size: 16px; }
 
+  /* Ver más genérico — tablet: más líneas visibles */
+  .text-expand { -webkit-line-clamp: 6; }
+
   /* Colegios — 2 col grid */
-  .colegios-stats { flex-wrap: nowrap; gap: 40px; margin-bottom: 36px; padding-bottom: 32px; }
-  .colegio-stat-num { font-size: 28px; }
+  .colegios-stats { display: flex; flex-wrap: nowrap; gap: 0; margin-bottom: 36px; }
+  .colegio-stat { padding: 0 32px; border-left: 1px solid var(--gray-200); }
+  .colegio-stat:first-child { border-left: none; padding-left: 0; }
+  .colegio-stat-num { font-size: 32px; }
   .colegios-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1138,7 +1173,7 @@ body {
 .bio-modal-inner {
   position: relative;
   background: var(--white);
-  width: min(680px, 100%);
+  width: min(860px, 100%);
   border-radius: var(--radius);
   overflow: hidden;
   margin: auto;
@@ -1189,6 +1224,9 @@ body {
 }
 
 @media (min-width: 1200px) {
+  /* Ver más genérico — desktop: 10 líneas */
+  .text-expand { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 10; -webkit-box-orient: vertical; }
+
   /* IAB grid: 4 columns */
   .iab-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
@@ -1299,8 +1337,10 @@ body {
   .text-block-subtitle { font-size: 17px; }
 
   /* Colegios — 3 col grid */
-  .colegios-stats { gap: 48px; margin-bottom: 44px; padding-bottom: 40px; }
-  .colegio-stat-num { font-size: 30px; }
+  .colegios-stats { margin-bottom: 44px; }
+  .colegio-stat { padding: 0 48px; }
+  .colegio-stat-num { font-size: 40px; }
+  .colegio-stat-label { font-size: 13px; max-width: 200px; }
   .colegios-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .colegios-grupo { margin-bottom: 44px; }
   .colegios-cta-global { margin-top: 8px; }

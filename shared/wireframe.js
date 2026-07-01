@@ -7,6 +7,14 @@ function toggleAcord(header) {
   chevron.classList.toggle('open', !isOpen);
 }
 
+/* ── VER MÁS GENÉRICO — mobile (PAT-VER-MAS) ────────────────── */
+function toggleTextExpand(btn) {
+  var block = btn.previousElementSibling;
+  if (!block || !block.classList.contains('text-expand')) return;
+  var expanded = block.classList.toggle('expanded');
+  btn.innerHTML = expanded ? 'Ver menos <span class="ver-mas-chevron">∧</span>' : 'Ver más <span class="ver-mas-chevron">∨</span>';
+}
+
 /* ── CARTA VER MÁS — mobile (SEK-CON-003) ───────────────────── */
 function toggleCartaMobile() {
   var cb = document.getElementById('carta-body');
