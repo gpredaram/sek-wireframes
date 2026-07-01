@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Future Learning Model — Wireframe</title>
-<link rel="stylesheet" href="/shared/styles.css">
+<link rel="stylesheet" href="../../shared/styles.css">
 <style>
   :root {
     --white:     #FFFFFF;
@@ -27,21 +27,7 @@
   .ph--logo  { width: 60px; height: 28px; border-radius: 3px; background: var(--ph-dark); }
 
   /* TOPBAR */
-  .topbar { background: var(--bg); border-bottom: 1px solid var(--border); height: 32px; display: flex; align-items: center; padding: 0 40px; gap: 24px; }
-  .topbar .ph--logo { width: 80px; height: 18px; }
-  .topbar__links { display: flex; gap: 20px; margin-left: 16px; }
-  .topbar__links a { font-size: 11px; color: var(--gray-mid); text-decoration: none; }
 
-  /* HEADER — z-index 10000 para flotar sobre el drawer (9999) */
-  .header { position: sticky; top: 0; z-index: 10000; background: var(--white); border-bottom: 1px solid var(--border); height: 56px; display: flex; align-items: center; padding: 0 40px; gap: 32px; }
-  .header .ph--logo { width: 120px; height: 28px; }
-  .header__nav { display: flex; gap: 24px; margin-left: 8px; }
-  .header__nav a { font-size: 13px; color: var(--gray-dark); text-decoration: none; font-weight: 500; }
-  .header__nav a::after { content: ' ↓'; font-size: 9px; color: var(--gray-lt); }
-  .header__cta { margin-left: auto; background: var(--black); color: var(--white); font-size: 12px; font-weight: 700; padding: 8px 18px; border-radius: 4px; text-decoration: none; white-space: nowrap; }
-
-  /* Drawer override — header de este archivo es 56px, no 52px del shared */
-  #nav-drawer { top: 56px; height: calc(100vh - 56px); }
 
   /* HERO */
   .hero { position: relative; background: var(--ph-dark); overflow: hidden; }
@@ -53,7 +39,7 @@
   .hero__sub { font-size: 14px; color: rgba(255,255,255,.8); max-width: 560px; }
 
   /* ANCLAS */
-  .anclas { position: sticky; top: 56px; z-index: 90; background: var(--white); border-bottom: 2px solid var(--border); display: flex; padding: 0 40px; }
+  .anclas { position: sticky; top: 0; z-index: 90; background: var(--white); border-bottom: 2px solid var(--border); display: flex; padding: 0 40px; }
   .anclas__item { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--gray-lt); border-bottom: 2px solid transparent; border-top: none; border-left: none; border-right: none; margin-bottom: -2px; cursor: pointer; background: none; transition: all .15s; white-space: nowrap; }
   .anclas__item.active { color: var(--black); border-bottom-color: var(--black); font-weight: 700; }
 
@@ -126,15 +112,11 @@
   .divider { height: 1px; background: var(--border); margin: 20px 0; }
   .infografia-label { font-size: 11px; color: var(--gray-lt); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
 
+
+
   /* ══ RESPONSIVE ══ */
 
   /* Mobile base */
-  .topbar { display: none; }
-  .header { padding: 0 20px; gap: 0; }
-  .header .ph--logo { width: 80px; height: 22px; }
-  .header__nav { display: none; }
-  .header__cta { display: none; }
-  .header .nav-hamburger { margin-left: auto; }
 
   .hero__img { height: 260px; }
   .hero__breadcrumb { padding: 12px 20px; font-size: 10px; }
@@ -162,11 +144,6 @@
 
   /* Tablet 768px+ */
   @media (min-width: 768px) {
-    .topbar { display: flex; }
-    .header { padding: 0 32px; }
-    .header__nav { display: none; }
-    .header__cta { display: none; }
-
     .hero__img { height: 300px; }
     .hero__breadcrumb { padding: 14px 32px; }
     .hero__content { padding: 28px 32px; }
@@ -187,14 +164,6 @@
 
   /* Desktop 1024px+ */
   @media (min-width: 1024px) {
-    .header .nav-hamburger { display: none; }
-    .header__nav { display: flex; gap: 24px; }
-    .header__cta { display: inline-block; }
-    .header { padding: 0 40px; gap: 32px; }
-    .header .ph--logo { width: 120px; height: 28px; }
-    .header__nav a { font-size: 13px; }
-    .header__cta { font-size: 12px; padding: 8px 18px; }
-
     .hero__img { height: 340px; }
     .hero__breadcrumb { padding: 16px 40px; }
     .hero__content { padding: 32px 40px; }
@@ -216,26 +185,6 @@
 </style>
 </head>
 <body>
-
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="ph ph--logo"></div>
-  <div class="topbar__links">
-    <a href="#">Colegios SEK</a><a href="#">Modelo Educativo</a><a href="#">Programas IB</a><a href="#">¿Por qué SEK?</a><a href="#">Admisiones</a><a href="#">Actualidad</a>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header class="header">
-  <div class="ph ph--logo"></div>
-  <nav class="header__nav">
-    <a href="#">El Colegio</a><a href="#">Etapas</a><a href="#">Instalaciones</a><a href="#">Servicios</a><a href="#">Vida Escolar</a><a href="#">Idiomas e Internacional</a><a href="#">Admisiones</a>
-  </nav>
-  <a href="#" class="header__cta">Solicitar INF →</a>
-  <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</header>
 
 <!-- HERO -->
 <div class="hero">
@@ -275,12 +224,15 @@
     <h3 class="sub-title">El papel de los docentes como facilitadores y la colaboración activa con las familias</h3>
     <div class="grid-2">
       <div>
-        <p class="body-text">Los profesores, a la vanguardia educativa y en constante desarrollo profesional, son facilitadores del aprendizaje, y adquirieron la condición de aprendices permanentes. La formación continua del profesorado es uno de los rasgos distintivos de la Institución Educativa SEK.</p>
-        <p class="body-text">Los Colegios SEK cuentan con equipos de profesores de excelencia que destacan no solo por su nivel de formación y su vocación de mejora, sino también por su compromiso con el modelo educativo SEK y con la calidad.</p>
-        <h3 class="sub-title--inner">Compromiso con las Familias</h3>
-        <p class="body-text">En nuestra Comunidad de Aprendizaje, la familia y el entorno del alumno son factores fundamentales. Continuamente se trabaja en temas relacionados con la educación de niños y adolescentes de interés para las familias, y se trasladan al Aula de Familias.</p>
-        <p class="body-text">Esta actividad, formativa y abierta, tiene como objetivo la reflexión en común y la fijación de criterios sobre los múltiples aspectos de la educación.</p>
-        <a href="#" class="btn">Acceder al Aula de Familias</a>
+        <div class="text-expand">
+          <p class="body-text">Los profesores, a la vanguardia educativa y en constante desarrollo profesional, son facilitadores del aprendizaje, y adquirieron la condición de aprendices permanentes. La formación continua del profesorado es uno de los rasgos distintivos de la Institución Educativa SEK.</p>
+          <p class="body-text">Los Colegios SEK cuentan con equipos de profesores de excelencia que destacan no solo por su nivel de formación y su vocación de mejora, sino también por su compromiso con el modelo educativo SEK y con la calidad.</p>
+          <h3 class="sub-title--inner">Compromiso con las Familias</h3>
+          <p class="body-text">En nuestra Comunidad de Aprendizaje, la familia y el entorno del alumno son factores fundamentales. Continuamente se trabaja en temas relacionados con la educación de niños y adolescentes de interés para las familias, y se trasladan al Aula de Familias.</p>
+          <p class="body-text">Esta actividad, formativa y abierta, tiene como objetivo la reflexión en común y la fijación de criterios sobre los múltiples aspectos de la educación.</p>
+        </div>
+        <button class="text-expand-btn" onclick="toggleTextExpand(this)">Ver más ∨</button>
+        <a href="#" class="btn" style="display:block;margin-top:16px">Acceder al Aula de Familias</a>
       </div>
       <div class="img-wrap">
         <div class="ph--img">imagen</div>
@@ -307,9 +259,12 @@
     <h3 class="sub-title">Competencias clave para el aprendizaje a lo largo de la vida</h3>
     <div class="grid-2">
       <div>
-        <p class="body-text">El Modelo Educativo SEK, SEK Future Learning Model, orienta a los alumnos al aprendizaje continuo a lo largo de toda su vida e integra el Perfil SEK. Las quince competencias de aprendizaje de este Perfil conforman la identidad de nuestra Comunidad Educativa y son la clave para el éxito individual y colectivo.</p>
-        <h3 class="sub-title--inner">Impacto del Perfil SEK</h3>
-        <p class="body-text">El Perfil SEK representa cómo nos relacionamos con nosotros mismos, con los demás y con el planeta. Pone el acento en un desarrollo competencial integral, en el perfeccionamiento de nuestro alumnado y quienes les acompañan en su aprendizaje.</p>
+        <div class="text-expand">
+          <p class="body-text">El Modelo Educativo SEK, SEK Future Learning Model, orienta a los alumnos al aprendizaje continuo a lo largo de toda su vida e integra el Perfil SEK. Las quince competencias de aprendizaje de este Perfil conforman la identidad de nuestra Comunidad Educativa y son la clave para el éxito individual y colectivo.</p>
+          <h3 class="sub-title--inner">Impacto del Perfil SEK</h3>
+          <p class="body-text">El Perfil SEK representa cómo nos relacionamos con nosotros mismos, con los demás y con el planeta. Pone el acento en un desarrollo competencial integral, en el perfeccionamiento de nuestro alumnado y quienes les acompañan en su aprendizaje.</p>
+        </div>
+        <button class="text-expand-btn" onclick="toggleTextExpand(this)">Ver más ∨</button>
       </div>
       <div class="img-wrap">
         <div class="ph--img">imagen</div>
@@ -601,13 +556,13 @@
     secs.forEach(s => { const el = document.getElementById(s.id); if (el && window.scrollY >= el.offsetTop - 120) current = s.idx; });
     items.forEach((item, i) => item.classList.toggle('active', i === current));
   });
-  function toggleAccordion(btn) {
+function toggleAccordion(btn) {
     const item = btn.closest('.accordion__item');
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.accordion__item').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
   }
 </script>
-<script src="/shared/wireframe.js" defer></script>
+<script src="../../shared/wireframe.js" defer></script>
 </body>
 </html>

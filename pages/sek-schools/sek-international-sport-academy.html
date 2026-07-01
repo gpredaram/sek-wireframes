@@ -5,165 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEK International Sports Academy — SEK Wireframe</title>
   <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    #anchor-bar { top: 0; }
+    /* CON-022: icono a la izquierda, número+etiqueta a la derecha */
+    .colegios-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 0;
+    }
+    .colegio-stat {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      border-left: none;
+      padding: 0;
+    }
+    @media (min-width: 768px) {
+      .colegios-stats { flex-direction: row; gap: 0; margin-bottom: 0; justify-content: space-between; }
+      .colegio-stat { padding: 0 20px; border-left: 1px solid var(--gray-200); flex: 1; }
+      .colegio-stat:first-child { border-left: none; padding-left: 0; }
+    }
+    @media (min-width: 1200px) {
+      .colegio-stat { padding: 0 24px; }
+    }
+  </style>
 </head>
 <body data-drawer="sek-schools">
 
 <div id="page-wrapper">
-
-  <!-- ══════════════════════════════════════════════════════════
-       NAVEGACIÓN GLOBAL
-  ══════════════════════════════════════════════════════════ -->
-  <nav id="site-nav">
-
-    <div class="nav-layer nav-layer--red">
-      <div class="container">
-        <div class="nav-inner">
-          <div class="nav-logo-sm"></div>
-          <ul class="nav-items">
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios-sek')">Colegios SEK <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-modelo')">Modelo Educativo <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-programas')">Programas IB <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-por-que-sek')">¿Por qué SEK? <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-red')">Admisiones <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-actualidad')">Actualidad <span class="nav-chevron">▾</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="nav-layer nav-layer--college">
-      <div class="container">
-        <div class="nav-inner">
-          <div class="nav-logo-college"></div>
-          <ul class="nav-items">
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegio')">El Colegio <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-etapas')">Etapas <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-instalaciones')">Instalaciones <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-servicios')">Servicios <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-vida')">Vida Escolar <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-idiomas')">Idiomas e Internacional <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-col')">Admisiones <span class="nav-chevron">▾</span></li>
-            <li class="nav-item nav-item--cta" onclick="toggleDropdown(this,'dd-solicitar-inf')">Solicitar INF <span class="nav-chevron">▾</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dropdowns capa 1 -->
-    <div class="nav-dropdown" id="dd-colegios-sek"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#">Colegios en Madrid</a></li>
-      <li><a href="#">Colegios en Cataluña</a></li>
-      <li><a href="#">Todos los colegios</a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-modelo"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#">Filosofía SEK</a></li>
-      <li><a href="#">Aprendizaje activo</a></li>
-      <li><a href="#">SEK Future Learning</a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-programas"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="bachillerato-internacional.html"><span class="nav-dd-link-title">Programas IB</span><span class="nav-dd-link-desc">PEP · PAI · PD · POP</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Bachillerato Online</span><span class="nav-dd-link-desc">Diploma IB a distancia</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-por-que-sek"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#"><span class="nav-dd-link-title">Resultados académicos</span><span class="nav-dd-link-desc">Logros y calificaciones</span></a></li>
-      <li><a href="sek-international-sport-academy.html"><span class="nav-dd-link-title">SEK International Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-admisiones-red"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#">Proceso de admisión</a></li>
-      <li><a href="#">Documentación</a></li>
-      <li><a href="#">Contactar</a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-actualidad"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#">Noticias</a></li>
-      <li><a href="#">Eventos</a></li>
-      <li><a href="#">Blog</a></li>
-    </ul></div></div></div>
-
-    <!-- Dropdowns capa 2 -->
-    <div class="nav-dropdown" id="dd-colegio"><div class="nav-dropdown-inner">
-      <div class="nav-dd-col"><ul>
-        <li><a href="bienvenida.html"><span class="nav-dd-link-title">Bienvenida</span><span class="nav-dd-link-desc">Comienza el curso escolar</span></a></li>
-        <li><a href="#"><span class="nav-dd-link-title">Curso 25-26</span><span class="nav-dd-link-desc">Calendario, noticias y actividades</span></a></li>
-        <li><a href="#"><span class="nav-dd-link-title">Equipo de liderazgo</span><span class="nav-dd-link-desc">Conoce a nuestro equipo</span></a></li>
-        <li><a href="#"><span class="nav-dd-link-title">Resultados</span><span class="nav-dd-link-desc">Datos académicos</span></a></li>
-        <li><a href="donde-estamos.html"><span class="nav-dd-link-title">Dónde estamos</span><span class="nav-dd-link-desc">Contacto con el centro</span></a></li>
-      </ul></div>
-      <div class="nav-dd-divider"></div>
-      <div class="nav-dd-extra">
-        <div class="nav-dd-event">
-          <div class="nav-dd-event-label">Evento destacado</div>
-          <div class="nav-dd-event-title">Jornada de puertas abiertas · Enero 2026</div>
-        </div>
-        <div class="nav-dd-stat">
-          <span class="nav-dd-stat-num">+52</span>
-          <span class="nav-dd-stat-text">años formando a las mejores generaciones</span>
-        </div>
-      </div>
-    </div></div>
-    <div class="nav-dropdown" id="dd-etapas"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#"><span class="nav-dd-link-title">Early Childhood</span><span class="nav-dd-link-desc">4 meses a 6 años</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Primaria</span><span class="nav-dd-link-desc">6 a 12 años</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Secundaria</span><span class="nav-dd-link-desc">12 a 16 años</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Bachillerato</span><span class="nav-dd-link-desc">16 a 18 años</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-instalaciones"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#"><span class="nav-dd-link-title">Espacios de aprendizaje</span><span class="nav-dd-link-desc">Aulas educativas únicas</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Espacios deportivos</span><span class="nav-dd-link-desc">Aprendizaje en movimiento</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Tour virtual</span><span class="nav-dd-link-desc">Visita desde casa</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-servicios"><div class="nav-dropdown-inner">
-      <div class="nav-dd-col">
-        <h4>Servicios incluidos</h4>
-        <ul>
-          <li><a href="#">Nutrición</a></li>
-          <li><a href="#">Servicio Médico</a></li>
-          <li><a href="#">Departamento Psicológico</a></li>
-          <li><a href="#">Actividades de enriquecimiento</a></li>
-          <li><a href="#">Aulas para familias</a></li>
-        </ul>
-      </div>
-      <div class="nav-dd-divider"></div>
-      <div class="nav-dd-col">
-        <h4>Servicios complementarios</h4>
-        <ul>
-          <li><a href="#">Transporte</a></li>
-          <li><a href="#">Extraescolares</a></li>
-          <li><a href="#">Cursos de verano</a></li>
-          <li><a href="#">Mutualidad SEK</a></li>
-          <li><a href="#">Residencia</a></li>
-        </ul>
-      </div>
-    </div></div>
-    <div class="nav-dropdown" id="dd-vida"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#"><span class="nav-dd-link-title">Actividades del centro</span><span class="nav-dd-link-desc">Semana Blanca · Duke of Edinburgh's</span></a></li>
-      <li><a href="sek-international-sport-academy.html"><span class="nav-dd-link-title">SEK International Sports Academy</span><span class="nav-dd-link-desc">Alto rendimiento deportivo</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-idiomas"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#"><span class="nav-dd-link-title">Idiomas y Certificación Oficial</span><span class="nav-dd-link-desc">Cambridge, Goethe Institut y Alliance Française</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Estancias internacionales</span><span class="nav-dd-link-desc">Dublín y Les Alpes</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Intercambios culturales</span><span class="nav-dd-link-desc">Colegios en el mundo</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-admisiones-col"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#"><span class="nav-dd-link-title">Admisiones generales</span><span class="nav-dd-link-desc">Proceso de matriculación</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Admisiones internacionales</span><span class="nav-dd-link-desc">Acceso de fuera de España</span></a></li>
-      <li><a href="#"><span class="nav-dd-link-title">Becas y ayudas</span><span class="nav-dd-link-desc">Apoyos económicos</span></a></li>
-    </ul></div></div></div>
-    <div class="nav-dropdown" id="dd-solicitar-inf"><div class="nav-dropdown-inner"><div class="nav-dd-col"><ul>
-      <li><a href="#">Necesito información</a></li>
-      <li><a href="#">Contacto</a></li>
-      <li><a href="#">Programar visita</a></li>
-      <li><a href="#">Tour virtual</a></li>
-    </ul></div></div></div>
-
-    <div class="nav-topbar-mobile">
-      <div class="nav-logo-mobile"></div>
-      <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-  </nav>
-
 
   <!-- ══════════════════════════════════════════════════════════
        1. HERO CON VÍDEO — SEK-CAB-002-VID
@@ -226,24 +97,24 @@
     <div class="container">
       <div class="colegios-stats">
         <div class="colegio-stat">
-          <div class="colegio-stat-num">XX</div>
-          <div class="colegio-stat-label">Campus SEK</div>
+          <div class="colegio-stat-icon"></div>
+          <div><div class="colegio-stat-num">XX</div><div class="colegio-stat-label">Campus SEK</div></div>
         </div>
         <div class="colegio-stat">
-          <div class="colegio-stat-num">+XX</div>
-          <div class="colegio-stat-label">Deportes</div>
+          <div class="colegio-stat-icon"></div>
+          <div><div class="colegio-stat-num">+XX</div><div class="colegio-stat-label">Deportes</div></div>
         </div>
         <div class="colegio-stat">
-          <div class="colegio-stat-num">+XX</div>
-          <div class="colegio-stat-label">Alumnos deportistas</div>
+          <div class="colegio-stat-icon"></div>
+          <div><div class="colegio-stat-num">+XX</div><div class="colegio-stat-label">Alumnos deportistas</div></div>
         </div>
         <div class="colegio-stat">
-          <div class="colegio-stat-num">+XX</div>
-          <div class="colegio-stat-label">Olímpicos formados</div>
+          <div class="colegio-stat-icon"></div>
+          <div><div class="colegio-stat-num">+XX</div><div class="colegio-stat-label">Olímpicos formados</div></div>
         </div>
         <div class="colegio-stat">
-          <div class="colegio-stat-num">+XX</div>
-          <div class="colegio-stat-label">Años de trayectoria</div>
+          <div class="colegio-stat-icon"></div>
+          <div><div class="colegio-stat-num">+XX</div><div class="colegio-stat-label">Años de trayectoria</div></div>
         </div>
       </div>
     </div>

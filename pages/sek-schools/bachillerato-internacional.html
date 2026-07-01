@@ -11,309 +11,6 @@
 <div id="page-wrapper">
 
   <!-- ══════════════════════════════════════════════════════════
-       SITE NAVIGATION — Sistema global (doble menú superpuesto)
-       Desktop: Capa 1 (red SEK) + Capa 2 (SEK Ciudalcampo)
-       Mobile:  Topbar logo + hamburger → drawer inyectado por wireframe.js
-  ══════════════════════════════════════════════════════════ -->
-  <nav id="site-nav">
-
-    <!-- Capa 1: Menú común red SEK -->
-    <div class="nav-layer nav-layer--red">
-      <div class="container">
-        <div class="nav-inner">
-          <div class="nav-logo-sm"></div>
-          <ul class="nav-items">
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios-sek')">Colegios SEK <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-modelo')">Modelo Educativo <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-programas')">Programas IB <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-por-que-sek')">¿Por qué SEK? <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-red')">Admisiones <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-actualidad')">Actualidad <span class="nav-chevron">▾</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Capa 2: Menú específico SEK Ciudalcampo -->
-    <div class="nav-layer nav-layer--college">
-      <div class="container">
-        <div class="nav-inner">
-          <div class="nav-logo-college"></div>
-          <ul class="nav-items">
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-colegio')">El Colegio <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-etapas')">Etapas <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-instalaciones')">Instalaciones <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-servicios')">Servicios <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-vida')">Vida Escolar <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-idiomas')">Idiomas e Internacional <span class="nav-chevron">▾</span></li>
-            <li class="nav-item" onclick="toggleDropdown(this,'dd-admisiones-col')">Admisiones <span class="nav-chevron">▾</span></li>
-            <li class="nav-item nav-item--cta" onclick="toggleDropdown(this,'dd-solicitar-inf')">Solicitar INF <span class="nav-chevron">▾</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dropdowns desktop -->
-    <div class="nav-dropdown" id="dd-colegios-sek">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#">Colegios en Madrid</a></li>
-          <li><a href="#">Colegios en Cataluña</a></li>
-          <li><a href="#">Todos los colegios</a></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="nav-dropdown" id="dd-modelo">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#">Filosofía SEK</a></li>
-          <li><a href="#">Aprendizaje activo</a></li>
-          <li><a href="#">SEK Future Learning</a></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="nav-dropdown" id="dd-programas">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="bachillerato-internacional.html"><span class="nav-dd-link-title">Programas IB</span><span class="nav-dd-link-desc">PEP · PAI · PD · POP</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Bachillerato Online</span><span class="nav-dd-link-desc">Diploma IB a distancia</span></a></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="nav-dropdown" id="dd-por-que-sek">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#">Resultados académicos</a></li>
-          <li><a href="#">Comunidad educativa</a></li>
-          <li><a href="#">Instalaciones</a></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="nav-dropdown" id="dd-admisiones-red">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#">Proceso de admisión</a></li>
-          <li><a href="#">Documentación</a></li>
-          <li><a href="#">Contactar</a></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="nav-dropdown" id="dd-actualidad">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#">Noticias</a></li>
-          <li><a href="#">Eventos</a></li>
-          <li><a href="#">Blog</a></li>
-        </ul></div>
-      </div>
-    </div>
-
-    <!-- El Colegio -->
-    <div class="nav-dropdown" id="dd-colegio">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="bienvenida.html"><span class="nav-dd-link-title">Bienvenida</span><span class="nav-dd-link-desc">Comienza el curso escolar</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Curso 25-26</span><span class="nav-dd-link-desc">Calendario, noticias y actividades</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Calendario de eventos</span><span class="nav-dd-link-desc">Consulta nuestra agenda virtual</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Equipo docente</span><span class="nav-dd-link-desc">Conoce a nuestros docentes</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Resultados</span><span class="nav-dd-link-desc">Datos académicos</span></a></li>
-          <li><a href="donde-estamos.html"><span class="nav-dd-link-title">Dónde estamos</span><span class="nav-dd-link-desc">Contacto con el centro</span></a></li>
-        </ul></div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-event">
-            <div class="nav-dd-event-label">Evento destacado</div>
-            <div class="nav-dd-event-title">Jornada de puertas abiertas · Enero 2026</div>
-          </div>
-          <div class="nav-dd-stat">
-            <span class="nav-dd-stat-num">+52</span>
-            <span class="nav-dd-stat-text">años formando a las mejores generaciones</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Etapas -->
-    <div class="nav-dropdown" id="dd-etapas">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#"><span class="nav-dd-link-title">Early Childhood</span><span class="nav-dd-link-desc">Edades de 4 meses a 6 años</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Primaria</span><span class="nav-dd-link-desc">Edades de 6 a 12 años</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Secundaria</span><span class="nav-dd-link-desc">Edades de 12 a 16 años</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Bachillerato</span><span class="nav-dd-link-desc">Edades de 16 a 18 años</span></a></li>
-        </ul></div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-event">
-            <div class="nav-dd-event-label">Actividad extraescolar</div>
-            <div class="nav-dd-event-title">Robótica y programación · Todos los niveles</div>
-          </div>
-          <div class="nav-dd-testimonial">
-            <p>"Un ambiente donde los niños realmente disfrutan aprender."</p>
-            <div class="nav-dd-testimonial-author">— Madre de alumno de Primaria</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Instalaciones -->
-    <div class="nav-dropdown" id="dd-instalaciones">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#"><span class="nav-dd-link-title">Espacios de aprendizaje</span><span class="nav-dd-link-desc">Aulas educativas únicas</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Espacios deportivos</span><span class="nav-dd-link-desc">Aprendizaje en movimiento</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Tour virtual</span><span class="nav-dd-link-desc">Visita nuestros colegios desde casa</span></a></li>
-        </ul></div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra" style="max-width:360px">
-          <div class="nav-dd-img-row">
-            <div class="nav-dd-img">imagen</div>
-            <div class="nav-dd-img">imagen</div>
-            <div class="nav-dd-img">imagen</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Servicios -->
-    <div class="nav-dropdown" id="dd-servicios">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col">
-          <h4>Servicios incluidos</h4>
-          <ul>
-            <li><a href="#">Nutrición</a></li>
-            <li><a href="#">Servicio Médico</a></li>
-            <li><a href="#">Departamento Psicológico y orientación</a></li>
-            <li><a href="#">Actividades de enriquecimiento curricular</a></li>
-            <li><a href="#">Aulas para familias</a></li>
-            <li><a href="#">Uniformes</a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-col">
-          <h4>Servicios complementarios</h4>
-          <ul>
-            <li><a href="#">Transporte</a></li>
-            <li><a href="#">Actividades Extraescolares</a></li>
-            <li><a href="#">Cursos de verano</a></li>
-            <li><a href="#">Mutualidad SEK</a></li>
-            <li><a href="#">Residencia</a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-img" style="width:100%;margin-bottom:10px">imagen comedor</div>
-          <div class="nav-dd-testimonial">
-            <p>"El servicio de orientación ha sido fundamental para nuestro hijo."</p>
-            <div class="nav-dd-testimonial-author">— Padre de alumno de Secundaria</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Vida Escolar -->
-    <div class="nav-dropdown" id="dd-vida">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col">
-          <h4>Actividades del centro</h4>
-          <ul>
-            <li><a href="#">Semana Blanca</a></li>
-            <li><a href="#">Duke of Edinburgh's</a></li>
-            <li><a href="#">SEKMUN</a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-col">
-          <h4>Alto rendimiento</h4>
-          <ul>
-            <li><a href="#"><span class="nav-dd-link-title">Escuela de alto rendimiento deportivo</span><span class="nav-dd-link-desc">Deporte y educación, equilibrio perfecto</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-img-row" style="margin-bottom:10px">
-            <div class="nav-dd-img">imagen</div>
-            <div class="nav-dd-img">imagen</div>
-          </div>
-          <div class="nav-dd-testimonial">
-            <p>"Nuestro hijo compite a nivel nacional y mantiene un excelente expediente."</p>
-            <div class="nav-dd-testimonial-author">— Madre de alumno de Bachillerato</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Idiomas e Internacional -->
-    <div class="nav-dropdown" id="dd-idiomas">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#"><span class="nav-dd-link-title">Idiomas y Certificación Oficial</span><span class="nav-dd-link-desc">Cambridge, Goethe Institut y Alliance Française</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Estancias internacionales</span><span class="nav-dd-link-desc">Nuestros centros Dublín y Les Alpes</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Intercambios culturales</span><span class="nav-dd-link-desc">Colegios en el mundo</span></a></li>
-        </ul></div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra">
-          <div class="nav-dd-testimonial">
-            <p>"La estancia en Dublín fue transformadora para mi hija."</p>
-            <div class="nav-dd-testimonial-author">— Padre de alumna de Bachillerato</div>
-          </div>
-          <div class="nav-dd-testimonial">
-            <p>"Salí del programa con un nivel de inglés que no imaginaba posible."</p>
-            <div class="nav-dd-testimonial-author">— Alumni SEK Ciudalcampo</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Admisiones -->
-    <div class="nav-dropdown" id="dd-admisiones-col">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#"><span class="nav-dd-link-title">Admisiones generales</span><span class="nav-dd-link-desc">Nuestro proceso de matriculación</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Admisiones internacionales</span><span class="nav-dd-link-desc">Acceso de alumnos de fuera de España</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Becas y ayudas</span><span class="nav-dd-link-desc">Apoyos económicos</span></a></li>
-          <li><a href="#"><span class="nav-dd-link-title">Ayudas a la enseñanza</span><span class="nav-dd-link-desc">Educación de calidad para todos</span></a></li>
-        </ul></div>
-        <div class="nav-dd-divider"></div>
-        <div class="nav-dd-extra" style="max-width:380px;flex:1">
-          <h4>FAQs</h4>
-          <ul class="nav-dd-faq">
-            <li>¿A quién está dirigido el Programa del Diploma IB?</li>
-            <li>¿Qué diferencia hay entre el PD IB y el POP IB?</li>
-            <li>¿Qué requisitos tiene el PAI IB?</li>
-            <li>¿Cómo es el sistema de evaluación del Bachillerato Internacional?</li>
-            <li>¿Cómo puedo solicitar información sobre admisiones?</li>
-          </ul>
-          <div class="nav-dd-phone-label">Llámanos</div>
-          <div class="nav-dd-phone">+34 900 67 87 98</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Solicitar INF -->
-    <div class="nav-dropdown" id="dd-solicitar-inf">
-      <div class="nav-dropdown-inner">
-        <div class="nav-dd-col"><ul>
-          <li><a href="#">Necesito información</a></li>
-          <li><a href="#">Contacto</a></li>
-          <li><a href="#">Programar visita</a></li>
-          <li><a href="#">Tour virtual</a></li>
-        </ul></div>
-      </div>
-    </div>
-
-    <!-- Mobile: topbar logo + hamburger -->
-    <div class="nav-topbar-mobile">
-      <div class="nav-logo-mobile"></div>
-      <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-  </nav>
-
-
-  <!-- ══════════════════════════════════════════════════════════
        1. HERO — SEK-CAB-002
        Sin subtítulo · breadcrumb: SEK International Schools › Bachillerato Internacional
   ══════════════════════════════════════════════════════════ -->
@@ -340,10 +37,15 @@
     <div class="container">
       <div class="con010-c2-grid">
 
-        <div class="text-block-body">
-          <p>Somos la <strong>primera Institución Educativa</strong> que, en 1977, fue autorizada para implementar los programas IB en España, y estamos entre los <strong>35 primeros Colegios IB del mundo</strong>. Pioneros también en el IB online.</p>
-          <p style="margin-top:16px">Somos la <strong>Institución española con más profesores y evaluadores acreditados por el IB</strong> y formamos parte del <strong>Consejo Regional del Bachillerato Internacional</strong> para África, Europa y Oriente Medio.</p>
-          <p style="margin-top:16px"><strong>Más de 3.000 alumnos SEK</strong> han cursado el Programa del Diploma IB® y acceden a las <strong>universidades más reconocidas del mundo</strong>.</p>
+        <div>
+          <div class="text-expand text-block-body">
+            <p>Comprometidos con el Bachillerato Internacional — International Baccalaureate —, somos la <strong>primera Institución Educativa</strong> que, en 1977, fue autorizada para impartir <strong>bachillerato internacional en España</strong>.</p>
+            <p>Además, somos el <strong>colegio con IB</strong> más antiguo de España y nos encontramos entre los <strong>primeros 35 colegios IB autorizados en el mundo</strong>, pioneros también en implementar el IB online.</p>
+            <p>Somos la <strong>Institución española con más profesores y evaluadores acreditados por el IB</strong> y formamos parte del <strong>Consejo Regional del Bachillerato Internacional</strong> para África, Europa y Oriente Medio.</p>
+            <p><strong>Más de 3.000 alumnos SEK</strong> han cursado el <strong>International Baccalaureate Diploma®</strong> con excelentes resultados, lo que les ha permitido el acceso a las <strong>universidades más reconocidas de todo el mundo</strong>.</p>
+            <p>Los profesionales SEK participan y colaboran en los <strong>talleres de formación</strong> y congresos organizados por la Organización del Bachillerato Internacional (OBI), actualizando constantemente su dominio de la <strong>metodología IB</strong>.</p>
+          </div>
+          <button class="text-expand-btn" onclick="toggleTextExpand(this)">Ver más <span class="ver-mas-chevron">∨</span></button>
         </div>
 
         <div class="video-ph" onclick="openVideoModal()">vídeo</div>
@@ -380,7 +82,7 @@
 
             <div class="con021-subblock">
               <h4>¿Qué es?</h4>
-              <p>Un currículo transdisciplinario basado en la <strong>indagación</strong>, para niños de 3 a 12 años. Desafía a los alumnos a pensar por sí mismos y asumir responsabilidad en su aprendizaje, explorando problemas reales del entorno local y global. En SEK se imparte en inglés.</p>
+              <p>Desarrolla la <strong>comprensión conceptual</strong> dentro de un currículo transdisciplinario basado en la <strong>indagación</strong>. Desafía a los alumnos a pensar por sí mismos y asumir responsabilidad en su aprendizaje, explorando problemas y oportunidades locales y globales en contextos de la vida real. En SEK se imparte en inglés.</p>
             </div>
 
             <div class="con021-subblock">
@@ -406,10 +108,6 @@
               <p>La evaluación en el PEP es <strong>continua y formativa</strong>. Los docentes observan, documentan y reflexionan sobre el aprendizaje del alumno a lo largo del curso, sin exámenes finales. Los informes se comparten regularmente con las familias.</p>
             </div>
 
-            <div class="con021-subblock con021-media">
-              <div class="video-ph" onclick="openVideoModal()">imagen o vídeo</div>
-            </div>
-
           </div>
         </div>
 
@@ -427,7 +125,7 @@
 
             <div class="con021-subblock">
               <h4>¿Qué es?</h4>
-              <p>Para alumnos de 11 a 16 años. Forma pensadores <strong>creativos, críticos y reflexivos</strong>, conectando los estudios con el mundo real y fomentando la comunicación, el entendimiento intercultural y el compromiso global.</p>
+              <p>Forma pensadores <strong>creativos, críticos y reflexivos</strong>, conectando los estudios con el mundo real y fomentando la comunicación, el entendimiento intercultural y el compromiso global.</p>
             </div>
 
             <div class="con021-subblock">
@@ -439,15 +137,12 @@
                 <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Aprendizaje holístico</span></div>
                 <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Comunicación</span></div>
               </div>
+              <p style="margin-top:12px">La <strong>metodología IB</strong> del PAI integra los <strong>enfoques de aprendizaje IB</strong> (Approaches to Learning): habilidades de pensamiento, comunicación, investigación, autogestión y colaboración que preparan al alumno para aprender de forma autónoma.</p>
             </div>
 
             <div class="con021-subblock">
               <h4>La evaluación</h4>
               <p>Basada en criterios establecidos por el IB. Los profesores del colegio elaboran y califican las tareas, <strong>verificadas externamente</strong> por examinadores del IB cada año.</p>
-            </div>
-
-            <div class="con021-subblock con021-media">
-              <div class="video-ph" onclick="openVideoModal()">imagen o vídeo</div>
             </div>
 
           </div>
@@ -467,26 +162,22 @@
 
             <div class="con021-subblock">
               <h4>¿Qué es?</h4>
-              <p>Programa de <strong>2 años</strong> para alumnos de 16 a 18 años, riguroso y equilibrado, que culmina con exámenes. Excelente preparación para la universidad y la vida adulta, reconocido por las <strong>principales universidades del mundo</strong>. En SEK se imparte en español, con asignaturas concretas en inglés.</p>
+              <p>El <strong>International Baccalaureate Diploma</strong> es un programa de <strong>2 años</strong> para alumnos de 16 a 18 años, riguroso y equilibrado, que culmina con exámenes. Excelente preparación para la universidad y la vida adulta, reconocido por las <strong>principales universidades del mundo</strong>. En SEK se imparte en español, con asignaturas concretas en inglés.</p>
             </div>
 
             <div class="con021-subblock">
               <h4>Modelo curricular</h4>
               <p>Los alumnos estudian <strong>6 asignaturas</strong> (5 obligatorias + 1 a elegir) que garantizan experiencia en lenguas, Ciencias Sociales, Ciencias Experimentales, Matemáticas y optativas de Artes. Más el <strong>tronco común</strong>:</p>
               <div class="con021-icons-grid" style="margin-top:12px">
-                <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Monografía</span></div>
-                <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Teoría del Conocimiento</span></div>
-                <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Creatividad, Acción y Servicio</span></div>
+                <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Monografía — investigación independiente en profundidad sobre un tema de una asignatura</span></div>
+                <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Teoría del Conocimiento — análisis crítico de las formas y tipos de conocimiento</span></div>
+                <div class="con021-icon-item"><div class="con021-icon-ph"></div><span class="con021-icon-label">Creatividad, Acción y Servicio — proyectos concretos fuera del aula con aprendizaje real</span></div>
               </div>
             </div>
 
             <div class="con021-subblock">
               <h4>La evaluación</h4>
               <p>Exámenes externos corregidos por el IB + tareas internas moderadas. El diploma se otorga a partir de <strong>24 puntos</strong> sobre un máximo de <strong>45</strong>.</p>
-            </div>
-
-            <div class="con021-subblock con021-media">
-              <div class="video-ph" onclick="openVideoModal()">imagen o vídeo</div>
             </div>
 
           </div>
@@ -506,7 +197,7 @@
 
             <div class="con021-subblock">
               <h4>¿Qué es?</h4>
-              <p>Para alumnos de 16 a 18 años que quieren combinar la formación académica del IB con <strong>competencias profesionales</strong> en un ámbito vocacional de su interés. Prepara tanto para la universidad como para el entorno laboral.</p>
+              <p>Integra asignaturas del Programa del Diploma con un estudio profesional especializado y un núcleo propio centrado en habilidades clave del siglo XXI: comunicación, investigación, pensamiento ético y competencia intercultural. Un programa <strong>flexible, exigente y conectado con la realidad</strong> que prepara tanto para la universidad como para el entorno laboral.</p>
             </div>
 
             <div class="con021-subblock">
@@ -531,10 +222,6 @@
               <p>Combina <strong>evaluación externa</strong> de las asignaturas del PD + <strong>evaluación interna continua</strong> del Núcleo CP Core + presentación del <strong>Reflective Project</strong>.</p>
             </div>
 
-            <div class="con021-subblock con021-media">
-              <div class="video-ph" onclick="openVideoModal()">imagen o vídeo</div>
-            </div>
-
           </div>
         </div>
 
@@ -551,7 +238,7 @@
     <div class="container">
       <div class="con019-inner">
         <h2>Solicita información</h2>
-        <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible</p>
+        <p>Déjanos tus datos y te informamos sobre admisión, programas de <strong>bachillerato internacional</strong>, <strong>becas</strong> disponibles y proceso de matriculación. Nos pondremos en contacto contigo lo antes posible.</p>
         <button class="cta-btn con019-btn" onclick="openContactModal()">Continuar</button>
       </div>
     </div>

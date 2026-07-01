@@ -6,10 +6,7 @@
 <title>Curso 25-26 — SEK Wireframe</title>
 <link rel="stylesheet" href="../../shared/styles.css">
 <style>
-  /* Offset para topbar mobile fija */
-  body { padding-top: 52px; }
-  @media (min-width: 768px) { body { padding-top: 0; } }
-
+  #anchor-bar { top: 0; }
   /* ── SEK-CON-012 — Bloque lista con iconos ─────────────────── */
   .con012-items {
     list-style: none;
@@ -206,71 +203,6 @@
 <div id="page-wrapper">
 
   <!-- ════════════════════════════════════════════════
-       NAV — SEK-NAV-003 / SEK-NAV-004
-  ════════════════════════════════════════════════ -->
-  <nav id="site-nav">
-
-    <!-- Mobile topbar -->
-    <div class="nav-topbar-mobile">
-      <div class="nav-logo-mobile"></div>
-      <button class="nav-hamburger" aria-expanded="false" onclick="toggleDrawer()">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-    <!-- Desktop · Capa 1: barra red SEK -->
-    <div class="nav-layer--red">
-      <div class="container nav-inner">
-        <div class="nav-logo-sm"></div>
-        <ul class="nav-items">
-          <li class="nav-item" onclick="toggleDropdown(this,'dd-colegios')">
-            Colegios SEK <span class="nav-chevron">&#9660;</span>
-          </li>
-          <li class="nav-item" onclick="toggleDropdown(this,'dd-seg')">
-            SEK Education Group <span class="nav-chevron">&#9660;</span>
-          </li>
-          <li class="nav-item">Actualidad</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Desktop · Capa 2: nav del colegio -->
-    <div class="nav-layer--college">
-      <div class="container nav-inner">
-        <div class="nav-logo-college"></div>
-        <ul class="nav-items">
-          <li class="nav-item active" onclick="toggleDropdown(this,'dd-colegio')">
-            El Colegio <span class="nav-chevron">&#9660;</span>
-          </li>
-          <li class="nav-item" onclick="toggleDropdown(this,'dd-etapas')">
-            Etapas <span class="nav-chevron">&#9660;</span>
-          </li>
-          <li class="nav-item">Servicios</li>
-          <li class="nav-item">Vida Escolar</li>
-          <li class="nav-item">Idiomas</li>
-          <li class="nav-item nav-item--cta">Solicitar información</li>
-        </ul>
-      </div>
-      <!-- Dropdown: El Colegio -->
-      <div id="dd-colegio" class="nav-dropdown">
-        <div class="nav-dropdown-inner">
-          <div class="nav-dd-col">
-            <h4>El Colegio</h4>
-            <ul>
-              <li><a href="#">Bienvenida</a></li>
-              <li><a href="#" class="active">Curso 25-26</a></li>
-              <li><a href="#">Calendario de eventos</a></li>
-              <li><a href="#">Equipo docente</a></li>
-              <li><a href="#">Resultados</a></li>
-              <li><a href="#">D&oacute;nde estamos</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ════════════════════════════════════════════════
        HERO — SEK-CAB-002
   ════════════════════════════════════════════════ -->
   <section id="hero">
@@ -455,7 +387,7 @@
   <footer id="footer">
     <div class="container">
       <div class="footer-inner">
-        <div>
+        <div class="footer-col">
           <div class="footer-logo"></div>
         </div>
         <div class="footer-col">
@@ -469,27 +401,22 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Etapas</h4>
-          <ul>
-            <li><a href="#">Early Childhood</a></li>
-            <li><a href="#">Primaria</a></li>
-            <li><a href="#">Secundaria</a></li>
-            <li><a href="#">Bachillerato</a></li>
-          </ul>
+          <h4>Síguenos</h4>
+          <div class="footer-social">
+            <div class="social-icon">In</div>
+            <div class="social-icon">Tw</div>
+            <div class="social-icon">Li</div>
+            <div class="social-icon">Yt</div>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Aviso legal</a>
+            <a href="#">Pol&iacute;tica de cookies</a>
+            <a href="#">Pol&iacute;tica de privacidad</a>
+          </div>
         </div>
-      </div>
-      <div class="footer-social">
-        <div class="social-icon"></div>
-        <div class="social-icon"></div>
-        <div class="social-icon"></div>
-        <div class="social-icon"></div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-legal">
-          <a href="#">Pol&iacute;tica de privacidad</a>
-          <a href="#">Aviso legal</a>
-          <a href="#">Pol&iacute;tica de cookies</a>
-        </div>
+        &copy; 2026 SEK Education Group. Todos los derechos reservados.
       </div>
     </div>
   </footer>
